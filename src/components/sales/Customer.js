@@ -1,5 +1,8 @@
 import React from 'react'
 
-const Customer = () => (<h1>Customer</h1>)
+const Customer = props => {
+    console.log(props.match)
+    return (<h1>Customer</h1>)
+}
 
 export default Customer
