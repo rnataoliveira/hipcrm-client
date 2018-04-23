@@ -11,6 +11,12 @@ import Agreement from './Agreement'
 
 const SalesPipeline = ({ match, location }) => (
     <div className='row mt-5'>
+        <div className="col-12">
+            <h1>
+                Processo de Vendas
+                <small className="ml-2 text-muted">Nova Venda</small>
+            </h1>
+        </div>
         <div className='col-12'>
             <ul className="nav nav-tabs nav-fill">
                 <li className="nav-item">
