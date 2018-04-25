@@ -1,80 +1,50 @@
 import React, { Component } from 'react'
 import { withRouter } from "react-router-dom";
 
-class PersonForm extends Component {
+class LegalForm extends Component {
     constructor(props) {
         super(props)
     }
-
+    
     handleGoBack(event) {
         this.props.history.push("/sales/new/customer");
-    }
+    }   
 
     render() {
         return (
             <form>
-                <h2 className="h2">Cadastrar Cliente - Pessoal Física</h2>
+                <h2 className="h2">Cadastrar Cliente - Pessoa Juridíca</h2>
                 <hr style={{ color: '#757575', width: '90%' }} className="d-flex justify-content-start " />
-                <h5 className="h5 mt-4">Informações Pessoais</h5>
+                <h5 className="h5 mt-4">Informações da Empresa</h5>
                 <div className="row">
-                    <div className="col-sm-6">
-                        <input type="text" className="form-control" placeholder="Nome" />
-                    </div>
-                    <div className="col-sm-6">
-                        <input type="text" className="form-control" placeholder="Sobrenome" />
+                    <div className="col-sm-12">
+                        <input type="text" className="form-control" placeholder="Razão Social" />
                     </div>
                 </div>
                 <div className="row mt-2">
-                    <div className="col-sm-2">
-                        <input type="text" className="form-control" placeholder="Cpf" />
+                    <div className="col-sm-4">
+                        <input type="text" className="form-control" placeholder="Cnpj" />
                     </div>
-                    <div className="col-sm-2">
-                        <input type="text" className="form-control" placeholder="Rg" />
+                    <div className="col-sm-8">
+                        <input type="text" className="form-control" placeholder="Inscrição Estadual" />
                     </div>
-                    <div className="col-sm-2">
-                        <input type="text" className="form-control" placeholder="DD/MM/AAAA" />
-                    </div>
-                    <div className="col-sm-2">
-                        <input type="text" className="form-control" placeholder="Idade" />
-                    </div>
-                    <div className="col-sm-2">
-                        <select className="custom-select">
-                            <option selected>Sexo</option>
-                            <option value="1">Feminino</option>
-                            <option value="2">Masculino</option>
-                        </select>
-                    </div>
-                    <div className="col-sm-2">
-                        <select className="custom-select">
-                            <option selected>Estado Civil</option>
-                            <option value="1">Solteiro</option>
-                            <option value="2">União Estável</option>
-                            <option value="3">Casado</option>
-                            <option value="4">Divorciado</option>
-                            <option value="5">Viúvo</option>
-                        </select>
-                    </div>
+
                 </div>
+
                 <h5 className="h5 mt-4">Informações de Contato</h5>
                 <div className="row mt-2">
-                    <div className="col-sm-1">
+                    <div className="col-sm-2">
                         <input type="text" className="form-control" placeholder="DDD" />
                     </div>
                     <div className="col-sm-2">
                         <input type="text" className="form-control" placeholder="Telefone" />
                     </div>
-                    <div className="col-sm-1">
-                        <input type="text" className="form-control" placeholder="DDD" />
-                    </div>
-                    <div className="col-sm-2">
-                        <input type="text" className="form-control" placeholder="Celular" />
-                    </div>
-                    <div className="col-sm-6">
+                    <div className="col-sm-8">
                         <input type="text" className="form-control" placeholder="Email" />
                     </div>
                 </div>
 
-                <h5 className="h5 mt-4">Endereço</h5>
+                <h5 className="h5 mt-4">Endereço Fiscal</h5>
                 <div className="row mt-2">
                     <div className="col-sm-2">
                         <input type="text" className="form-control" placeholder="Cep" />
@@ -140,7 +110,9 @@ class PersonForm extends Component {
                 <button type="submit" className="btn btn-primary mt-5 float-right">Salvar</button>
                 <button onClick={this.handleGoBack.bind(this)} type="button" className="btn btn-primary mt-5 mr-2 float-right">Voltar</button>
             </form>
+
         )
     }
 }
-export default PersonForm
+
+export default LegalForm
