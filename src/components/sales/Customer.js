@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
+import { withRouter } from "react-router-dom";
+
 import CreateCustomerContainer from '../customers/CreateCustomerContainer'
+import CustomerTypeForm from '../customers/CustomerTypeForm'
 
 class Customer extends Component {
     constructor() {
@@ -13,7 +16,7 @@ class Customer extends Component {
         this.setState({
             operation: 'new-customer'
         })
-        // history.push('/customer/type')
+        this.props.history.push("/customer/type");
     }    
 
     render() {
