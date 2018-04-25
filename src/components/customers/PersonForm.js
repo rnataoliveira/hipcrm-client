@@ -136,7 +136,6 @@ class PersonForm extends Component {
                         <textarea className="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
                     </div>
                 </div>
-
                 <button type="submit" className="btn btn-primary mt-5 float-right">Salvar</button>
                 <button onClick={this.handleGoBack.bind(this)} type="button" className="btn btn-primary mt-5 mr-2 float-right">Voltar</button>
             </form>
