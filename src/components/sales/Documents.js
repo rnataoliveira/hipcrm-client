@@ -17,7 +17,7 @@ class Documents extends Component {
     render() {
         return (
             <div>
-                <h1>Documents</h1>
+                <h1>Documentos</h1>
                 <form>
                     <div class="input-group mb-3">
                         <div class="custom-file">

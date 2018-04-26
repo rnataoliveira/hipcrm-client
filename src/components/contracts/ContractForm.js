@@ -2,8 +2,9 @@ import React from 'react'
 
 const ContractForm = props => {
     return (
-                <h1>Teste</h1>
-        
+        <div>
+            <h1>ContractForm</h1>
+        </div>
     )
 }
 
