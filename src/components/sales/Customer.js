@@ -8,7 +8,7 @@ class Customer extends Component {
     constructor() {
         super()
         this.state = {
-            operation: 'search'
+            operation: 'search',
         }
     }
 
@@ -16,7 +16,6 @@ class Customer extends Component {
         this.setState({
             operation: 'new-customer'
         })
-        this.props.history.push("/customer/type");
     }    
 
     render() {
@@ -33,7 +32,7 @@ class Customer extends Component {
                     </div>
                 </div>}
                 
-                {this.state.operation === 'new-customer' && <CreateCustomerContainer />}
+                {this.state.operation === 'new-customer' && <CustomerTypeForm />}
             </div>
         )
     }
