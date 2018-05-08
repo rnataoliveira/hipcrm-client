@@ -1,7 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import Routes from '../Routes'
-import { withUserManager } from '../../modules/Auth'
 
 import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -31,14 +30,15 @@ const Shell = (props) => {
                             </a>
                                 <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuContracts">
                                     <Link to="/sales/new" className="dropdown-item">Iniciar Venda</Link>
+                                    <Link to="/ping" className="dropdown-item">Ping</Link>
                                 </div>
                             </li>
                         </ul>
                     </div>
-                    { props.userManager.currentUser ? 
-                        <Link to="/login" className='btn btn-primary my-2 my-sm-0' >Entrar</Link> :
-                        <span>Olá</span>
-                    }
+                    {/* { props.userManager.currentUser ?  */}
+                        <Link to="/login" className='btn btn-primary my-2 my-sm-0' >Entrar</Link>
+                        {/* <span>Olá</span> */}
+                    {/* } */}
                 </div>
             </nav>
             <div className="container">
@@ -48,4 +48,4 @@ const Shell = (props) => {
     )
 }
 
-export default withUserManager(Shell)
+export default Shell

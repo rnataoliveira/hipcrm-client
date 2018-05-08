@@ -1,11 +1,18 @@
 import React from 'react'
-import { Route, Redirect } from 'react-router'
-import { withUserManager } from '../../modules/Auth'
+import { connect } from 'react-redux'
+import { Route } from 'react-router'
+import userManager from '../../modules/userManager'
 
-const PrivateRoute = ({ component: Component, userManager, ...rest }) => (
+const PrivateRoute = ({ component: Component, user, ...rest }) => (
     <Route {...rest} render={(props) => {
-        return userManager.currentUser ? <Component {...props} /> : <Redirect to='/login' />
+        return !user || user.expired ? userManager.signinRedirect() : <Component {...props} />
     }} />
 )
 
-export default withUserManager(PrivateRoute)
+const mapStateToProps = state => ({
+    user: state.oidc.user
+})
+
+const mapDispatchToProps = dispatch => ({ dispatch })
+
+export default connect(mapStateToProps, mapDispatchToProps)(PrivateRoute)

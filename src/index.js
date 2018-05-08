@@ -1,13 +1,7 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-import registerServiceWorker from './registerServiceWorker';
+import React from 'react'
+import { render } from 'react-dom'
+import registerServiceWorker from './registerServiceWorker'
+import App from './App'
 
-const app = (
-    <React.Fragment>
-        <App />
-    </React.Fragment>
-)
-
-ReactDOM.render(app, document.getElementById('root'));
-registerServiceWorker();
+render(<App />, document.getElementById('root'))
+registerServiceWorker()

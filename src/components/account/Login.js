@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { withUserManager } from '../../modules/Auth'
 
 class Login extends Component {
     componentDidMount() {
@@ -19,4 +18,4 @@ class Login extends Component {
     }
 }
 
-export default withUserManager(Login)
+export default Login
