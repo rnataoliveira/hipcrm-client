@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import Routes from '../Routes'
+import UserProfile from '../auth/UserProfile'
 
 import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -25,7 +26,7 @@ const Shell = (props) => {
                                     aria-haspopup="true"
                                     aria-expanded="false"
                                     data-toggle="dropdown"
-                                    href="#">
+                                    role='button'>
                                     Vendas
                             </a>
                                 <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuContracts">
@@ -35,10 +36,7 @@ const Shell = (props) => {
                             </li>
                         </ul>
                     </div>
-                    {/* { props.userManager.currentUser ?  */}
-                        <Link to="/login" className='btn btn-primary my-2 my-sm-0' >Entrar</Link>
-                        {/* <span>Olá</span> */}
-                    {/* } */}
+                    <UserProfile />
                 </div>
             </nav>
             <div className="container">

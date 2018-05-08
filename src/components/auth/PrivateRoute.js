@@ -1,11 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Route } from 'react-router'
-import userManager from '../../modules/userManager'
+import { Route, Redirect } from 'react-router'
 
 const PrivateRoute = ({ component: Component, user, ...rest }) => (
     <Route {...rest} render={(props) => {
-        return !user || user.expired ? userManager.signinRedirect() : <Component {...props} />
+        return !user || user.expired ? <Redirect to='/auth/login' /> : <Component {...props} />
     }} />
 )
 

@@ -1,8 +1,9 @@
 import React from 'react'
 import { Route, Switch } from 'react-router'
-import PrivateRoute from './layout/PrivateRoute'
+import PrivateRoute from './auth/PrivateRoute'
 
-import Login from './account/Login'
+import Login from './auth/Login'
+import Logout from './auth/Logout'
 import Callback from './auth/Callback'
 import ContractForm from './contracts/ContractForm'
 import SalesPipeline from './sales/SalesPipeline'
@@ -13,7 +14,8 @@ const Routes = () => (
     <Switch>
         <Route exact path="/" component={() => <h1>Home Publica</h1>} />
         <Route path="/ping" component={() => <h1>Pong!</h1>} />
-        <Route path="/login" component={Login} />
+        <Route path="/auth/login" component={Login} />
+        <Route path="/auth/logout" component={Logout} />
         <Route path="/auth/callback" component={Callback} />
         <PrivateRoute path="/dashboard" component={() => <h1>Dashboard</h1>} />
         <PrivateRoute path="/sales/new" component={SalesPipeline} />
