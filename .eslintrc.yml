@@ -1,0 +1,9 @@
+extends: [standard, eslint:recommended, plugin:react/recommended]
+rules:
+  curly: [error, multi]
+  array-bracket-spacing: [error, always]
+  quotes: 
+    - error
+    - single
+    - allowTemplateLiterals: true
+  indent: [error, 2]
