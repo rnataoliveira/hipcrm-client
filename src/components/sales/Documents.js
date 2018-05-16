@@ -15,7 +15,7 @@ class Documents extends Component {
     }
 
     render() {
-        return (
+    return (
             <div>
                 <h1>Documentos</h1>
                 <form>
@@ -30,7 +30,7 @@ class Documents extends Component {
                     </div>
                     <button onClick={this.handleGogoForward.bind(this)} type="button" className="btn btn-primary mt-5 mr-2 float-right">Next</button>
                     <button type="button" className="btn btn-primary mt-5 mr-2 float-right">Upload</button>
-                    <button onClick={this.handleGoBack.bind(this)}  type="button" className="btn btn-primary mt-5 mr-2 float-right">Anterior</button>
+                    <button onClick={this.handleGoBack.bind(this)} type="button" className="btn btn-primary mt-5 mr-2 float-right">Anterior</button>
                 </form>
             </div>
         )

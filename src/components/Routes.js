@@ -9,6 +9,8 @@ import ContractForm from './contracts/ContractForm'
 import SalesPipeline from './sales/SalesPipeline'
 import ContractPerson from './contracts/ContractPerson'
 import ContractLegalPerson from './contracts/ContractLegalPerson'
+import PersonFormExists from './customers/PersonFormExists';
+import LegalFormExists from './customers/LegalFormExists';
 
 const Routes = () => (
     <Switch>
@@ -23,6 +25,8 @@ const Routes = () => (
         <PrivateRoute path="/contracts/new" component={ContractForm} />
         <PrivateRoute path="/contracts/new/physical-person" component={ContractPerson} />
         <PrivateRoute path="/contracts/new/legal-person" component={ContractLegalPerson} />
+        <PrivateRoute path="/personform-exists" component={PersonFormExists} />
+        <PrivateRoute path="/legalform-exists" component={LegalFormExists} />
     </Switch>
 )
 
