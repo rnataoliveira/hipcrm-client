@@ -6,7 +6,7 @@ import PersonFormExists from '../customers/PersonFormExists'
 import LegalFormExists from '../customers/LegalFormExists'
 
 import 'bootstrap'
-import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/dist/css/bootstrap.css'
 
 const Shell = (props) => {
     return (

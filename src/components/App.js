@@ -9,6 +9,8 @@ import userManager from '../modules/userManager'
 
 import Shell from './layout/Shell'
 
+store.subscribe(() => window.localStorage.setItem('redux-state', JSON.stringify(store.getState())))
+
 const App = () => (
   <Provider store={store}>
     <OidcProvider store={store} userManager={userManager}>
