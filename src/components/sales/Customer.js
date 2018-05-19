@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Typeahead, AsyncTypeahead } from 'react-bootstrap-typeahead'
+import { AsyncTypeahead } from 'react-bootstrap-typeahead'
 
-// import CreateCustomerContainer from '../customers/CreateCustomerContainer'
 import CustomerTypeForm from '../customers/CustomerTypeForm'
+import { searchCustomers } from '../../actions'
 
 import 'react-bootstrap-typeahead/css/Typeahead.css'
 import 'react-bootstrap-typeahead/css/Typeahead-bs4.css'
@@ -13,8 +13,7 @@ class Customer extends Component {
     super(props)
     this.state = {
       operation: 'search',
-      isLoading: false,
-      options: []
+      isLoading: false
     }
   }
 
@@ -25,16 +24,7 @@ class Customer extends Component {
   }
 
   onSearch(query) {
-    fetch(`http://localhost:5000/customers?q=${query}`, {
-      headers: {
-        'Authorization': `Bearer ${this.props.accessToken}`
-      }
-    })
-      .then(response => response.json())
-      .then(customers => this.setState({
-        isLoading: false,
-        options: customers
-      }))
+    this.props.searchCustomers(query, this.props.accessToken)
   }
 
   onChange(selected) {
@@ -54,7 +44,7 @@ class Customer extends Component {
                 isLoading={this.state.isLoading}
                 onSearch={this.onSearch.bind(this)}
                 onChange={this.onChange.bind(this)}
-                options={this.state.options}
+                options={this.props.customers}
               />
             </div>
             <hr style={{ color: '#757575', width: '90%' }} className="d-flex justify-content-center " />
@@ -70,7 +60,12 @@ class Customer extends Component {
 }
 
 const mapStateToProps = state => ({
+  customers: state.salesPipeline.customers,
   accessToken: state.oidc.user && state.oidc.user.id_token
 })
 
-export default connect(mapStateToProps)(Customer)
+const mapDispatchToProps = dispatch => ({
+  searchCustomers: (q, accessToken) => dispatch(searchCustomers(q, accessToken))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Customer)

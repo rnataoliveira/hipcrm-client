@@ -2,6 +2,8 @@ import { createStore, compose, applyMiddleware } from 'redux'
 import { routerMiddleware } from 'react-router-redux'
 import createOidcMiddleware, { } from 'redux-oidc'
 import createHistory from 'history/createBrowserHistory'
+import axios from 'axios'
+import axiosMiddleware from 'redux-axios-middleware'
 
 import userManager from './userManager'
 import reducer from '../reducer'
@@ -12,8 +14,13 @@ const initialState = {}
 
 const history = createHistory()
 
+const apiClient = axios.create({
+    baseURL: 'http://localhost:5000',
+    responseType: JSON
+})
+
 const createStoreWithMiddlewares = compose(
-    applyMiddleware(oidcMiddleware, routerMiddleware(history))
+    applyMiddleware(oidcMiddleware, routerMiddleware(history), axiosMiddleware(apiClient))
 )(createStore)
 
 const store = createStoreWithMiddlewares(reducer, initialState, 
