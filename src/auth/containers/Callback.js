@@ -20,8 +20,10 @@ Callback.propTypes = {
   redirect: PropTypes.func.isRequired
 }
 
+const mapStateToProps = state => ({})
+
 const mapDispatchToProps = dispatch => ({
   redirect: () => dispatch(push('/dashboard'))
 })
 
-export default connect(mapDispatchToProps)(Callback)
+export default connect(mapStateToProps, mapDispatchToProps)(Callback)
