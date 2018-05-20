@@ -2,7 +2,6 @@ import React from 'react'
 import { Switch, Route } from 'react-router'
 
 import LinkContainer from './LinkContainer'
-
 import Customer from './Customer'
 import Appointments from './Appointments'
 import Documents from './Documents'

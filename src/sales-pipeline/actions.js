@@ -10,3 +10,8 @@ export const searchCustomers = (q, accessToken) => ({
     }
   }
 })
+
+export const customerSelected = customer => ({
+  type: 'CUSTOMER_SELECTED',
+  payload: customer
+})

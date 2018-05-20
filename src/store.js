@@ -5,26 +5,26 @@ import createHistory from 'history/createBrowserHistory'
 import axios from 'axios'
 import axiosMiddleware from 'redux-axios-middleware'
 
-import userManager from './userManager'
-import reducer from '../reducer'
+import { userManager } from './auth'
+import reducer from './rootReducer'
 
 const oidcMiddleware = createOidcMiddleware(userManager)
 
-const initialState = {}
+const initialState = { }
 
 const history = createHistory()
 
 const apiClient = axios.create({
-    baseURL: 'http://localhost:5000',
-    responseType: JSON
+  baseURL: 'http://localhost:5000',
+  responseType: JSON
 })
 
 const createStoreWithMiddlewares = compose(
-    applyMiddleware(oidcMiddleware, routerMiddleware(history), axiosMiddleware(apiClient))
+  applyMiddleware(oidcMiddleware, routerMiddleware(history), axiosMiddleware(apiClient))
 )(createStore)
 
-const store = createStoreWithMiddlewares(reducer, initialState, 
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+const store = createStoreWithMiddlewares(reducer, initialState,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 )
 
 export default store

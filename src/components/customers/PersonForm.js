@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Customer from '../sales/Customer';
+import Customer from '../../sales-pipeline/components/Customer'
 
 class PersonForm extends Component {
     constructor(props) {

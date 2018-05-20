@@ -4,10 +4,10 @@ import { OidcProvider } from 'redux-oidc'
 import { ConnectedRouter } from 'react-router-redux'
 import createHistory from 'history/createBrowserHistory'
 
-import store from '../modules/store'
-import userManager from '../modules/userManager'
+import store from '../store'
+import { userManager } from '../auth'
 
-import Shell from './layout/Shell'
+import Shell from './Shell'
 
 store.subscribe(() => window.localStorage.setItem('redux-state', JSON.stringify(store.getState())))
 
