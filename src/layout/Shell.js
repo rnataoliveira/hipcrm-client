@@ -20,11 +20,19 @@ const Shell = (props) => {
               <li className="nav-item active">
                 <Link to="/" className="nav-link">Dashboard</Link>
               </li>
-              <li className="nav-item">
-                <Link to="/personform-exists" className="nav-link">Pessoa Fisíca Existe</Link>
-              </li>
-              <li className="nav-item">
-                <Link to="/legalform-exists" className="nav-link">Pessoa Jurídica Existe</Link>
+              <li className="nav-item dropdown">
+                <a className="nav-link dropdown-toggle"
+                  id="navbarDropdownMenuContracts"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                  data-toggle="dropdown"
+                  role='button'>
+                  Vendas
+                </a>
+                <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuContracts">
+                  <Link to="/sales/new" className="dropdown-item">Iniciar Venda</Link>
+                  <Link to="/ping" className="dropdown-item">Ping</Link>
+                </div>
               </li>
               <li className="nav-item dropdown">
                 <a className="nav-link dropdown-toggle"
@@ -33,10 +41,9 @@ const Shell = (props) => {
                   aria-expanded="false"
                   data-toggle="dropdown"
                   role='button'>
-                                    Vendas
+                  Financeiro
                 </a>
                 <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuContracts">
-                  <Link to="/sales/new" className="dropdown-item">Iniciar Venda</Link>
                   <Link to="/ping" className="dropdown-item">Ping</Link>
                 </div>
               </li>

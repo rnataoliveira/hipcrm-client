@@ -25,7 +25,7 @@ class Customer extends Component {
 
   render() {
     return (
-      <div className="row">
+      <div className="">
         <Switch>
           <Route exact path='/sales/new/customer' render={() => {
             return (<div className="col-12">
