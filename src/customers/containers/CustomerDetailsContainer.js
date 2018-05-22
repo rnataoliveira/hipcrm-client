@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { getCustomer } from '../actions'
 import CustomerDetailsComponent from '../customers/CustomerDetailsComponent'
-import PersonFormDetails from '../customers/PersonFormDetails'
-import LegalFormDetails from '../customers/LegalFormDetails'
+import PhysicalPersonDetails from '../customers/PhysicalPersonDetails'
+import LegalPersonDetails from '../customers/LegalPersonDetails'
 
 class CustomerDetailsContainer extends Component {
   componentDidMount() {
@@ -17,9 +17,9 @@ class CustomerDetailsContainer extends Component {
       <div>
         {this.props.customer &&
           (this.props.customer.type === 'PhysicalPerson' ?
-            <PersonFormDetails customer={this.props.customer} />
+            <PhysicalPersonDetails customer={this.props.customer} />
             :
-            <LegalFormDetails customer={this.props.customer} />
+            <LegalPersonDetails customer={this.props.customer} />
           )}
       </div>
     )
