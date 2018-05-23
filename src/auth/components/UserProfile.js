@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 const UserProfile = ({ user }) => {
@@ -30,11 +29,7 @@ const UserProfile = ({ user }) => {
 }
 
 UserProfile.propTypes = {
-  user: PropTypes.object.isRequired
+  user: PropTypes.object
 }
 
-const mapStateToProps = state => ({
-  user: state.oidc.user
-})
-
-export default connect(mapStateToProps)(UserProfile)
+export default UserProfile

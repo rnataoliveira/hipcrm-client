@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
 import Routes from './Routes'
 import { UserProfile } from '../auth'
 
@@ -15,40 +16,43 @@ const Shell = (props) => {
           <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
-          <div className="collapse navbar-collapse" id="navbarNav">
-            <ul className="navbar-nav">
-              <li className="nav-item active">
-                <Link to="/" className="nav-link">Dashboard</Link>
-              </li>
-              <li className="nav-item dropdown">
-                <a className="nav-link dropdown-toggle"
-                  id="navbarDropdownMenuContracts"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                  data-toggle="dropdown"
-                  role='button'>
-                  Vendas
-                </a>
-                <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuContracts">
-                  <Link to="/sales/new" className="dropdown-item">Iniciar Venda</Link>
-                  <Link to="/ping" className="dropdown-item">Ping</Link>
-                </div>
-              </li>
-              <li className="nav-item dropdown">
-                <a className="nav-link dropdown-toggle"
-                  id="navbarDropdownMenuContracts"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                  data-toggle="dropdown"
-                  role='button'>
-                  Financeiro
-                </a>
-                <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuContracts">
-                  <Link to="/ping" className="dropdown-item">Ping</Link>
-                </div>
-              </li>
-            </ul>
-          </div>
+          {props.user &&
+            (<div className="collapse navbar-collapse" id="navbarNav">
+              <ul className="navbar-nav">
+                <li className="nav-item active">
+                  <Link to="/dashboard" className="nav-link">Dashboard</Link>
+                </li>
+                <li className="nav-item dropdown">
+                  <a className="nav-link dropdown-toggle"
+                    id="navbarDropdownMenuContracts"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                    data-toggle="dropdown"
+                    role='button'>
+                    Vendas
+                  </a>
+                  <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuContracts">
+                    <Link to="/sales/new" className="dropdown-item">Iniciar Venda</Link>
+                    <Link to="/ping" className="dropdown-item">Ping</Link>
+                  </div>
+                </li>
+                <li className="nav-item dropdown">
+                  <a className="nav-link dropdown-toggle"
+                    id="navbarDropdownMenuContracts"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                    data-toggle="dropdown"
+                    role='button'>
+                    Financeiro
+                  </a>
+                  <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuContracts">
+                    <Link to="/ping" className="dropdown-item">Ping</Link>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            )
+          }
           <UserProfile />
         </div>
       </nav>
@@ -59,4 +63,8 @@ const Shell = (props) => {
   )
 }
 
-export default Shell
+const mapStateToProps = state => ({
+  user: state.oidc.user
+})
+
+export default connect(mapStateToProps)(Shell)

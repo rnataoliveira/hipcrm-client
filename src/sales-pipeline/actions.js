@@ -15,3 +15,19 @@ export const customerSelected = customer => ({
   type: 'CUSTOMER_SELECTED',
   payload: customer
 })
+
+export const createSale = ({ customerId }, accessToken) => ({
+  type: 'CREATE_SALE',
+  payload: {
+    request: {
+      method: 'post',
+      url: 'sales-pipelines',
+      headers: {
+        'Authorization': `Bearer ${accessToken}`
+      },
+      data: {
+        customerId
+      }
+    }
+  }
+})

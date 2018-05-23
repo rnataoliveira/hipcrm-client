@@ -4,6 +4,7 @@ import { Switch, Route } from 'react-router'
 import { Link } from 'react-router-dom'
 import CustomerSearchContainer from '../containers/CustomerSearchContainer'
 import { CustomerDetailsContainer } from '../../customers'
+import CustomerTypeForm from '../../components/customers/CustomerTypeForm'
 
 import 'react-bootstrap-typeahead/css/Typeahead.css'
 import 'react-bootstrap-typeahead/css/Typeahead-bs4.css'
@@ -40,7 +41,7 @@ class Customer extends Component {
           }} />
           <Route path='/sales/new/customer/new' render={() => {
             return (<div className="col-12">
-              Criar Novo Cliente
+              <CustomerTypeForm />
             </div>)
           }} />
           <Route path='/sales/new/customer/:customerId' component={CustomerDetailsContainer} />
