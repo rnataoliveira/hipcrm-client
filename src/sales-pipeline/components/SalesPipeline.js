@@ -18,7 +18,7 @@ class SalesPipeline extends Component {
 
   componentDidMount() {
     const { id: saleId } = this.props.match.params
-    this.props.fetchSale(saleId, this.props.oidc)
+    this.props.fetchSale(saleId)
   }
 
   render() {
@@ -60,12 +60,11 @@ class SalesPipeline extends Component {
 }
 
 const mapStateToProps = state => ({
-  sale: state.salesPipeline.sale,
-  oidc: state.oidc.user
+  sale: state.salesPipeline.sale
 })
 
 const mapDispatchToProps = dispatch => ({
-  fetchSale: (saleId, oidc) => dispatch(fetchSale(saleId, oidc))
+  fetchSale: saleId => dispatch(fetchSale(saleId))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SalesPipeline)

@@ -27,7 +27,6 @@ const CustomerDetails = ({ customer, children }) => {
 
 CustomerDetails.propTypes = {
   customer: PropTypes.object.isRequired,
-  createSale: PropTypes.func.isRequired,
   children:  PropTypes.object.isRequired
 }
 

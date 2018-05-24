@@ -22,7 +22,7 @@ class CustomerSearchContainer extends Component {
         labelKey='name'
         placeholder='Buscar um cliente existente'
         isLoading={this.state.isLoading}
-        onSearch={q => this.props.searchCustomers(q, this.props.accessToken)}
+        onSearch={this.props.searchCustomers}
         onChange={this.props.customerSelected}
         options={this.props.customers}
       />
@@ -31,12 +31,11 @@ class CustomerSearchContainer extends Component {
 }
 
 const mapStateToProps = state => ({
-  customers: state.salesPipeline.new.customers,
-  accessToken: state.oidc.user && state.oidc.user.id_token
+  customers: state.salesPipeline.new.customers
 })
 
 const mapDispatchToProps = dispatch => ({
-  searchCustomers: (q, accessToken) => dispatch(searchCustomers(q, accessToken)),
+  searchCustomers: q => dispatch(searchCustomers(q)),
   customerSelected: customer => {
     dispatch(customerSelected(customer[0]))
     dispatch(push(`/sales/new/customer/${customer[0].id}`))

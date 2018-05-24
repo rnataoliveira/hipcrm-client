@@ -7,40 +7,39 @@ import { CustomerDetails } from '../../customers'
 
 class CustomerDetailsContainer extends Component {
   static propTypes = {
-    customer: PropTypes.object.isRequired,
-    oidc: PropTypes.object.isRequired
+    customer: PropTypes.object
   }
 
   componentDidMount() {
     const { id: customerId } = this.props.match.params
-    this.props.oidc && this.props.fetchCustomer(customerId, this.props.oidc)
+    this.props.fetchCustomer(customerId)
   }
 
   handleNewSale() {
-    this.props.createSale(this.props.customer.id, this.props.oidc)
+    this.props.createSale(this.props.customer.id)
   }
 
   render() {
-    const display = (
+    const display = () => (
       <CustomerDetails customer={this.props.customer}>
         <div className="col-12 text-right">
           <button onClick={this.handleNewSale.bind(this)} className="btn btn-primary">Iniciar Venda</button>
         </div>
       </CustomerDetails>
     )
-    return this.props.saleId ? <Redirect to={`/sales/${this.props.saleId}`} /> : display
+    return this.props.saleId ? <Redirect to={`/sales/${this.props.saleId}`} /> :
+      this.props.customer ? display() : null
   }
 }
 
 const mapStateToProps = state => ({
   customer: state.salesPipeline.new.customer,
-  saleId: state.salesPipeline.new.saleId,
-  oidc: state.oidc.user
+  saleId: state.salesPipeline.new.saleId
 })
 
 const mapDispatchToProps = dispatch => ({
-  fetchCustomer: (customerId, oidc) => dispatch(fetchCustomer(customerId, oidc)),
-  createSale: (customerId, oidc) => dispatch(createSale({ customerId }, oidc))
+  fetchCustomer: customerId => dispatch(fetchCustomer(customerId)),
+  createSale: customerId => dispatch(createSale({ customerId }))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(CustomerDetailsContainer)

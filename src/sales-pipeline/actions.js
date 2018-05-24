@@ -1,23 +1,25 @@
-export const searchCustomers = (q, accessToken) => ({
+import { store } from '../store'
+
+export const searchCustomers = q => ({
   type: 'SEARCH_CUSTOMERS',
   payload: {
     request: {
       url: '/customers',
       params: { q },
       headers: {
-        'Authorization': `Bearer ${accessToken}`
+        'Authorization': `Bearer ${store.getState().oidc.user.id_token}`
       }
     }
   }
 })
 
-export const fetchCustomer = (customerId, oidc) => ({
+export const fetchCustomer = customerId => ({
   type: 'FETCH_CUSTOMER',
   payload: {
     request: {
       url: `/customers/${customerId}`,
       headers: {
-        'Authorization': `Bearer ${oidc.id_token}`
+        'Authorization': `Bearer ${store.getState().oidc.user.id_token}`
       }
     }
   }
@@ -28,15 +30,15 @@ export const customerSelected = customer => ({
   payload: customer
 })
 
-export const createSale = ({ customerId }, oidc) => ({
+export const createSale = ({ customerId }) => ({
   type: 'CREATE_SALE',
   payload: {
     request: {
       method: 'post',
       url: 'sales-pipelines',
       headers: {
-        'Authorization': `Bearer ${oidc.id_token}`,
-        'AccessToken': oidc.access_token
+        'Authorization': `Bearer ${store.getState().oidc.user.id_token}`,
+        'AccessToken': store.getState().oidc.user.access_token
       },
       data: {
         customerId
@@ -45,13 +47,13 @@ export const createSale = ({ customerId }, oidc) => ({
   }
 })
 
-export const fetchSale = (saleId, oidc) => ({
+export const fetchSale = saleId => ({
   type: 'FETCH_SALE',
   payload: {
     request: {
       url: `/sales-pipelines/${saleId}`,
       headers: {
-        'Authorization': `Bearer ${oidc.id_token}`
+        'Authorization': `Bearer ${store.getState().oidc.user.id_token}`,
       }
     }
   }
