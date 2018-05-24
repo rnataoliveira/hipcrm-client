@@ -10,7 +10,7 @@ class CustomerSearchContainer extends Component {
   static propTypes = {
     searchCustomers: PropTypes.func.isRequired,
     customerSelected: PropTypes.func.isRequired,
-    searchResults: PropTypes.array.isRequired
+    customers: PropTypes.array.isRequired
   }
 
   state = { isLoading: false }
@@ -24,14 +24,14 @@ class CustomerSearchContainer extends Component {
         isLoading={this.state.isLoading}
         onSearch={q => this.props.searchCustomers(q, this.props.accessToken)}
         onChange={this.props.customerSelected}
-        options={this.props.searchResults}
+        options={this.props.customers}
       />
     )
   }
 }
 
 const mapStateToProps = state => ({
-  searchResults: state.salesPipeline.customer.searchResults,
+  customers: state.salesPipeline.new.customers,
   accessToken: state.oidc.user && state.oidc.user.id_token
 })
 

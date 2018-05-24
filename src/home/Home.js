@@ -16,7 +16,7 @@ class Home extends Component {
         className="col-sm-12 d-flex position-absolute text-center"
       >
         <div
-          className="col-sm-8  text-left  "
+          className="col-sm-8  text-left"
           style={{
             backgroundRepeat: 'no-repeat',
             backgroundImage: `url("img/bg.jpeg")`,

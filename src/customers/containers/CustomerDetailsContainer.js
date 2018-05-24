@@ -28,7 +28,7 @@ class CustomerDetailsContainer extends Component {
 
 const mapStateToProps = state => ({
   accessToken: state.oidc.user && state.oidc.user.id_token,
-  customer: state.customers.customerDetails
+  customer: state.customers.customerDetails,
 })
 
 const mapDispatchToProps = dispatch => ({

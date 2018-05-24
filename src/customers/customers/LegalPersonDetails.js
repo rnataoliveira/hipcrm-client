@@ -1,12 +1,23 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { createSale } from '../../sales-pipeline/actions'
+import { Redirect } from 'react-router-dom'
 
 class LegalPersonDetails extends Component {
   constructor(props) {
     super(props)
   }
 
+  handleNewSale(event) {
+    const { id: customerId } = this.props.customer
+    const { user } = this.props
+    this.props.createSale({ customerId }, user)
+  }
+
   render() {
-    console.log('legal', this.props)
+    if (this.props.sale)
+      return <Redirect to={`/sales/${this.props.sale.saleId}`} />
+
     return (
       <form className="col-sm-12">
         <div>
@@ -78,7 +89,7 @@ class LegalPersonDetails extends Component {
           </div>
 
           <div className="col-lg-12 col-md-12 col-sm-12 d-flex justify-content-end">
-            <button type="button" className="btn btn-primary mt-5 mr-2 float-right">Iniciar Nova Venda</button>
+            <button type="button" className="btn btn-primary mt-5 mr-2 float-right" onClick={(event) => { this.handleNewSale() }}>Iniciar Nova Venda</button>
             <button type="button" className="btn btn-primary mt-5 mr-2 float-right">Editar</button>
             <button type="button" className="btn btn-primary mt-5 mr-2 float-right">Excluir</button>
           </div>
@@ -88,4 +99,14 @@ class LegalPersonDetails extends Component {
   }
 }
 
-export default LegalPersonDetails
+const mapStateToProps = state => ({
+  user: state.oidc.user,
+  customer: state.customers.customerDetails,
+  sale: state.salesPipeline.sale
+})
+
+const mapDispatchToProps = dispatch => ({
+  createSale: (customer, user) => dispatch(createSale(customer, user))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(LegalPersonDetails)

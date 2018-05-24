@@ -1,14 +1,25 @@
 import React, { Component } from 'react'
 import moment from 'moment'
+import { connect } from 'react-redux'
+import { createSale } from '../../sales-pipeline/actions'
+import { Redirect } from 'react-router-dom'
 
 class PhysicalPersonDetails extends Component {
   constructor(props) {
     super(props)
   }
 
+  handleNewSale(event) {
+    const { id: customerId } = this.props.customer
+    const { user } = this.props
+    this.props.createSale({ customerId }, user)
+  }
+
   render() {
     const birth = this.props.customer.personalData.birthDate
-    
+    if (this.props.sale)
+      return <Redirect to={`/sales/${this.props.sale.saleId}`} />
+
     return (
       <form action="" className="col-sm-12">
         <div>
@@ -29,7 +40,7 @@ class PhysicalPersonDetails extends Component {
               <p className="border-bottom">{this.props.customer.personalData.documentNumber}</p>
             </div>
             <div className="col-sm-2">
-              <p className="border-bottom">{this.props.customer.personalData.generalRegistration? this.props.customer.personalData.generalRegistration : 'RG'}</p>
+              <p className="border-bottom">{this.props.customer.personalData.generalRegistration ? this.props.customer.personalData.generalRegistration : 'RG'}</p>
             </div>
             <div className="col-sm-2">
               <p className="border-bottom">
@@ -90,7 +101,6 @@ class PhysicalPersonDetails extends Component {
               <p className="border-bottom">{this.props.customer.personalData.address.state}</p>
             </div>
           </div>
-          {/*Te amo ❤️*/}
           <div className="row mt-4">
             <div className="col-sm-12">
               <p className="border-bottom" >{this.props.customer.personalData.address.complement}</p>
@@ -104,7 +114,7 @@ class PhysicalPersonDetails extends Component {
             </div>
           </div>
           <div className="col-lg-12 col-md-12 col-sm-12 d-flex justify-content-end">
-            <button type="button" className="btn btn-primary mt-5 mr-2 float-right">Iniciar Nova Venda</button>
+            <button type="button" className="btn btn-primary mt-5 mr-2 float-right" onClick={(event) => this.handleNewSale()}>Iniciar Nova Venda</button>
             <button type="button" className="btn btn-primary mt-5 mr-2 float-right">Editar</button>
             <button type="button" className="btn btn-primary mt-5 mr-2 float-right">Excluir</button>
           </div>
@@ -114,4 +124,14 @@ class PhysicalPersonDetails extends Component {
   }
 }
 
-export default PhysicalPersonDetails
+const mapStateToProps = state => ({
+  user: state.oidc.user,
+  customer: state.customers.customerDetails,
+  sale: state.salesPipeline.sale
+})
+
+const mapDispatchToProps = dispatch => ({
+  createSale: (customer, user) => dispatch(createSale(customer, user))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(PhysicalPersonDetails)

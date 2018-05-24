@@ -1,11 +1,13 @@
-export default (state = { customer: { selected: null, searchResults: [] }, sale: null }, action) => {
+export default (state = { new: { customers: [], customer: null }, sale: null }, action) => {
   switch (action.type) {
   case 'SEARCH_CUSTOMERS_SUCCESS':
-    return { ...state, customer: { ...state.customer, searchResults: action.payload.data } }
-  case 'CUSTOMER_SELECTED':
-    return { ...state, customer: { ...state.customer, selected: action.payload } } 
+    return { ...state, new: { ...state.new, customers: action.payload.data } }
+  case 'FETCH_CUSTOMER_SUCCESS':
+    return { ...state, new: { ...state.new, customer: action.payload.data } }
   case 'CREATE_SALE_SUCCESS':
-    return { ...state, customer: { selected: null, searchResults: [] }, sale: action.payload.data }
+    return { ...state, new: { ...state.new, saleId: action.payload.data.saleId } }
+  case 'FETCH_SALE_SUCCESS':
+    return { ...state, new: { customers: [], customer: null }, sale: action.payload.data }
   default: return { ...state }
   }
 }
