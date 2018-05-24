@@ -15,7 +15,7 @@ const CustomerDetails = ({ customer, children }) => {
       <h5 className="h5 mt-4">Observações</h5>
       <div className="row mt-2">
         <div className="col-sm-12">
-          <p className="border rounded">{customer.notes}</p>
+          <p className="form-control">{customer.notes}</p>
         </div>
       </div>
       {children}

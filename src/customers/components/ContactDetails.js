@@ -7,22 +7,43 @@ const ContactDetails = ({ cellPhone, phone, email }) => (
     <div className="row mt-2">
       {cellPhone && (
         <div className="col-sm-1">
-          <p className="border-bottom">{cellPhone.areaCode}</p>
+          <label htmlFor="cellPhoneAreaCode">DDD</label>
         </div>
       )}
       {cellPhone && (
         <div className="col-sm-2">
-          <p className="border-bottom">{cellPhone.number}</p>
+          <label htmlFor="cellPhoneNumber">Celular</label>
         </div>
       )}
       <div className="col-sm-1">
-        <p className="border-bottom">{phone.areaCode}</p>
+        <label htmlFor="phoneAreaCode">DDD</label>
       </div>
       <div className="col-sm-2">
-        <p className="border-bottom">{phone.number}</p>
+        <label htmlFor="phoneNumber">Telefone</label>
       </div>
-      <div className="col-sm-6">
-        <p className="border-bottom">{email}</p>
+      <div className={cellPhone ? 'col-sm-6' : 'col-sm-9'}>
+        <label htmlFor="email">E-mail</label>
+      </div>
+    </div>
+    <div className="row mt-2">
+      {cellPhone && (
+        <div className="col-sm-1">
+          <p className="form-control">{cellPhone.areaCode}</p>
+        </div>
+      )}
+      {cellPhone && (
+        <div className="col-sm-2">
+          <p className="form-control">{cellPhone.number}</p>
+        </div>
+      )}
+      <div className="col-sm-1">
+        <p className="form-control">{phone.areaCode}</p>
+      </div>
+      <div className="col-sm-2">
+        <p className="form-control">{phone.number}</p>
+      </div>
+      <div className={cellPhone ? 'col-sm-6' : 'col-sm-9'}>
+        <p className="form-control">{email}</p>
       </div>
     </div>
   </div>
