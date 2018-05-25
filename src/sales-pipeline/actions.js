@@ -95,3 +95,8 @@ export const deleteSale = saleId => ({
   },
   saleId
 })
+
+export const filterSales = q => ({
+  type: 'FILTER_SALES',
+  q
+})

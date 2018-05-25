@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { fetchSales, deleteSale } from '../actions'
+import { fetchSales, deleteSale, filterSales } from '../actions'
 import { Link } from 'react-router-dom'
 
 class SalesList extends Component {
@@ -13,13 +13,17 @@ class SalesList extends Component {
     this.props.deleteSale(saleId)
   }
 
+  handleChange(event) {
+    this.props.filterSales(event.target.value)
+  }
+
   render() {
     return (
       <div>
         <h1 className="mt-4">Vendas</h1>
         <div className="row justify-content-center mt-2 mb-4 mt-4">
           <form className="form-inline my-2 col-4 my-lg-0">
-            <input className="form-control col-12" type="search" placeholder="Buscar Venda" aria-label="Search" />
+            <input value={this.props.filter} onChange={this.handleChange.bind(this)} className="form-control col-12" type="search" placeholder="Buscar Venda" aria-label="Search" />
           </form>
         </div>
         <table className="table mt-2">
@@ -55,16 +59,24 @@ class SalesList extends Component {
 SalesList.propTypes = {
   sales: PropTypes.array,
   fetchSales: PropTypes.func.isRequired,
-  deleteSale: PropTypes.func.isRequired
+  deleteSale: PropTypes.func.isRequired,
+  filterSales: PropTypes.func.isRequired,
+  filter: PropTypes.string
+}
+
+const getFilteredSales = (sales, q) => {
+  return q ? sales.filter(sale => sale.code === q) : sales
 }
 
 const mapStateToProps = state => ({
-  sales: state.salesPipeline.sales
+  sales: getFilteredSales(state.salesPipeline.sales, state.salesPipeline.filter),
+  filter: state.salesPipeline.filter
 })
 
 const mapDispatchToProps = dispatch => ({
   fetchSales: () => dispatch(fetchSales()),
-  deleteSale: saleId => dispatch(deleteSale(saleId))
+  deleteSale: saleId => dispatch(deleteSale(saleId)),
+  filterSales: q => dispatch(filterSales(q))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SalesList)
