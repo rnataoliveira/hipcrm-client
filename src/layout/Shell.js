@@ -34,7 +34,20 @@ const Shell = (props) => {
                   <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuContracts">
                     <Link to="/sales/new" className="dropdown-item">Iniciar Venda</Link>
                     <Link to="/sales" className="dropdown-item">Ver Vendas</Link>
-                    <Link to="/ping" className="dropdown-item">Ping</Link>
+                  </div>
+                </li>
+                <li className="nav-item dropdown">
+                  <a className="nav-link dropdown-toggle"
+                    id="navbarDropdownMenuCustomers"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                    data-toggle="dropdown"
+                    role='button'>
+                    Clientes
+                  </a>
+                  <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuCustomers">
+                    <Link to="/customers/new" className="dropdown-item">Cadastrar Cliente</Link>
+                    <Link to="/customers" className="dropdown-item">Ver Clientes</Link>
                   </div>
                 </li>
                 <li className="nav-item dropdown">

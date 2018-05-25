@@ -11,3 +11,20 @@ export const fetchCustomer = (customerId) => ({
     }
   }
 })
+
+export const fetchCustomers = () => ({
+  type: 'FETCH_CUSTOMERS',
+  payload: {
+    request: {
+      url: `/customers`,
+      headers: {
+        'Authorization': `Bearer ${store.getState().oidc.user.id_token}`
+      }
+    }
+  }
+})
+
+export const filterCustomers = q => ({
+  type: 'FILTER_CUSTOMERS',
+  q
+})

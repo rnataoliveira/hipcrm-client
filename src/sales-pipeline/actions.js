@@ -4,7 +4,7 @@ export const searchCustomers = q => ({
   type: 'SEARCH_CUSTOMERS',
   payload: {
     request: {
-      url: '/customers',
+      url: '/customers/search',
       params: { q },
       headers: {
         'Authorization': `Bearer ${store.getState().oidc.user.id_token}`

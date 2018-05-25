@@ -5,7 +5,6 @@ import { connect } from 'react-redux'
 import { fetchSale } from '../actions'
 
 import LinkContainer from './LinkContainer'
-import Customer from './Customer'
 import Appointments from './Appointments'
 import Documents from './Documents'
 

@@ -4,7 +4,7 @@ import { Route, Switch } from 'react-router'
 import { Home } from '../home'
 import { Login, Logout, Callback, PrivateRoute } from '../auth'
 import { SalesPipeline, NewSale } from '../sales-pipeline'
-import { CustomerDetailsContainer } from '../customers'
+import { CustomerDetailsContainer, CustomerListContainer } from '../customers'
 import Dashboard from '../home/Dashboard';
 import SalesList from '../sales-pipeline/components/SalesList';
 
@@ -19,6 +19,7 @@ const Routes = () => (
     <PrivateRoute path="/sales/new" component={NewSale} />
     <PrivateRoute path="/sales/:id" component={SalesPipeline} />
     <PrivateRoute path="/customers/:id" component={CustomerDetailsContainer} />
+    <PrivateRoute path="/customers" component={CustomerListContainer} />
   </Switch>
 )
 
