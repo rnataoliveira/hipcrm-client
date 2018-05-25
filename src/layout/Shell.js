@@ -33,6 +33,7 @@ const Shell = (props) => {
                   </a>
                   <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuContracts">
                     <Link to="/sales/new" className="dropdown-item">Iniciar Venda</Link>
+                    <Link to="/sales" className="dropdown-item">Ver Vendas</Link>
                     <Link to="/ping" className="dropdown-item">Ping</Link>
                   </div>
                 </li>
@@ -46,7 +47,8 @@ const Shell = (props) => {
                     Financeiro
                   </a>
                   <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuContracts">
-                    <Link to="/ping" className="dropdown-item">Ping</Link>
+                    <Link to="/ping" className="dropdown-item">Gerar Relatório</Link>
+                    <Link to="/ping" className="dropdown-item">Ver Relatórios</Link>
                   </div>
                 </li>
               </ul>

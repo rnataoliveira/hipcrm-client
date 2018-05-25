@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { fetchCustomer, createSale } from '../actions'
 import { Redirect } from 'react-router'
 import { CustomerDetails } from '../../customers'
+import { Alert } from '../../layout'
 
 class CustomerDetailsContainer extends Component {
   static propTypes = {
@@ -21,11 +22,20 @@ class CustomerDetailsContainer extends Component {
 
   render() {
     const display = () => (
-      <CustomerDetails customer={this.props.customer}>
-        <div className="col-12 text-right">
-          <button onClick={this.handleNewSale.bind(this)} className="btn btn-primary">Iniciar Venda</button>
-        </div>
-      </CustomerDetails>
+      <div>
+        {this.props.errors &&
+          <Alert type="danger" heading="Ops!">
+            <ul>
+              {Object.keys(this.props.errors).map(key => 
+                this.props.errors[key].map((errorMessage, index) => <li key={`${key}.${index}`}>{errorMessage}</li>))}
+            </ul>
+          </Alert>}
+        <CustomerDetails customer={this.props.customer}>
+          <div className="col-12 text-right">
+            <button onClick={this.handleNewSale.bind(this)} className="btn btn-primary">Iniciar Venda</button>
+          </div>
+        </CustomerDetails>
+      </div>
     )
     return this.props.saleId ? <Redirect to={`/sales/${this.props.saleId}`} /> :
       this.props.customer ? display() : null
@@ -34,7 +44,8 @@ class CustomerDetailsContainer extends Component {
 
 const mapStateToProps = state => ({
   customer: state.salesPipeline.new.customer,
-  saleId: state.salesPipeline.new.saleId
+  saleId: state.salesPipeline.new.saleId,
+  errors: state.salesPipeline.new.errors
 })
 
 const mapDispatchToProps = dispatch => ({

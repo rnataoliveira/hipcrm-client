@@ -39,7 +39,7 @@ const mapDispatchToProps = dispatch => ({
   customerSelected: customer => {
     dispatch(customerSelected(customer[0]))
     dispatch(push(`/sales/new/customer/${customer[0].id}`))
-  } 
+  }
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(CustomerSearchContainer)

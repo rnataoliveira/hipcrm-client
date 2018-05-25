@@ -9,7 +9,7 @@ import CustomerSource from './CustomerSource'
 const NewSale = ({ match, location }) => (
   <div className='row mt-5'>
     <div className="col-12">
-      <div className="row">
+      <div className="">
         <div className="col-12">
           <h1>
             Processo de Vendas <small className="ml-2 text-muted">Nova Venda</small>

@@ -5,6 +5,7 @@ import { Home } from '../home'
 import { Login, Logout, Callback, PrivateRoute } from '../auth'
 import { SalesPipeline, NewSale } from '../sales-pipeline'
 import Dashboard from '../home/Dashboard';
+import SalesList from '../sales-pipeline/components/SalesList';
 
 const Routes = () => (
   <Switch>
@@ -13,8 +14,11 @@ const Routes = () => (
     <Route path="/auth/logout" component={Logout} />
     <Route path="/auth/callback" component={Callback} />
     <PrivateRoute path="/dashboard" component={Dashboard} />
-    <Route path="/sales/new" component={NewSale} />
-    <Route path="/sales/:id" component={SalesPipeline} />
+    <PrivateRoute path="/sales/new" component={NewSale} />
+    <PrivateRoute path="/sales/:id" component={SalesPipeline} />
+    
+    {/* Route to test */}
+    <PrivateRoute path="/sales" component={SalesList} />
   </Switch>
 )
 

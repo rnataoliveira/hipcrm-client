@@ -68,3 +68,15 @@ export const getCalendar = (calendarId, accessToken) => ({
     }
   }
 })
+
+export const fetchSales = () => ({
+  type: 'FETCH_SALES',
+  payload: {
+    request: {
+      url: '/sales-pipelines',
+      headers: {
+        'Authorization': `Bearer ${store.getState().oidc.user.id_token}`,
+      }
+    }
+  }
+})
