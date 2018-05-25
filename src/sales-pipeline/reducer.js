@@ -13,7 +13,7 @@ export default (state = { new: { customers: [], selectedCustomer: null }, sale: 
   case 'FETCH_SALES_SUCCESS':
     return { ...state, sales: [ ...action.payload.data ], filter: '' }
   case 'DELETE_SALE_SUCCESS':
-    return { ...state, sales: state.sales.filter(sale => sale.id != action.meta.previousAction.saleId) }
+    return { ...state, sales: state.sales.filter(sale => sale.id !== action.meta.previousAction.saleId) }
   case 'FILTER_SALES':
     return { ...state, filter: action.q || '' }
   default: return { ...state }
