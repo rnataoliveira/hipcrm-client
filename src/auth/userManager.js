@@ -6,6 +6,7 @@ const config = {
   scope: `profile email openid https://www.googleapis.com/auth/calendar`,
   response_type: 'token id_token',
   redirect_uri: 'https://corretora-lopes.firebaseapp.com/auth/callback'
+  // redirect_uri: 'http://localhost:3000/auth/callback'
 }
 
 export default createUserManager(config)
