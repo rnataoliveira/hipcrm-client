@@ -26,8 +26,8 @@ const CustomerDetails = ({ customer, children }) => {
 }
 
 CustomerDetails.propTypes = {
-  customer: PropTypes.object.isRequired,
-  children:  PropTypes.object.isRequired
+  customer: PropTypes.object,
+  children:  PropTypes.object
 }
 
 export default CustomerDetails

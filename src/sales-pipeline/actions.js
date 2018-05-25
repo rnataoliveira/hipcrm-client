@@ -27,7 +27,7 @@ export const fetchCustomer = customerId => ({
 
 export const customerSelected = customer => ({
   type: 'CUSTOMER_SELECTED',
-  payload: customer
+  customer
 })
 
 export const createSale = ({ customerId }) => ({

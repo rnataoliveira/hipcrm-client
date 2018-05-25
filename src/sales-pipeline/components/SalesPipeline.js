@@ -9,6 +9,8 @@ import Customer from './Customer'
 import Appointments from './Appointments'
 import Documents from './Documents'
 
+import { CustomerDetails } from '../../customers'
+
 class SalesPipeline extends Component {
   static propTypes = {
     match: PropTypes.object.isRequired,
@@ -27,7 +29,7 @@ class SalesPipeline extends Component {
       <div className='row mt-5'>
         <div className="col-12">
           <h1>
-            Processo de Vendas <small className="ml-2 text-muted">Venda - {this.props.sale.id}</small>
+            Vendas <small className="ml-2 text-muted">{this.props.sale.code}</small>
           </h1>
         </div>
         <div className='col-12'>
@@ -48,7 +50,7 @@ class SalesPipeline extends Component {
         </div>
         <div className="col-12">
           <Switch>
-            <Route path="/sales/:id/customer" component={Customer} />
+            <Route path="/sales/:id/customer" component={() => <CustomerDetails customer={this.props.sale.customer} />} />
             <Route path="/sales/:id/appointments" component={Appointments} />
             <Route path="/sales/:id/documents" component={Documents} />
             <Redirect to={`${match.url}/customer`} />

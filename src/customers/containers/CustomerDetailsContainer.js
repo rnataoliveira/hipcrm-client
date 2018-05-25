@@ -1,38 +1,35 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { getCustomer } from '../actions'
-import CustomerDetailsComponent from '../customers/CustomerDetailsComponent'
-import PhysicalPersonDetails from '../customers/PhysicalPersonDetails'
-import LegalPersonDetails from '../customers/LegalPersonDetails'
+import { fetchCustomer } from '../actions'
+
+import CustomerDetails from '../components/CustomerDetails'
 
 class CustomerDetailsContainer extends Component {
   componentDidMount() {
-    const { customerId } = this.props.match.params
-    this.props.getCustomer(customerId, this.props.accessToken)
+    const { id: customerId } = this.props.match.params
+    this.props.fetchCustomer(customerId)
   }
 
   render() {
     return (
-      <div>
-        {this.props.customer &&
-          (this.props.customer.type === 'PhysicalPerson' ?
-            <PhysicalPersonDetails customer={this.props.customer} />
-            :
-            <LegalPersonDetails customer={this.props.customer} />
-          )}
-      </div>
+      <CustomerDetails customer={this.props.customer} />
     )
   }
 }
 
+CustomerDetailsContainer.propTypes = {
+  customer: PropTypes.object,
+  fetchCustomer: PropTypes.func.isRequired,
+  match: PropTypes.object
+}
+
 const mapStateToProps = state => ({
-  accessToken: state.oidc.user && state.oidc.user.id_token,
-  customer: state.customers.customerDetails,
+  customer: state.customers.customer
 })
 
 const mapDispatchToProps = dispatch => ({
-  getCustomer: (customerId, accessToken) => dispatch(getCustomer(customerId, accessToken))
+  fetchCustomer: id => dispatch(fetchCustomer(id))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(CustomerDetailsContainer)

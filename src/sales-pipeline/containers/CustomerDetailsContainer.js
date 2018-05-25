@@ -26,15 +26,14 @@ class CustomerDetailsContainer extends Component {
         {this.props.errors &&
           <Alert type="danger" heading="Ops!">
             <ul>
-              {Object.keys(this.props.errors).map(key => 
+              {Object.keys(this.props.errors).map(key =>
                 this.props.errors[key].map((errorMessage, index) => <li key={`${key}.${index}`}>{errorMessage}</li>))}
             </ul>
           </Alert>}
-        <CustomerDetails customer={this.props.customer}>
-          <div className="col-12 text-right">
-            <button onClick={this.handleNewSale.bind(this)} className="btn btn-primary">Iniciar Venda</button>
-          </div>
-        </CustomerDetails>
+        <CustomerDetails customer={this.props.customer} />
+        <div className="col-12 text-right">
+          <button onClick={this.handleNewSale.bind(this)} className="btn btn-primary">Iniciar Venda</button>
+        </div>
       </div>
     )
     return this.props.saleId ? <Redirect to={`/sales/${this.props.saleId}`} /> :
@@ -43,7 +42,7 @@ class CustomerDetailsContainer extends Component {
 }
 
 const mapStateToProps = state => ({
-  customer: state.salesPipeline.new.customer,
+  customer: state.customers.customer,
   saleId: state.salesPipeline.new.saleId,
   errors: state.salesPipeline.new.errors
 })
