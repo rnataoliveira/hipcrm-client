@@ -5,10 +5,12 @@ import { Home } from '../home'
 import { Login, Logout, Callback, PrivateRoute } from '../auth'
 import { SalesPipeline, NewSale } from '../sales-pipeline'
 import { CustomerDetailsContainer, CustomerListContainer } from '../customers'
-import Dashboard from '../home/Dashboard';
-import SalesList from '../sales-pipeline/components/SalesList';
-import { ContractsListContainer } from '../contracts';
-import NewCustomer from '../customers/components/NewCustomer';
+import Dashboard from '../home/Dashboard'
+import SalesList from '../sales-pipeline/components/SalesList'
+import { ContractsListContainer } from '../contracts'
+import NewCustomer from '../customers/components/NewCustomer'
+import CreateReport from '../reports/components/CreatReport'
+import { ReportsListContainer } from '../reports'
 
 const Routes = () => (
   <Switch>
@@ -24,6 +26,8 @@ const Routes = () => (
     <PrivateRoute path="/customers/:id" component={CustomerDetailsContainer} />
     <PrivateRoute path="/customers" component={CustomerListContainer} />
     <PrivateRoute path="/contracts" component={ContractsListContainer} />
+    <PrivateRoute path="/reports/new" component={CreateReport} />
+    <PrivateRoute path="/reports" component={ReportsListContainer} />
   </Switch>
 )
 
