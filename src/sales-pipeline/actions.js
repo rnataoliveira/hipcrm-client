@@ -80,3 +80,18 @@ export const fetchSales = () => ({
     }
   }
 })
+
+export const deleteSale = saleId => ({
+  type: 'DELETE_SALE',
+  payload: {
+    request: {
+      method: 'delete',
+      url: `/sales-pipelines/${saleId}`,
+      headers: {
+        'Authorization': `Bearer ${store.getState().oidc.user.id_token}`,
+        'AccessToken': store.getState().oidc.user.access_token
+      }
+    }
+  },
+  saleId
+})

@@ -1,12 +1,16 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { fetchSales } from '../actions'
+import { fetchSales, deleteSale } from '../actions'
 import { Link } from 'react-router-dom'
 
 class SalesList extends Component {
   componentDidMount() {
     this.props.fetchSales()
+  }
+
+  handleDeleteSale(saleId) {
+    this.props.deleteSale(saleId)
   }
 
   render() {
@@ -35,7 +39,10 @@ class SalesList extends Component {
                   :
                   <td>{sale.customer.personalData.companyName}</td>
                 }
-                <td className="text-right"><Link to={`/sales/${sale.id}`}>Detalhes</Link></td>
+                <td className="text-right">
+                  <Link to={`/sales/${sale.id}`}>Detalhes</Link>
+                  <button onClick={() => this.handleDeleteSale(sale.id)} type="button" className="btn btn-primary">Excluir</button>
+                </td>
               </tr>
             )}
           </tbody>
@@ -47,7 +54,8 @@ class SalesList extends Component {
 
 SalesList.propTypes = {
   sales: PropTypes.array,
-  fetchSales: PropTypes.func.isRequired
+  fetchSales: PropTypes.func.isRequired,
+  deleteSale: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
@@ -55,7 +63,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  fetchSales: () => dispatch(fetchSales())
+  fetchSales: () => dispatch(fetchSales()),
+  deleteSale: saleId => dispatch(deleteSale(saleId))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SalesList)

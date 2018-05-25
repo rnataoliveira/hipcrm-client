@@ -12,6 +12,8 @@ export default (state = { new: { customers: [], customer: null }, sale: null, sa
     return { ...state, new: { customers: [], customer: null }, sale: action.payload.data }
   case 'FETCH_SALES_SUCCESS':
     return { ...state, sales: [ ...action.payload.data ] }
+  case 'DELETE_SALE_SUCCESS':
+    return { ...state, sales: state.sales.filter(sale => sale.id != action.meta.previousAction.saleId) }
   default: return { ...state }
   }
 }
