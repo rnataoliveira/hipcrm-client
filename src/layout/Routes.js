@@ -7,6 +7,8 @@ import { SalesPipeline, NewSale } from '../sales-pipeline'
 import { CustomerDetailsContainer, CustomerListContainer } from '../customers'
 import Dashboard from '../home/Dashboard';
 import SalesList from '../sales-pipeline/components/SalesList';
+import { ContractsListContainer } from '../contracts';
+import NewCustomer from '../customers/components/NewCustomer';
 
 const Routes = () => (
   <Switch>
@@ -18,8 +20,10 @@ const Routes = () => (
     <PrivateRoute exact path="/sales" component={SalesList} />
     <PrivateRoute path="/sales/new" component={NewSale} />
     <PrivateRoute path="/sales/:id" component={SalesPipeline} />
+    <PrivateRoute path="/customers/new" component={NewCustomer} />
     <PrivateRoute path="/customers/:id" component={CustomerDetailsContainer} />
     <PrivateRoute path="/customers" component={CustomerListContainer} />
+    <PrivateRoute path="/contracts" component={ContractsListContainer} />
   </Switch>
 )
 
