@@ -61,7 +61,7 @@ const Shell = (props) => {
                   </a>
                   <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuCustomers">
                     {/* <Link to="/contracts/new" className="dropdown-item">Cadastrar Contrato</Link> */}
-                    <Link to="/contracts" className="dropdown-item">Ver Contratos</Link>
+                    <Link to="/agreements" className="dropdown-item">Ver Contratos</Link>
                   </div>
                 </li>
                 <li className="nav-item dropdown">
