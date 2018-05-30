@@ -43,7 +43,7 @@ class SalesPipeline extends Component {
               <LinkContainer location={location} to={`${match.url}/documents`}>Documentos</LinkContainer>
             </li>
             <li className="nav-item col">
-              <LinkContainer location={location} to={`${match.url}/agreement`}>Contrato</LinkContainer>
+              <LinkContainer location={location} to={`${match.url}/agreements`}>Contrato</LinkContainer>
             </li>
           </ul>
         </div>
