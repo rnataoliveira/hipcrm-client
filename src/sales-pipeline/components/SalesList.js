@@ -44,8 +44,8 @@ class SalesList extends Component {
                   <td>{sale.customer.personalData.companyName}</td>
                 }
                 <td className="text-right">
-                  <Link to={`/sales/${sale.id}`}>Detalhes</Link>
-                  <button onClick={() => this.handleDeleteSale(sale.id)} type="button" className="btn btn-primary">Excluir</button>
+                  <Link className="m-2" to={`/sales/${sale.id}`}>Detalhes</Link>
+                  <button onClick={() => this.handleDeleteSale(sale.id)} type="button" className="btn btn-primary m-2">Excluir</button>
                 </td>
               </tr>
             )}

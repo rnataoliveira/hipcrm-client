@@ -35,8 +35,8 @@ class ContractsList extends Component {
                 <th scope="row">0009</th>
                 <td>Renata Oliveira</td>
                 <td className="text-right">
-                  <Link to="">Detalhes</Link>
-                  <button type="button" className="btn btn-primary">Inativar</button>
+                  <Link className="m-2" to="">Detalhes</Link>
+                  <button type="button" className="btn btn-primary m-2">Inativar</button>
                 </td>
               </tr>
             })
