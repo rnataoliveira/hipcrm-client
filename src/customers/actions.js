@@ -28,3 +28,8 @@ export const filterCustomers = q => ({
   type: 'FILTER_CUSTOMERS',
   q
 })
+
+export const changeCustomerType = customerType => ({
+  type: 'CHANGE_CUSTOMER_TYPE',
+  customerType
+})
