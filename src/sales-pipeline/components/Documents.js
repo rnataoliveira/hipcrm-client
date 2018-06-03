@@ -15,7 +15,7 @@ class Documents extends Component {
     window.gapi.load('picker', () => {
       const uploadView = new window.google.picker.DocsUploadView()
       uploadView.setParent(this.props.folderId)
-      
+
       const picker = new window.google.picker.PickerBuilder()
         .addView(uploadView)
         .setOAuthToken(this.props.oAuthToken)
@@ -34,8 +34,11 @@ class Documents extends Component {
   render() {
     return (
       <div>
-        <div className="custom-file d-flex justify-content-center ">
-          <button type="button" className="btn btn-primary m-2 float-center" onClick={this.handlePicker.bind(this)}>Upload File</button>
+        <div className="d-flex justify-content-center p-2 mt-5">
+          <button type="button" className="btn btn-primary m-2 float-center" onClick={this.handlePicker.bind(this)}>Adicionar Novo Documento</button>
+        </div>
+        <div className="embed-responsive embed-responsive-16by9">
+          <iframe className="embed-responsive-item" src={`https://drive.google.com/embeddedfolderview?id=${this.props.folderId}`} width="100%" height="unset"></iframe>
         </div>
       </div >
     )
