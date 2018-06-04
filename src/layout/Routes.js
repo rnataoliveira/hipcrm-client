@@ -8,8 +8,7 @@ import Dashboard from '../home/Dashboard'
 import SalesList from '../sales-pipeline/components/SalesList'
 import { ContractsListContainer } from '../contracts'
 import NewCustomer from '../customers/components/NewCustomer'
-import CreateReport from '../reports/components/CreatReport'
-import { ReportsListContainer } from '../reports'
+import { Reports } from '../reports'
 import { CustomerDetailsContainer, CustomerListContainer, CustomerEditContainer } from '../customers'
 
 const Routes = () => (
@@ -27,8 +26,7 @@ const Routes = () => (
     <PrivateRoute path="/customers/:id" component={CustomerDetailsContainer} />
     <PrivateRoute path="/customers" component={CustomerListContainer} />
     <PrivateRoute path="/agreements" component={ContractsListContainer} />
-    <PrivateRoute path="/reports/new" component={CreateReport} />
-    <PrivateRoute path="/reports" component={ReportsListContainer} />
+    <PrivateRoute path="/reports" component={Reports} />
   </Switch>
 )
 

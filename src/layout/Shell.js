@@ -74,8 +74,7 @@ const Shell = (props) => {
                     Financeiro
                   </a>
                   <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuContracts">
-                    <Link to="/reports/new" className="dropdown-item">Gerar Relatório</Link>
-                    <Link to="/reports" className="dropdown-item">Ver Relatórios</Link>
+                    <Link to="/reports" className="dropdown-item">Relatório de Faturamento</Link>
                   </div>
                 </li>
               </ul>

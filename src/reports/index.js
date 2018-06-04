@@ -1,2 +1,1 @@
-export { default as ReportsListContainer } from './containers/ReportsListContainer'
-export { default as reducer } from './reducer'
+export { default as Reports } from './components/Reports'
