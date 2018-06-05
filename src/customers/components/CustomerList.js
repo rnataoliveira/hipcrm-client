@@ -69,7 +69,9 @@ CustomerList.propTypes = {
 
 const getFilteredCustomers = (customers, q) => {
   return q ? customers.filter(customer => customer.personalData.documentNumber === q || customer.personalData.companyRegistration === q ||
-    customer.personalData.firstName === q || customer.personalData.companyName === q) : customers
+    customer.personalData.firstName === q || customer.personalData.surname === q ||
+    customer.personalData.firstName + ' ' + customer.personalData.surname === q ||
+    customer.personalData.companyName === q) : customers
 }
 
 const mapStateToProps = state => ({
