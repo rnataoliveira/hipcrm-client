@@ -30,7 +30,7 @@ const LegalPersonDetails = ({ personalData }) => {
           <p className="form-control">{personalData.companyRegistration}</p>
         </div>
         <div className="col-8">
-          <p className="form-control">{personalData.stateRegistration ? personalData.stateRegistration : 'null'}</p>
+          <p className="form-control">{personalData.stateRegistration ? personalData.stateRegistration : <br />}</p>
         </div>
       </div>
     </div>
