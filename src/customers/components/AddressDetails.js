@@ -18,13 +18,13 @@ const AddressDetails = ({ address }) => {
       </div>
       <div className="row mt-2">
         <div className="col-sm-2">
-          <p className="form-control">{address.zipCode}</p>
+          <p className="form-control">{address.zipCode ? address.zipCode : 'null'}</p>
         </div>
         <div className="col-sm-8">
-          <p className="form-control">{address.street}</p>
+          <p className="form-control">{address.street ? address.street : 'null'}</p>
         </div>
         <div className="col-sm-2">
-          <p className="form-control">{address.number}</p>
+          <p className="form-control">{address.number ? address.number : 'null'}</p>
         </div>
       </div>
       <div className="row mt-2">
@@ -40,13 +40,13 @@ const AddressDetails = ({ address }) => {
       </div>
       <div className="row mt-2">
         <div className="col-sm-6">
-          <p className="form-control">{address.neighborhood}</p>
+          <p className="form-control">{address.neighborhood ? address.neighborhood : 'null'}</p>
         </div>
         <div className="col-sm-4">
-          <p className="form-control">{address.city}</p>
+          <p className="form-control">{address.city ? address.city : 'null'}</p>
         </div>
         <div className="col-sm-2">
-          <p className="form-control">{address.state}</p>
+          <p className="form-control">{address.state ? address.state : 'null'}</p>
         </div>
       </div>
       <div className="row mt-2">
@@ -56,7 +56,7 @@ const AddressDetails = ({ address }) => {
       </div>
       <div className="row mt-2">
         <div className="col-sm-12">
-          <p className="form-control" >{address.complement}</p>
+          <p className="form-control" >{address.complement ? address.complement : 'null'}</p>
         </div>
       </div>
     </div>

@@ -50,7 +50,7 @@ const PhysicalPersonDetails = ({ personalData }) => {
           <p className="form-control">{personalData.documentNumber}</p>
         </div>
         <div className="col-sm-2">
-          <p className="form-control">{personalData.generalRegistration ? personalData.generalRegistration : 'RG'}</p>
+          <p className="form-control">{personalData.generalRegistration ? personalData.generalRegistration : 'null'}</p>
         </div>
         <div className="col-sm-2">
           <p className="form-control">
@@ -58,10 +58,10 @@ const PhysicalPersonDetails = ({ personalData }) => {
           </p>
         </div>
         <div className="col-sm-2">
-          <p className="form-control">{personalData.age} anos</p>
+          <p className="form-control">{personalData.age ? personalData.age : 'null'}</p>
         </div>
         <div className="col-sm-2">
-          <p className="form-control">{personalData.sex}</p>
+          <p className="form-control">{personalData.sex ? personalData.sex : 'null'}</p>
         </div>
         <div className="col-sm-2">
           <p className="form-control">{personalData.maritalState}</p>

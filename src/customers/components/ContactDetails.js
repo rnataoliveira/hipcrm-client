@@ -28,22 +28,22 @@ const ContactDetails = ({ cellPhone, phone, email }) => (
     <div className="row mt-2">
       {cellPhone && (
         <div className="col-sm-1">
-          <p className="form-control">{cellPhone.areaCode}</p>
+          <p className="form-control">{cellPhone.areaCode ? cellPhone.areaCode : 'null'}</p>
         </div>
       )}
       {cellPhone && (
         <div className="col-sm-2">
-          <p className="form-control">{cellPhone.number}</p>
+          <p className="form-control">{cellPhone.number ? cellPhone.number : 'null'}</p>
         </div>
       )}
       <div className="col-sm-1">
-        <p className="form-control">{phone.areaCode}</p>
+        <p className="form-control">{phone.areaCode ? phone.areaCode : 'null'}</p>
       </div>
       <div className="col-sm-2">
-        <p className="form-control">{phone.number}</p>
+        <p className="form-control">{phone.number ? phone.number : 'null'}</p>
       </div>
       <div className={cellPhone ? 'col-sm-6' : 'col-sm-9'}>
-        <p className="form-control">{email}</p>
+        <p className="form-control">{email ? email : 'null'}</p>
       </div>
     </div>
   </div>
