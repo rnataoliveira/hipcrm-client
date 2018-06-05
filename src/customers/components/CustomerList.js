@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { fetchCustomers, filterCustomers } from '../actions'
 
 class CustomerList extends Component {
   componentDidMount() {
@@ -65,4 +67,19 @@ CustomerList.propTypes = {
   filterCustomers: PropTypes.func.isRequired,
 }
 
-export default CustomerList
+const getFilteredCustomers = (customers, q) => {
+  return q ? customers.filter(customer => customer.personalData.documentNumber === q || customer.personalData.companyRegistration === q ||
+    customer.personalData.firstName === q || customer.personalData.companyName === q) : customers
+}
+
+const mapStateToProps = state => ({
+  customers: getFilteredCustomers(state.customers.all, state.customers.filter),
+  filter: state.customers.filter
+})
+
+const mapDispatchToProps = dispatch => ({
+  fetchCustomers: () => dispatch(fetchCustomers()),
+  filterCustomers: q => dispatch(filterCustomers(q))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(CustomerList)
