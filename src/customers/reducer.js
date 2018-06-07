@@ -1,4 +1,4 @@
-export default (state = { all: [] }, action) => {
+export default (state = { all: [], new: {}, customer: {} }, action) => {
   switch (action.type) {
   case 'FETCH_CUSTOMER_SUCCESS':
     return { ...state, customer: action.payload.data }
@@ -6,8 +6,16 @@ export default (state = { all: [] }, action) => {
     return { ...state, all: action.payload.data }
   case 'FILTER_CUSTOMERS':
     return { ...state, filter: action.q || '' }
-  case 'CHANGE_CUSTOMER_TYPE':
-    return { ...state, customer: { ...state.customer, type: action.customerType } }
+  case 'CREATE_CUSTOMER_PHYSICAL_PERSON_FAIL':
+    return { ...state, new: { ...state.new, errors: action.error } }
+  case 'CREATE_CUSTOMER_SUCCESS':
+    return { ...state, new: { }, customer: { customerId: action.payload.data.customerId } }
+  case 'CREATE_CUSTOMER_FAIL':
+    return { ...state, new: { ...state.new, errors: action.error } }
+  case 'DELETE_CUSTOMER_SUCCESS':
+    return { ...state, all: state.all.filter(customer => customer.id !== action.meta.previousAction.customerId) }
+  case 'DELETE_CUSTOMER_FAIL':
+    return { ...state }
   default: return { ...state }
   }
 }

@@ -95,6 +95,7 @@ const NewContractPhysicalPerson = () => {
           </select>
         </div>
         <div className="col-sm-2">
+          {/* (valor total - entrada) / parcelas*/}
           <input type="text" className="form-control" placeholder="Valor da Parcela" />
         </div>
       </div>

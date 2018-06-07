@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import { connect } from 'react-redux'
-import { fetchCustomers, filterCustomers } from '../actions'
 
 class CustomerList extends Component {
   componentDidMount() {
@@ -11,6 +9,10 @@ class CustomerList extends Component {
 
   handleChange(event) {
     this.props.filterCustomers(event.target.value)
+  }
+
+  handleDeleteCustomer(customerId) {
+    this.props.deleteCustomer(customerId)
   }
 
   render() {
@@ -39,7 +41,7 @@ class CustomerList extends Component {
                   <td className="text-right">
                     <Link className="m-2" to={`/customers/${customer.id}`}>Detalhes</Link>
                     <Link className="m-2" to={`/customers/${customer.id}/edit`}>Edit</Link>
-                    <button type="button" className="btn btn-primary m-2">Excluir</button>
+                    <button onClick={() => this.handleDeleteCustomer(customer.id)} type="button" className="btn btn-primary m-2">Excluir</button>
                   </td>
                 </tr>
                 :
@@ -49,7 +51,7 @@ class CustomerList extends Component {
                   <td className="text-right">
                     <Link className="m-2" to={`/customers/${customer.id}`}>Detalhes</Link>
                     <Link className="m-2" to={`/customers/${customer.id}/edit`}>Edit</Link>
-                    <button type="button" className="btn btn-primary m-2">Excluir</button>
+                    <button onClick={() => this.handleDeleteCustomer(customer.id)} type="button" className="btn btn-primary m-2">Excluir</button>
                   </td>
                 </tr>
             })}
@@ -63,25 +65,9 @@ class CustomerList extends Component {
 CustomerList.propTypes = {
   customers: PropTypes.array,
   filter: PropTypes.string,
+  deleteCustomer: PropTypes.func.isRequired,
   fetchCustomers: PropTypes.func.isRequired,
   filterCustomers: PropTypes.func.isRequired,
 }
 
-const getFilteredCustomers = (customers, q) => {
-  return q ? customers.filter(customer => customer.personalData.documentNumber === q || customer.personalData.companyRegistration === q ||
-    customer.personalData.firstName === q || customer.personalData.surname === q ||
-    customer.personalData.firstName + ' ' + customer.personalData.surname === q ||
-    customer.personalData.companyName === q) : customers
-}
-
-const mapStateToProps = state => ({
-  customers: getFilteredCustomers(state.customers.all, state.customers.filter),
-  filter: state.customers.filter
-})
-
-const mapDispatchToProps = dispatch => ({
-  fetchCustomers: () => dispatch(fetchCustomers()),
-  filterCustomers: q => dispatch(filterCustomers(q))
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(CustomerList)
+export default CustomerList

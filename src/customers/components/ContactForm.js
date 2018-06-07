@@ -52,6 +52,7 @@ class ContactForm extends Component {
       email: event.target.value
     })
   }
+  
   render() {
     console.log('opp', this.props)
     return (

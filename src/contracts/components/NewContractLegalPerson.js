@@ -128,32 +128,32 @@ const NewContractLegalPerson = () => {
 
       <h5 className="h5 mt-4">Modalidade</h5>
       <div className="row mt-2">
-        <div class="form-check form-check-inline ml-3">
-          <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked />
-          <label class="form-check-label" for="exampleRadios1">
+        <div className="form-check form-check-inline ml-3">
+          <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked />
+          <label className="form-check-label">
             Com Participação
-      </label>
+          </label>
         </div>
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2" />
-          <label class="form-check-label" for="exampleRadios2">
+        <div className="form-check form-check-inline">
+          <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2" />
+          <label className="form-check-label">
             Sem Participação
-      </label>
+          </label>
         </div>
       </div>
       <h5 className="h5 mt-4">Contratação de Assistência Odontológica</h5>
       <div className="row mt-2">
-        <div class="form-check form-check-inline ml-3">
-          <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked />
-          <label class="form-check-label" for="exampleRadios1">
+        <div className="form-check form-check-inline ml-3">
+          <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked />
+          <label className="form-check-label">
             Sim
-      </label>
+          </label>
         </div>
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2" />
-          <label class="form-check-label" for="exampleRadios2">
+        <div className="form-check form-check-inline">
+          <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2" />
+          <label className="form-check-label">
             Não
-      </label>
+          </label>
         </div>
       </div>
       <div className="row mt-2">
@@ -192,6 +192,7 @@ const NewContractLegalPerson = () => {
           </select>
         </div>
         <div className="col-sm-2">
+          {/* (valor total - entrada) / parcelas*/}
           <input type="text" className="form-control" placeholder="Valor da Parcela" />
         </div>
       </div>
@@ -202,7 +203,6 @@ const NewContractLegalPerson = () => {
         </div>
       </div>
       <button type="submit" className="btn btn-primary mt-5 float-right">Salvar</button>
-      <button type="button" className="btn btn-primary mt-5 mr-2 float-right">Voltar</button>
     </form>
 
   )
