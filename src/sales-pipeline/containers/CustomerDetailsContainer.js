@@ -37,7 +37,7 @@ class CustomerDetailsContainer extends Component {
       </div>
     )
     return this.props.saleId ? <Redirect to={`/sales/${this.props.saleId}`} /> :
-      this.props.customer ? display() : null
+      this.props.customer && this.props.customer.id ? display() : null
   }
 }
 
