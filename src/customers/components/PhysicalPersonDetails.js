@@ -11,59 +11,38 @@ const PhysicalPersonDetails = ({ personalData }) => {
       <div className="row mt-2">
         <div className="col-sm-6">
           <label htmlFor="firstName">Nome</label>
-        </div>
-        <div className="col-sm-6">
-          <label htmlFor="surname">Sobrenome</label>
-        </div>
-      </div>
-      <div className="row mt-2">
-        <div className="col-sm-6">
           <p className="form-control">{personalData.firstName}</p>
         </div>
         <div className="col-sm-6">
+          <label htmlFor="surname">Sobrenome</label>
           <p className="form-control">{personalData.surname}</p>
         </div>
       </div>
-
       <div className="row mt-2">
         <div className="col-sm-2">
-          <label htmlFor="documentNumber">Cpf</label>s
-        </div>
-        <div className="col-sm-2">
-          <label htmlFor="generalRegistration">Rg</label>
-        </div>
-        <div className="col-sm-2">
-          <label htmlFor="birthDate">Data de Nascimento</label>
-        </div>
-        <div className="col-sm-2">
-          <label htmlFor="age">Idade</label>
-        </div>
-        <div className="col-sm-2">
-          <label htmlFor="sex">Sexo</label>
-        </div>
-        <div className="col-sm-2">
-          <label htmlFor="maritalState">Estado Civil</label>
-        </div>
-      </div>
-      <div className="row mt-2">
-        <div className="col-sm-2">
+          <label htmlFor="documentNumber">Cpf</label>
           <p className="form-control">{personalData.documentNumber}</p>
         </div>
         <div className="col-sm-2">
+          <label htmlFor="generalRegistration">Rg</label>
           <p className="form-control">{personalData.generalRegistration ? personalData.generalRegistration : <br />}</p>
         </div>
         <div className="col-sm-2">
           <p className="form-control">
+            <label htmlFor="birthDate">Data de Nascimento</label>
             {moment(personalData.birthDate).format('MM.DD.YYYY')}
           </p>
         </div>
         <div className="col-sm-2">
+          <label htmlFor="age">Idade</label>
           <p className="form-control">{personalData.age ? personalData.age : <br />}</p>
         </div>
         <div className="col-sm-2">
+          <label htmlFor="sex">Sexo</label>
           <p className="form-control">{personalData.sex ? personalData.sex : <br />}</p>
         </div>
         <div className="col-sm-2">
+          <label htmlFor="maritalState">Estado Civil</label>
           <p className="form-control">{personalData.maritalState}</p>
         </div>
       </div>
