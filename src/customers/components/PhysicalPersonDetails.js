@@ -28,8 +28,8 @@ const PhysicalPersonDetails = ({ personalData }) => {
           <p className="form-control">{personalData.generalRegistration ? personalData.generalRegistration : <br />}</p>
         </div>
         <div className="col-sm-2">
+          <label htmlFor="birthDate">Data de Nascimento</label>
           <p className="form-control">
-            <label htmlFor="birthDate">Data de Nascimento</label>
             {moment(personalData.birthDate).format('MM.DD.YYYY')}
           </p>
         </div>
