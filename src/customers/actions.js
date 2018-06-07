@@ -67,3 +67,18 @@ export const filterCustomers = q => ({
   type: 'FILTER_CUSTOMERS',
   q
 })
+
+export const updateCustomer = (customer, type) => ({
+  type: 'UPDATE_CUSTOMER',
+  payload: {
+    request: {
+      method: 'put',
+      url: `customers/${type}`,
+      headers: {
+        'Authorization': `Bearer ${store.getState().oidc.user.id_token}`,
+        'AccessToken': store.getState().oidc.user.access_token
+      },
+      data: customer
+    }
+  }
+})

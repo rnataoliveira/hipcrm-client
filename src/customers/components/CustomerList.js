@@ -40,7 +40,7 @@ class CustomerList extends Component {
                   <td>{customer.personalData.firstName + ' ' + customer.personalData.surname}</td>
                   <td className="text-right">
                     <Link className="m-2" to={`/customers/${customer.id}`}>Detalhes</Link>
-                    <Link className="m-2" to={`/customers/${customer.id}/edit`}>Edit</Link>
+                    <Link className="m-2" to={`/customers/physical-person/${customer.id}/edit`}>Edit</Link>
                     <button onClick={() => this.handleDeleteCustomer(customer.id)} type="button" className="btn btn-primary m-2">Excluir</button>
                   </td>
                 </tr>
@@ -50,7 +50,7 @@ class CustomerList extends Component {
                   <td>{customer.personalData.companyName}</td>
                   <td className="text-right">
                     <Link className="m-2" to={`/customers/${customer.id}`}>Detalhes</Link>
-                    <Link className="m-2" to={`/customers/${customer.id}/edit`}>Edit</Link>
+                    <Link className="m-2" to={`/customers/legal-person/${customer.id}/edit`}>Edit</Link>
                     <button onClick={() => this.handleDeleteCustomer(customer.id)} type="button" className="btn btn-primary m-2">Excluir</button>
                   </td>
                 </tr>

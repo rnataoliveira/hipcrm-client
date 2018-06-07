@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import PhysicalPersonForm from './PhysicalPersonForm'
-import LegalPersonForm from './LegalPersonForm'
+// import PhysicalPersonForm from './PhysicalPersonForm'
+// import LegalPersonForm from './LegalPersonForm'
 import AddressForm from './AddressForm'
 import ContactForm from './ContactForm'
 
@@ -29,8 +29,8 @@ class CustomerForm extends Component {
             <h2 className="h2 mt-4 col-s4">Cliente - {this.props.customer.type === 'PhysicalPerson' ? 'Pessoa Fisíca' : 'Pessoa Jurídica'} </h2>
           </div>
           <hr style={{ color: '#757575', width: '90%' }} className="d-flex justify-content-start " />
-          {this.props.customer.type === 'PhysicalPerson' && <PhysicalPersonForm personalData={this.props.customer.personalData || null} />}
-          {this.props.customer.type === 'LegalPerson' && <LegalPersonForm personalData={this.props.customer.personalData || null} />}
+          {/* {this.props.customer.type === 'PhysicalPerson' && <PhysicalPersonForm personalData={this.props.customer.personalData || null} />} */}
+          {/* {this.props.customer.type === 'LegalPerson' && <LegalPersonForm personalData={this.props.customer.personalData || null} />} */}
           <ContactForm {...this.props.customer.personalData} />
           <AddressForm address={this.props.customer.personalData.address} />
           <h5 className="h5 mt-4">Observações</h5>
