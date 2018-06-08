@@ -252,6 +252,10 @@ class NewAgreementLegalPerson extends Component {
     })
   }
 
+  handleSubmit() {
+    this.props.agreementId && this.props.saveAgreementLegalPerson()
+  }
+
   render() {
     return (
       <form className="mt-2">

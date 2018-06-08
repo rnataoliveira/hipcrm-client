@@ -171,6 +171,10 @@ class NewAgreementPhysicalPerson extends Component {
     })
   }
 
+  handleSubmit() {
+    this.props.agreementId && this.props.saveAgreementPhysicalPerson()
+  }
+
   render() {
     return (
       <form className="mt-2">
@@ -303,7 +307,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  saveAgreementLegalPerson: (sale) => dispatch(saveAgreement(sale, 'legal-person')),
+  saveAgreementPhysicalPerson: (sale) => dispatch(saveAgreement(sale, 'physical-person')),
   displaySuccess: () => dispatch(flashMessage({ text: 'Contrato Salvo!' }))
 })
 
