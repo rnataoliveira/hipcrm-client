@@ -4,7 +4,7 @@ import { Route, Switch } from 'react-router'
 import { Home } from '../home'
 import { Login, Logout, Callback, PrivateRoute } from '../auth'
 import Dashboard from '../home/Dashboard'
-import { ContractsListContainer } from '../contracts'
+import { ContractsListContainer } from '../agreements'
 import { Reports } from '../reports'
 
 import { Router as CustomersModule } from '../customers'
