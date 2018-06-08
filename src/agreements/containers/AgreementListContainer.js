@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { fetchContracts, filterContracts } from '../actions'
 
-import ContractsList from '../components/ContractsList'
+import AgreementList from '../components/AgreementList'
 
 const applyFilter = (contracts, q) => {
   return q ? contracts.filter(contract => contract.number != q) : contracts
@@ -19,4 +19,4 @@ const mapDispatchToProps = dispatch => ({
   filterContracts: q => dispatch(filterContracts(q))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(ContractsList)
+export default connect(mapStateToProps, mapDispatchToProps)(AgreementList)

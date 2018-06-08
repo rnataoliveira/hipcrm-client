@@ -7,6 +7,9 @@ import { fetchSale } from '../actions'
 import LinkContainer from './LinkContainer'
 import Appointments from './Appointments'
 import Documents from './Documents'
+import Agreement from '../containers/AgreementContainer'
+
+import { NewAgreement } from '../../agreements'
 
 import { CustomerDetails } from '../../customers'
 
@@ -43,7 +46,7 @@ class SalesPipeline extends Component {
               <LinkContainer location={location} to={`${match.url}/documents`}>Documentos</LinkContainer>
             </li>
             <li className="nav-item col">
-              <LinkContainer location={location} to={`${match.url}/agreements`}>Contrato</LinkContainer>
+              <LinkContainer location={location} to={`${match.url}/agreement`}>Contrato</LinkContainer>
             </li>
           </ul>
         </div>
@@ -52,7 +55,7 @@ class SalesPipeline extends Component {
             <Route path="/sales/:id/customer" component={() => <CustomerDetails customer={this.props.sale.customer} />} />
             <Route path="/sales/:id/appointments" component={Appointments} />
             <Route path="/sales/:id/documents" component={Documents} />
-            <Route path="/sales/:id/agreements" component={() => <h1>Aggreements</h1>} />
+            <Route path="/sales/:id/agreement" component={Agreement} />
             <Redirect to={`${match.url}/customer`} />
           </Switch>
         </div>

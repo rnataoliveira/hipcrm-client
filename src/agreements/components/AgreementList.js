@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
-class ContractsList extends Component {
+class AgreementList extends Component {
   componentDidMount() {
     this.props.fetchContracts()
   }
@@ -48,11 +48,11 @@ class ContractsList extends Component {
   }
 }
 
-ContractsList.propTypes = {
+AgreementList.propTypes = {
   contracts: PropTypes.array,
   filter: PropTypes.string,
   fetchContracts: PropTypes.func.isRequired,
   filterContracts: PropTypes.func.isRequired
 }
 
-export default ContractsList
+export default AgreementList
