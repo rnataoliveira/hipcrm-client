@@ -4,7 +4,7 @@ import { routerReducer } from 'react-router-redux'
 import { reducer as oidcReducer } from 'redux-oidc'
 import { reducer as salesReducer } from './sales-pipeline'
 import { reducer as customersReducer } from './customers'
-import { reducer as contractsReducer } from './contracts'
+import { reducer as contractsReducer } from './agreements'
 import { reducer as flashMessagesReducer } from './flash-messages'
 
 export default combineReducers({
