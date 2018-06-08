@@ -456,7 +456,7 @@ class NewAgreementLegalPerson extends Component {
             <textarea onChange={this.handleChangeNotes.bind(this)} className="form-control" id="exampleFormControlTextarea1" rows="3" value={this.state.notes}></textarea>
           </div>
         </div>
-        <button type="submit" className="btn btn-primary mt-5 float-right">Salvar</button>
+        <button onClick={this.handleSubmit.bind(this)} type="submit" className="btn btn-primary mt-5 float-right">Salvar</button>
       </form>
     )
   }
