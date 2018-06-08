@@ -12,6 +12,6 @@ export default combineReducers({
   oidc: oidcReducer,
   salesPipeline: salesReducer,
   customers: customersReducer,
-  contracts: agreementReducer,
+  agreements: agreementReducer,
   messages: flashMessagesReducer
 })
