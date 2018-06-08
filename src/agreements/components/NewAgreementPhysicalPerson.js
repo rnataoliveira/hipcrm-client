@@ -1,20 +1,26 @@
 import React, { Component } from 'react'
+import { flashMessage } from '../../flash-messages/actions'
+import { connect } from 'react-redux'
+import { saveAgreement } from '../actions';
 
 class NewAgreementPhysicalPerson extends Component {
   state = {
-    contractNumber: '',
+    agreementNumber: '',
     plan: '',
     phone: {
       areaCode: '',
       number: ''
     },
     dependents: [],
-    comission: '',
-    totalValue: '',
-    entranceFee: '',
-    installmentAmount: '',
-    amountValue: '',
+    comission: 0,
+    totalValue: 0,
+    entranceFee: 0,
+    installmentAmount: 0,
+    amountValue: 0,
     notes: ''
+  }
+  componentWillUnmount() {
+    this.props.agreementId && this.props.displaySuccess()
   }
 
   handleAddMoreDependents(event) {
@@ -26,6 +32,145 @@ class NewAgreementPhysicalPerson extends Component {
     })
   }
 
+  handleChangeAgreementNumber(event) {
+    this.setState({
+      agreementNumber: event.target.value
+    })
+  }
+
+  handleChangePlan(event) {
+    this.setState({
+      plan: event.target.value
+    })
+  }
+
+  handleChangePhoneAreaCode(event) {
+    this.setState({
+      phone: {
+        ...this.state.phone,
+        areaCode: event.target.value
+      }
+    })
+  }
+
+  handleChangePhoneNumber(event) {
+    this.setState({
+      phone: {
+        ...this.state.phone,
+        number: event.target.value
+      }
+    })
+  }
+
+  handleChangeDependentsName(event, index) {
+    this.setState({
+      beneficiaries: this.state.beneficiaries.map((b, idx) => {
+        if(idx != index) return b
+
+        return { ...b, name: event.target.value }
+      })
+    })
+  }
+
+  handleChangeDependentsDocumentNumber(event, index) {
+    this.setState({
+      beneficiaries: this.state.beneficiaries.map((b, idx) => {
+        if(idx != index) return b
+
+        return { ...b, documentNumber: event.target.value }
+      })
+    })
+  }
+
+  handleChangeDependentsGeneralRegistration(event, index) {
+    this.setState({
+      beneficiaries: this.state.beneficiaries.map((b, idx) => {
+        if(idx != index) return b
+
+        return { ...b, generalRegistration: event.target.value }
+      })
+    })
+  }
+
+  handleChangeDependentsBirthDate(event, index) {
+    this.setState({
+      beneficiaries: this.state.beneficiaries.map((b, idx) => {
+        if(idx != index) return b
+
+        return { ...b, birthDate: event.target.value }
+      })
+    })
+  }
+
+  handleChangeDependentsMothersName(event, index) {
+    this.setState({
+      beneficiaries: this.state.beneficiaries.map((b, idx) => {
+        if(idx != index) return b
+
+        return { ...b, mothersName: event.target.value }
+      })
+    })
+  }
+
+  handleChangeDependentsMaritalState(event, index) {
+    this.setState({
+      beneficiaries: this.state.beneficiaries.map((b, idx) => {
+        if(idx != index) return b
+
+        return { ...b, maritalState: event.target.value }
+      })
+    })
+  }
+
+  handleChangeDependentsRelationShip(event, index) {
+    this.setState({
+      beneficiaries: this.state.beneficiaries.map((b, idx) => {
+        if(idx != index) return b
+
+        return { ...b, relationship: event.target.value }
+      })
+    })
+  }
+
+  handleChangeTotalValue(event) {
+    this.setState({
+      totalValue: event.target.value
+    })
+  }
+
+  handleChangeEntranceFee(event) {
+    this.setState({
+      entranceFee: event.target.value
+    })
+  }
+
+  handleAmountValue(event) {
+    const total = this.state.totalValue
+    const entrance = this.state.entranceFee
+    const installment = this.state.installmentAmount
+    this.setState({
+      amountValue: ((total - entrance)/ installment)
+    })
+  }
+
+  handleChangeInstallmentAmount(event) {
+    this.setState({
+      installmentAmount: event.target.value
+    })
+  }
+
+  handleChangeComission(event) {
+    this.setState({
+      comission: event.target.value
+    })
+  }
+
+  handleChangeNotes(event) {
+    this.setState({
+      notes: event.target.value
+    })
+  }
+
   render() {
     return (
       <form className="mt-2">
@@ -33,8 +178,8 @@ class NewAgreementPhysicalPerson extends Component {
         <hr style={{ color: '#757575', width: '90%' }} className="d-flex justify-content-start " />
         <div className="row">
           <div className="col-sm-4">
-            <label htmlFor="contractNumber">Número do Contrato</label>
-            <input value={this.state.contractNumber} type="text" className="form-control" placeholder="Número do Contrato" />
+            <label htmlFor="agreementNumber">Número do Contrato</label>
+            <input onChange={this.handleChangeAgreementNumber.bind(this)} value={this.state.agreementNumber} type="text" className="form-control" placeholder="Número do Contrato" />
           </div>
         </div>
         <hr />
@@ -42,15 +187,15 @@ class NewAgreementPhysicalPerson extends Component {
         <div className="row">
           <div className="col-sm-8">
             <label htmlFor="plan">Plano</label>
-            <input value={this.state.plan} type="text" className="form-control" placeholder="Plano Contratado" />
+            <input onChange={this.handleChangePlan.bind(this)} value={this.state.plan} type="text" className="form-control" placeholder="Plano Contratado" />
           </div>
           <div className="col-sm-2">
             <label htmlFor="phoneAreaCode">DDD</label>
-            <input value={this.state.phone.areaCode} type="text" className="form-control" placeholder="DDD" />
+            <input onChange={this.handleChangePhoneAreaCode.bind(this)} value={this.state.phone.areaCode} type="text" className="form-control" placeholder="DDD" />
           </div>
           <div className="col-sm-2">
             <label htmlFor="phoneNumber">Telefone</label>
-            <input value={this.state.phone.number} type="text" className="form-control" placeholder="Telefone do Plano" />
+            <input onChange={this.handleChangePhoneNumber.bind(this)}  value={this.state.phone.number} type="text" className="form-control" placeholder="Telefone do Plano" />
           </div>
         </div>
 
@@ -60,29 +205,29 @@ class NewAgreementPhysicalPerson extends Component {
             <div className="row mt-2">
               <div className="col-sm-6">
                 <label htmlFor="dependentName">Nome</label>
-                <input value={d.name} type="text" className="form-control" placeholder="Nome do Dependente" />
+                <input onChange={(e) => this.handleChangeDependentsName(e, index)} value={d.name} type="text" className="form-control" placeholder="Nome do Dependente" />
               </div>
               <div className="col-sm-2">
                 <label htmlFor="dependentDocumentNumber">Cpf</label>
-                <input value={d.documentNumber} type="text" className="form-control" placeholder="Cpf" />
+                <input onChange={(e) => this.handleChangeDependentsDocumentNumber(e, index)} value={d.documentNumber} type="text" className="form-control" placeholder="Cpf" />
               </div>
               <div className="col-sm-2">
                 <label htmlFor="dependentGeneralRegistration">Rg</label>
-                <input value={d.generalRegistration} type="text" className="form-control" placeholder="Rg" />
+                <input onChange={(e) => this.handleChangeDependentsGeneralRegistration(e, index)} value={d.generalRegistration} type="text" className="form-control" placeholder="Rg" />
               </div>
               <div className="col-sm-2">
                 <label htmlFor="dependentBirthDate">Data de Nascimento</label>
-                <input value={d.birthDate} type="text" className="form-control" placeholder="DD/MM/AAAA" />
+                <input onChange={(e) => this.handleChangeDependentsBirthDate(e, index)}value={d.birthDate} type="text" className="form-control" placeholder="DD/MM/AAAA" />
               </div>
             </div>
             <div className="row mt-2">
               <div className="col-sm-7">
                 <label htmlFor="dependentMothersName">Nome da Mãe</label>
-                <input value={d.mothersName} type="text" className="form-control" placeholder="Nome da Mãe" />
+                <input onChange={(e) => this.handleChangeDependentsMothersName(e, index)} value={d.mothersName} type="text" className="form-control" placeholder="Nome da Mãe" />
               </div>
               <div className="col-sm-2">
                 <label htmlFor="dependentMaritalState">Estado Civil</label>
-                <select className="custom-select" value={d.maritalState}>
+                <select onChange={(e) => this.handleChangeDependentsMaritalState(e, index)} className="custom-select" value={d.maritalState}>
                   <option selected>Estado Civil</option>
                   <option value="1">Solteiro</option>
                   <option value="2">União Estável</option>
@@ -93,7 +238,7 @@ class NewAgreementPhysicalPerson extends Component {
               </div>
               <div className="col-sm-3">
                 <label htmlFor="dependentRelationship">Parentesco</label>
-                <input value={d.relationship} type="text" className="form-control" placeholder="Grau de Parentesco" />
+                <input onChange={(e) => this.handleChangeDependentsRelationShip(e, index)} value={d.relationship} type="text" className="form-control" placeholder="Grau de Parentesco" />
               </div>
             </div>
           </div>
@@ -109,15 +254,15 @@ class NewAgreementPhysicalPerson extends Component {
         <div className="row mt-2">
           <div className="col-sm-2">
             <label htmlFor="totalValue">Total</label>
-            <input type="text" className="form-control" placeholder="Valor Total do Plano" value={this.state.totalValue} />
+            <input onChange={this.handleChangeTotalValue.bind(this)} type="text" className="form-control" placeholder="Valor Total do Plano" value={this.state.totalValue} />
           </div>
           <div className="col-sm-2">
             <label htmlFor="entranceFee">Entrada</label>
-            <input type="text" className="form-control" placeholder="Valor da Entrada" value={this.state.entranceFee} />
+            <input onChange={this.handleChangeEntranceFee.bind(this)} type="text" className="form-control" placeholder="Valor da Entrada" value={this.state.entranceFee} />
           </div>
           <div className="col-sm-3">
             <label htmlFor="installmentAmount">Quantidade</label>
-            <select className="custom-select" value={this.state.installmentAmount}>
+            <select onChange={this.handleChangeInstallmentAmount.bind(this)} className="custom-select" value={this.state.installmentAmount}>
               <option value="parcelas">Quantidade de Parcelas</option>
               <option value="1">1</option>
               <option value="2">2</option>
@@ -134,17 +279,17 @@ class NewAgreementPhysicalPerson extends Component {
           <div className="col-sm-2">
             {/* (valor total - entrada) / parcelas*/}
             <label htmlFor="amountValue">Parcela</label>
-            <input type="text" className="form-control" placeholder="Valor da Parcela" value={this.state.amountValue} />
+            <input onChange={this.handleAmountValue.bind(this)} type="text" className="form-control" placeholder="Valor da Parcela" value={this.state.amountValue} />
           </div>
           <div className="col-sm-3">
             <label htmlFor="comission">Comissão</label>
-            <input type="text" className="form-control" placeholder="Valor da Comissão" value={this.state.comission} />
+            <input onChange={this.handleChangeComission.bind(this)} type="text" className="form-control" placeholder="Valor da Comissão" value={this.state.comission} />
           </div>
         </div>
         <h5 className="h5 mt-4">Observações</h5>
         <div className="row mt-2">
           <div className="col-sm-12">
-            <textarea className="form-control" id="exampleFormControlTextarea1" rows="3" value={this.state.notes}></textarea>
+            <textarea onChange={this.handleChangeNotes.bind(this)} className="form-control" id="exampleFormControlTextarea1" rows="3" value={this.state.notes}></textarea>
           </div>
         </div>
         <button type="submit" className="btn btn-primary mt-5 float-right">Salvar</button>
@@ -152,4 +297,14 @@ class NewAgreementPhysicalPerson extends Component {
     )
   }
 }
-export default NewAgreementPhysicalPerson
+
+const mapStateToProps = state => ({
+  customerId: state.customers.customer.customerId
+})
+
+const mapDispatchToProps = dispatch => ({
+  saveAgreementLegalPerson: (sale) => dispatch(saveAgreement(sale, 'legal-person')),
+  displaySuccess: () => dispatch(flashMessage({ text: 'Contrato Salvo!' }))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(NewAgreementPhysicalPerson)

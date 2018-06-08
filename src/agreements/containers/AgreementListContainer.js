@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { fetchContracts, filterContracts } from '../actions'
+import { fetchAgreements, filterAgreements } from '../actions'
 
 import AgreementList from '../components/AgreementList'
 
@@ -15,8 +15,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  fetchContracts: () => dispatch(fetchContracts()),
-  filterContracts: q => dispatch(filterContracts(q))
+  feetchAgreements: () => dispatch(fetchAgreements()),
+  filterAgreements: q => dispatch(filterAgreements(q))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(AgreementList)
