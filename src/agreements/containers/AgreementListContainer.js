@@ -5,7 +5,7 @@ import { fetchAgreements, filterAgreements } from '../actions'
 import AgreementList from '../components/AgreementList'
 
 const applyFilter = (agreement, q) => {
-  return q ? this.props.agreements.filter(agreement => agreement.number != q) : agreement
+  return q ? this.props.agreements.filter(agreement => agreement.number !== q) : agreement
 }
 
 const mapStateToProps = state => ({

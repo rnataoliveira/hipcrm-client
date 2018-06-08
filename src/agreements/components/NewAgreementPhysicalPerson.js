@@ -65,7 +65,7 @@ class NewAgreementPhysicalPerson extends Component {
   handleChangeDependentsName(event, index) {
     this.setState({
       beneficiaries: this.state.beneficiaries.map((b, idx) => {
-        if(idx != index) return b
+        if(idx !== index) return b
 
         return { ...b, name: event.target.value }
       })
@@ -75,7 +75,7 @@ class NewAgreementPhysicalPerson extends Component {
   handleChangeDependentsDocumentNumber(event, index) {
     this.setState({
       beneficiaries: this.state.beneficiaries.map((b, idx) => {
-        if(idx != index) return b
+        if(idx !== index) return b
 
         return { ...b, documentNumber: event.target.value }
       })
@@ -85,7 +85,7 @@ class NewAgreementPhysicalPerson extends Component {
   handleChangeDependentsGeneralRegistration(event, index) {
     this.setState({
       beneficiaries: this.state.beneficiaries.map((b, idx) => {
-        if(idx != index) return b
+        if(idx !== index) return b
 
         return { ...b, generalRegistration: event.target.value }
       })
@@ -95,7 +95,7 @@ class NewAgreementPhysicalPerson extends Component {
   handleChangeDependentsBirthDate(event, index) {
     this.setState({
       beneficiaries: this.state.beneficiaries.map((b, idx) => {
-        if(idx != index) return b
+        if(idx !== index) return b
 
         return { ...b, birthDate: event.target.value }
       })
@@ -105,7 +105,7 @@ class NewAgreementPhysicalPerson extends Component {
   handleChangeDependentsMothersName(event, index) {
     this.setState({
       beneficiaries: this.state.beneficiaries.map((b, idx) => {
-        if(idx != index) return b
+        if(idx !== index) return b
 
         return { ...b, mothersName: event.target.value }
       })
@@ -115,7 +115,7 @@ class NewAgreementPhysicalPerson extends Component {
   handleChangeDependentsMaritalState(event, index) {
     this.setState({
       beneficiaries: this.state.beneficiaries.map((b, idx) => {
-        if(idx != index) return b
+        if(idx !== index) return b
 
         return { ...b, maritalState: event.target.value }
       })
@@ -125,7 +125,7 @@ class NewAgreementPhysicalPerson extends Component {
   handleChangeDependentsRelationShip(event, index) {
     this.setState({
       beneficiaries: this.state.beneficiaries.map((b, idx) => {
-        if(idx != index) return b
+        if(idx !== index) return b
 
         return { ...b, relationship: event.target.value }
       })

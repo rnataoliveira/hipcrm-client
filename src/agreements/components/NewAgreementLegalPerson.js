@@ -67,12 +67,6 @@ class NewAgreementLegalPerson extends Component {
     })
   }
 
-  handleChangeEmail(event) {
-    this.setState({
-      email: event.target.value
-    })
-  }
-
   handleChangeCompanyContact(event) {
     this.setState({
       companyContact: event.target.value
@@ -166,7 +160,7 @@ class NewAgreementLegalPerson extends Component {
   handleChangeBeneficiariesPlan(event, index) {
     this.setState({
       beneficiaries: this.state.beneficiaries.map((b, idx) => {
-        if(idx != index) return b
+        if(idx !== index) return b
 
         return { ...b, plan: event.target.value }
       })
@@ -176,7 +170,7 @@ class NewAgreementLegalPerson extends Component {
   handleChangeBeneficiariesNumber(event, index) {
     this.setState({
       beneficiaries: this.state.beneficiaries.map((b, idx) => {
-        if(idx != index) return b
+        if(idx !== index) return b
 
         return { ...b, number: event.target.value }
       })
