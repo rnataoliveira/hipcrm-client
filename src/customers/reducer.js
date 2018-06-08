@@ -1,4 +1,4 @@
-export default (state = { all: [], new: {}, customer: {} }, action) => {
+export default (state = { all: [], new: {}, customer: {}, messages: [] }, action) => {
   switch (action.type) {
   case 'FETCH_CUSTOMER_SUCCESS':
     return { ...state, customer: action.payload.data }
@@ -9,7 +9,12 @@ export default (state = { all: [], new: {}, customer: {} }, action) => {
   case 'CREATE_CUSTOMER_PHYSICAL_PERSON_FAIL':
     return { ...state, new: { ...state.new, errors: action.error } }
   case 'CREATE_CUSTOMER_SUCCESS':
-    return { ...state, new: { }, customer: { customerId: action.payload.data.customerId } }
+    return { 
+      ...state, 
+      messages: [ 'Cliente Cadastrado' ], 
+      new: { }, 
+      customer: { customerId: action.payload.data.customerId } 
+    }
   case 'CREATE_CUSTOMER_FAIL':
     return { ...state, new: { ...state.new, errors: action.error } }
   case 'DELETE_CUSTOMER_SUCCESS':
