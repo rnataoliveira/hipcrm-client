@@ -25,7 +25,6 @@ AgreementContainer.propTypes = {
   fetchSale: PropTypes.func.isRequired,
 }
 
-
 const mapStateToProps = state => ({
   sale: state.salesPipeline.sale
 })

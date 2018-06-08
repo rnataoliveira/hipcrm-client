@@ -1,10 +1,10 @@
 import { store } from '../store'
 
-export const fetchContract = (number) => ({
-  type: 'FETCH_CONTRACT',
+export const fetchAgreement = (number) => ({
+  type: 'FETCH_agreement',
   payload: {
     request: {
-      url: `/contracts/${number}`,
+      url: `/agreement/${number}`,
       headers: {
         'Authorization': `Bearer ${store.getState().oidc.user.id_token}`
       }
@@ -12,11 +12,11 @@ export const fetchContract = (number) => ({
   }
 })
 
-export const fetchContracts = () => ({
-  type: 'FETCH_CONTRACTS',
+export const fetchAgreements = () => ({
+  type: 'FETCH_AGREEMENTS',
   payload: {
     request: {
-      url: `/contracts`,
+      url: `/agreement`,
       headers: {
         'Authorization': `Bearer ${store.getState().oidc.user.id_token}`
       }
@@ -24,7 +24,22 @@ export const fetchContracts = () => ({
   }
 })
 
-export const filterContracts = q => ({
-  type: 'FILTER_CONTRACTS',
+export const filterAgreements = q => ({
+  type: 'FILTER_AGREEMENTS',
   q
+})
+
+export const saveAgreement = (sale, saleId, type) => ({
+  type: 'SAVE_AGREEMENT',
+  payload: {
+    request: {
+      method: 'post',
+      url: `sales-pipelines/${saleId}/agreement/${type}`,
+      headers: {
+        'Authorization': `Bearer ${store.getState().oidc.user.id_token}`,
+        'AccessToken': store.getState().oidc.user.access_token
+      },
+      data: sale
+    }
+  }
 })

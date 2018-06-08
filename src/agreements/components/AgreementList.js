@@ -1,14 +1,16 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
+import { fetchAgreements, filterAgreements } from '../actions'
+import { connect } from 'react-redux'
 
 class AgreementList extends Component {
   componentDidMount() {
-    this.props.fetchContracts()
+    this.props.fetchAgreements()
   }
 
   handleChange(event) {
-    this.props.filterContracts(event.target.value)
+    this.props.filterAgreements(event.target.value)
   }
 
   render() {
@@ -30,8 +32,8 @@ class AgreementList extends Component {
             </tr>
           </thead>
           <tbody>
-            {this.props.contracts.map(contract => {
-              <tr key={contract.number}>
+            {this.props.agreements.map(a => {
+              <tr key={a.number}>
                 <th scope="row">0009</th>
                 <td>Renata Oliveira</td>
                 <td className="text-right">
@@ -49,10 +51,19 @@ class AgreementList extends Component {
 }
 
 AgreementList.propTypes = {
-  contracts: PropTypes.array,
+  agreements: PropTypes.array,
   filter: PropTypes.string,
-  fetchContracts: PropTypes.func.isRequired,
-  filterContracts: PropTypes.func.isRequired
+  fetchAgreements: PropTypes.func.isRequired,
+  filterAgreements: PropTypes.func.isRequired
 }
 
-export default AgreementList
+
+const mapStateToProps = state => ({
+  agreement: state.salesPipeline.sale.agreement,
+})
+
+const mapDispatchToProps = dispatch => ({
+  fetchAgreements: () => dispatch(fetchAgreements()),
+  filterAgreements: q => dispatch(filterAgreements(q))
+})
+export default connect(mapStateToProps, mapDispatchToProps)(AgreementList)
