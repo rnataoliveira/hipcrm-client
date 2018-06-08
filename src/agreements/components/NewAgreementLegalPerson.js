@@ -165,8 +165,8 @@ class NewAgreementLegalPerson extends Component {
 
         <h5 className="h5 mt-4">Beneficiários por plano</h5>
         {this.state.beneficiaries.map((b, index) => (
-          <div className="row mt-2">
-            <div className="col-sm-4" key={index}>
+          <div className="row mt-2" key={index}>
+            <div className="col-sm-4">
               <label htmlFor="beneficiariesNumber">Número</label>
               <input value={b.number} type="text" className="form-control" placeholder="Número de Beneficiário" />
             </div>
