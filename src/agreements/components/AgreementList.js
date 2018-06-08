@@ -9,9 +9,10 @@ class AgreementList extends Component {
   componentDidMount() {
     this.props.fetchAgreements()
   }
-  componentWillUnmount() {
-    this.props.displaySuccess()
-  }
+  
+  // componentWillUnmount() {
+  //   this.props.agreementId && this.props.displaySuccess()
+  // }
 
   handleChange(event) {
     this.props.filterAgreements(event.target.value)
