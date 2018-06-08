@@ -26,16 +26,14 @@ class NewAgreementLegalPerson extends Component {
       plan: '',
       number: ''
     }],
-    modality0: '',
-    modality1: '',
-    dentalCare0: '',
-    dentalCare1: '',
+    modality: '',
+    dentalCare: '',
     whichDentalCare: '',
     comission: 0,
     totalValue: 0,
     entranceFee: 0,
     installmentAmount: 0,
-    amountValue: 0,
+    installmentValue: 0,
     notes: ''
   }
 
@@ -177,27 +175,15 @@ class NewAgreementLegalPerson extends Component {
     })
   }
 
-  handleChangeModalityYes(event) {
+  handleChangeModality(event) {
     this.setState({
-      modality1: event.target.value
+      modality: event.target.value
     })
   }
 
-  handleChangeModalityNo(event) {
+  handleChangeDentalCare(event) {
     this.setState({
-      modality0: event.target.value
-    })
-  }
-
-  handleChangeDentalCareYes(event) {
-    this.setState({
-      dentalCare1: event.target.value
-    })
-  }
-
-  handleChangeDentalCareNo(event) {
-    this.setState({
-      dentalCare0: event.target.value
+      dentalCare: event.target.value
     })
   }
 
@@ -219,12 +205,13 @@ class NewAgreementLegalPerson extends Component {
     })
   }
 
-  handleAmountValue(event) {
+  handleinstallmentValue() {
     const total = this.state.totalValue
     const entrance = this.state.entranceFee
     const installment = this.state.installmentAmount
+    const totalMinuEntrance = total - entrance
     this.setState({
-      amountValue: ((total - entrance)/ installment)
+      installmentValue: (totalMinuEntrance / installment).toString()
     })
   }
 
@@ -375,13 +362,13 @@ class NewAgreementLegalPerson extends Component {
         <h5 className="h5 mt-4">Modalidade</h5>
         <div className="row mt-2">
           <div className="form-check form-check-inline m-2">
-            <input onChange={this.handleChangeModalityYes.bind(this)} className="form-check-input" type="radio" name="modality" id="exampleRadios1" value={this.state.modality1} />
+            <input onChange={this.handleChangeModality.bind(this)} className="form-check-input" type="radio" name="modality" id="exampleRadios1" value={this.state.modality} />
             <label className="form-check-label">
               Com Participação
             </label>
           </div>
           <div className="form-check form-check-inline m-2">
-            <input onChange={this.handleChangeModalityNo.bind(this)} className="form-check-input" type="radio" name="modality" id="exampleRadios2" value={this.state.modality0} />
+            <input onChange={this.handleChangeModality.bind(this)} className="form-check-input" type="radio" name="modality" id="exampleRadios2" value={this.state.modality} />
             <label className="form-check-label">
               Sem Participação
             </label>
@@ -390,13 +377,13 @@ class NewAgreementLegalPerson extends Component {
         <h5 className="h5 mt-4">Contratação de Assistência Odontológica</h5>
         <div className="row mt-2">
           <div className="form-check form-check-inline m-2">
-            <input onChange={this.handleChangeDentalCareYes.bind(this)} className="form-check-input" type="radio" name="dentalCare" id="exampleRadios1" value={this.state.dentalCare1} />
+            <input onChange={this.handleChangeDentalCare.bind(this)} className="form-check-input" type="radio" name="dentalCare" id="exampleRadios1" value={this.state.dentalCare} />
             <label className="form-check-label">
               Sim
             </label>
           </div>
           <div className="form-check form-check-inline m-2">
-            <input onChange={this.handleChangeDentalCareNo.bind(this)}  className="form-check-input" type="radio" name="dentalCare" id="exampleRadios2" value={this.state.dentalCare0} />
+            <input onChange={this.handleChangeDentalCare.bind(this)}  className="form-check-input" type="radio" name="dentalCare" id="exampleRadios2" value={this.state.dentalCare} />
             <label className="form-check-label">
               Não
             </label>
@@ -436,8 +423,8 @@ class NewAgreementLegalPerson extends Component {
           </div>
           <div className="col-sm-2">
             {/* (valor total - entrada) / parcelas*/}
-            <label htmlFor="amountValue">Parcela</label>
-            <input onClick={this.handleAmountValue.bind(this)} type="text" className="form-control" placeholder="Valor da Parcela" value={this.state.amountValue} />
+            <label htmlFor="installmentValue">Parcela</label>
+            <input readonly="readonly" onClick={this.handleinstallmentValue.bind(this)} type="text" className="form-control" placeholder="Valor da Parcela" value={this.state.installmentValue} />
           </div>
           <div className="col-sm-3">
             <label htmlFor="comission">Comissão</label>
