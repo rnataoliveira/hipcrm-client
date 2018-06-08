@@ -160,7 +160,7 @@ class NewAgreementPhysicalPerson extends Component {
     const installment = this.state.installmentAmount
     const totalMinuEntrance = total - entrance
     this.setState({
-      installmentValue: (totalMinuEntrance / installment).toString()
+      installmentValue: (totalMinuEntrance / installment)
     })
   }
 
@@ -288,7 +288,7 @@ class NewAgreementPhysicalPerson extends Component {
           <div className="col-sm-2">
             {/* (valor total - entrada) / parcelas*/}
             <label htmlFor="installmentValue">Parcela</label>
-            <input readonly="readonly" type="text" className="form-control" placeholder="Valor da Parcela" value={this.state.installmentValue} />
+            <input readonly="readOnly" type="text" onChange={this.handleinstallmentValue.bind(this)} type="text" className="form-control" placeholder="Valor da Parcela" value={this.state.installmentValue} />
           </div>
           <div className="col-sm-3">
             <label htmlFor="comission">Comissão</label>

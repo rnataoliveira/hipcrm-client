@@ -12,29 +12,31 @@ class NewAgreementLegalPerson extends Component {
     },
     email: '',
     companyContact: '',
-    address: {
+    mailingAddress: {
       zipCode: '',
       street: '',
       number: '',
       complement: '',
       neighborhood: '',
       city: '',
-      state: '',
-      reference: '',
+      state: ''
     },
     beneficiaries: [{
       plan: '',
       number: ''
     }],
     modality: '',
-    dentalCare: '',
-    whichDentalCare: '',
-    comission: 0,
-    totalValue: 0,
-    entranceFee: 0,
-    installmentAmount: 0,
-    installmentValue: 0,
-    notes: ''
+    dentalCare: {
+      whichDentalCare: ''
+    },
+    payment: {
+      comission: 0,
+      totalValue: 0,
+      entranceFee: 0,
+      installmentAmount: 0,
+      installmentValue: 0,
+      notes: ''
+    }
   }
 
   componentWillUnmount() {
@@ -79,8 +81,8 @@ class NewAgreementLegalPerson extends Component {
 
   handleChangeZipCode(event) {
     this.setState({
-      address: {
-        ...this.state.address,
+      mailingAddress: {
+        ...this.state.mailingAddress,
         zipCode: event.target.value
       }
     })
@@ -88,8 +90,8 @@ class NewAgreementLegalPerson extends Component {
 
   handleChangeStreet(event) {
     this.setState({
-      address: {
-        ...this.state.address,
+      mailingAddress: {
+        ...this.state.mailingAddress,
         street: event.target.value
       }
     })
@@ -97,8 +99,8 @@ class NewAgreementLegalPerson extends Component {
 
   handleChangeNumber(event) {
     this.setState({
-      address: {
-        ...this.state.address,
+      mailingAddress: {
+        ...this.state.mailingAddress,
         number: event.target.value
       }
     })
@@ -106,8 +108,8 @@ class NewAgreementLegalPerson extends Component {
 
   handleChangeNeighborhood(event) {
     this.setState({
-      address: {
-        ...this.state.address,
+      mailingAddress: {
+        ...this.state.mailingAddress,
         neighborhood: event.target.value
       }
     })
@@ -115,8 +117,8 @@ class NewAgreementLegalPerson extends Component {
 
   handleChangeCity(event) {
     this.setState({
-      address: {
-        ...this.state.address,
+      mailingAddress: {
+        ...this.state.mailingAddress,
         city: event.target.value
       }
     })
@@ -124,8 +126,8 @@ class NewAgreementLegalPerson extends Component {
 
   handleChangeState(event) {
     this.setState({
-      address: {
-        ...this.state.address,
+      mailingAddress: {
+        ...this.state.mailingAddress,
         state: event.target.value
       }
     })
@@ -133,18 +135,9 @@ class NewAgreementLegalPerson extends Component {
 
   handleChangeComplement(event) {
     this.setState({
-      address: {
-        ...this.state.address,
+      mailingAddress: {
+        ...this.state.mailingAddress,
         complement: event.target.value
-      }
-    })
-  }
-
-  handleChangeReference(event) {
-    this.setState({
-      address: {
-        ...this.state.address,
-        reference: event.target.value
       }
     })
   }
@@ -158,7 +151,7 @@ class NewAgreementLegalPerson extends Component {
   handleChangeBeneficiariesPlan(event, index) {
     this.setState({
       beneficiaries: this.state.beneficiaries.map((b, idx) => {
-        if(idx !== index) return b
+        if (idx !== index) return b
 
         return { ...b, plan: event.target.value }
       })
@@ -168,7 +161,7 @@ class NewAgreementLegalPerson extends Component {
   handleChangeBeneficiariesNumber(event, index) {
     this.setState({
       beneficiaries: this.state.beneficiaries.map((b, idx) => {
-        if(idx !== index) return b
+        if (idx !== index) return b
 
         return { ...b, number: event.target.value }
       })
@@ -187,9 +180,11 @@ class NewAgreementLegalPerson extends Component {
     })
   }
 
-  handleChangeWhichDentalCare(event) {
+  handleChangeDentalCarePlan(event) {
     this.setState({
-      whichDentalCare: event.target.value
+      dentalCare: {
+        whichDentalCare: event.target.value
+      }
     })
   }
 
@@ -245,7 +240,7 @@ class NewAgreementLegalPerson extends Component {
         <div className="row">
           <div className="col-sm-4">
             <label htmlFor="agreementNumber">Número do Contrato</label>
-            <input onChange={this.handleChangeAgreementNumber.bind(this)}  type="text" className="form-control" placeholder="Número do Contrato" value={this.state.agreementNumber} />
+            <input onChange={this.handleChangeAgreementNumber.bind(this)} type="text" className="form-control" placeholder="Número do Contrato" value={this.state.agreementNumber} />
           </div>
         </div>
         <hr />
@@ -262,11 +257,11 @@ class NewAgreementLegalPerson extends Component {
           </div>
           <div className="col-sm-4">
             <label htmlFor="email">E-mail</label>
-            <input onChange={this.handleChangeEmail.bind(this)}  type="text" className="form-control" placeholder="E-mail" value={this.state.email} />
+            <input onChange={this.handleChangeEmail.bind(this)} type="text" className="form-control" placeholder="E-mail" value={this.state.email} />
           </div>
           <div className="col-sm-5">
             <label htmlFor="companyContact">Contato da Empresa</label>
-            <input onChange={this.handleChangeCompanyContact.bind(this)}  type="text" className="form-control" placeholder="Contato da Empresa" value={this.state.companyContact} />
+            <input onChange={this.handleChangeCompanyContact.bind(this)} type="text" className="form-control" placeholder="Contato da Empresa" value={this.state.companyContact} />
           </div>
         </div>
 
@@ -275,33 +270,33 @@ class NewAgreementLegalPerson extends Component {
         <div className="row mt-2">
           <div className="col-sm-2">
             <label htmlFor="zipCode">Cep</label>
-            <input onChange={this.handleChangeZipCode.bind(this)} type="text" className="form-control" placeholder="Cep" value={this.state.address.zipCode} />
+            <input onChange={this.handleChangeZipCode.bind(this)} type="text" className="form-control" placeholder="Cep" value={this.state.mailingAddress.zipCode} />
           </div>
           <div className="col-sm-8">
             <label htmlFor="street">Logradouro</label>
-            <input onChange={this.handleChangeStreet.bind(this)} type="text"  className="form-control" placeholder="Logradouro" value={this.state.address.street} />
+            <input onChange={this.handleChangeStreet.bind(this)} type="text" className="form-control" placeholder="Logradouro" value={this.state.mailingAddress.street} />
           </div>
           <div className="col-sm-2">
             <label htmlFor="number">Número</label>
-            <input onChange={this.handleChangeNumber.bind(this)} type="text" className="form-control" placeholder="Numero" value={this.state.address.number} />
+            <input onChange={this.handleChangeNumber.bind(this)} type="text" className="form-control" placeholder="Numero" value={this.state.mailingAddress.number} />
           </div>
         </div>
         <div className="row mt-4">
           <div className="col-sm-2">
             <label htmlFor="complement">Complemento</label>
-            <input onChange={this.handleChangeComplement.bind(this)} type="text" className="form-control" placeholder="Complemento" value={this.state.address.complement} />
+            <input onChange={this.handleChangeComplement.bind(this)} type="text" className="form-control" placeholder="Complemento" value={this.state.mailingAddress.complement} />
           </div>
           <div className="col-sm-4">
             <label htmlFor="neighborhood">Bairro</label>
-            <input onChange={this.handleChangeNeighborhood.bind(this)} type="text" className="form-control" placeholder="Bairro" value={this.state.address.neighborhood} />
+            <input onChange={this.handleChangeNeighborhood.bind(this)} type="text" className="form-control" placeholder="Bairro" value={this.state.mailingAddress.neighborhood} />
           </div>
           <div className="col-sm-4">
             <label htmlFor="city">Cidade</label>
-            <input onChange={this.handleChangeCity.bind(this)} type="text" className="form-control" placeholder="Cidade" value={this.state.address.city} />
+            <input onChange={this.handleChangeCity.bind(this)} type="text" className="form-control" placeholder="Cidade" value={this.state.mailingAddress.city} />
           </div>
           <div className="col-sm-2">
             <label htmlFor="state">Estado</label>
-            <select onChange={this.handleChangeState.bind(this)} className="custom-select" value={this.state.address.state}>
+            <select onChange={this.handleChangeState.bind(this)} className="custom-select" value={this.state.mailingAddress.state}>
               <option value="UF">Estado</option>
               <option value="AC">Acre</option>
               <option value="AL">Alagoas</option>
@@ -333,12 +328,6 @@ class NewAgreementLegalPerson extends Component {
             </select>
           </div>
         </div>
-        <div className="row mt-2">
-          <div className="col-sm-12">
-            <label htmlFor="reference">Referência</label>
-            <input onChange={this.handleChangeReference.bind(this)} type="text" className="form-control" placeholder="Ponto de Referência" value={this.state.address.reference} />
-          </div>
-        </div>
 
         <h5 className="h5 mt-4">Beneficiários por plano</h5>
         {this.state.beneficiaries.map((b, index) => (
@@ -349,7 +338,7 @@ class NewAgreementLegalPerson extends Component {
             </div>
             <div className="col-sm-8">
               <label htmlFor="beneficiariesPlan" name="plan">Plano</label>
-              <input onChange={(e) => this.handleChangeBeneficiariesPlan(e, index)}  value={b.plan} type="text" className="form-control" placeholder="Plano" />
+              <input onChange={(e) => this.handleChangeBeneficiariesPlan(e, index)} value={b.plan} type="text" className="form-control" placeholder="Plano" />
             </div>
           </div>
         ))}
@@ -383,7 +372,7 @@ class NewAgreementLegalPerson extends Component {
             </label>
           </div>
           <div className="form-check form-check-inline m-2">
-            <input onChange={this.handleChangeDentalCare.bind(this)}  className="form-check-input" type="radio" name="dentalCare" id="exampleRadios2" value={this.state.dentalCare} />
+            <input onChange={this.handleChangeDentalCare.bind(this)} className="form-check-input" type="radio" name="dentalCare" id="exampleRadios2" value={this.state.dentalCare} />
             <label className="form-check-label">
               Não
             </label>
@@ -391,8 +380,8 @@ class NewAgreementLegalPerson extends Component {
         </div>
         <div className="row mt-2">
           <div className="col-sm-12">
-            <label htmlFor="whichDentalCare">Qual?</label>
-            <input onChange={this.handleChangeWhichDentalCare.bind(this)} type="text" className="form-control" placeholder="Qual?" value={this.state.whichDentalCare} />
+            <label htmlFor="dentalCarePlan">Qual?</label>
+            <input onChange={this.handleChangeDentalCarePlan.bind(this)} type="text" className="form-control" placeholder="Qual?" value={this.state.dentalCare.plan} />
           </div>
         </div>
         <h5 className="h5 mt-4">Controle de Pagamento do Contrato</h5>
@@ -424,7 +413,7 @@ class NewAgreementLegalPerson extends Component {
           <div className="col-sm-2">
             {/* (valor total - entrada) / parcelas*/}
             <label htmlFor="installmentValue">Parcela</label>
-            <input readonly="readonly" onClick={this.handleinstallmentValue.bind(this)} type="text" className="form-control" placeholder="Valor da Parcela" value={this.state.installmentValue} />
+            <input readonly="readOnly" type="text" onChange={this.handleinstallmentValue.bind(this)} type="text" className="form-control" placeholder="Valor da Parcela" value={this.state.installmentValue} />
           </div>
           <div className="col-sm-3">
             <label htmlFor="comission">Comissão</label>
