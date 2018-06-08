@@ -55,8 +55,8 @@ class NewAgreementPhysicalPerson extends Component {
         </div>
 
         <h5 className="h5 mt-4">Dependentes</h5>
-        {this.state.dependents.map((d) => (
-          <div className="mt-2">
+        {this.state.dependents.map((d, index) => (
+          <div className="mt-2" key={index}>
             <div className="row mt-2">
               <div className="col-sm-6">
                 <label htmlFor="dependentName">Nome</label>
