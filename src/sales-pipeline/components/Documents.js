@@ -19,6 +19,7 @@ class Documents extends Component {
       const picker = new window.google.picker.PickerBuilder()
         .addView(uploadView)
         .setOAuthToken(this.props.oAuthToken)
+        .setOrigin(window.location.protocol + '//' + window.location.host)
         // .setDeveloperKey('AIzaSyBjauEuKZPDHAO9G1C8QolA3ljnpUvXaXM')
         .build()
 
