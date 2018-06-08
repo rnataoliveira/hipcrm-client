@@ -4,6 +4,8 @@ import { connect } from 'react-redux'
 import { Link, Redirect } from 'react-router-dom'
 import { createCustomer } from '../actions'
 import moment from 'moment'
+import { flashMessage } from '../../flash-messages/actions'
+
 
 class NewPhysicalPerson extends Component {
   state = {
@@ -33,6 +35,10 @@ class NewPhysicalPerson extends Component {
       complement: '',
     },
     notes: ''
+  }
+
+  componentWillUnmount() {
+    this.props.customerId && this.props.displaySuccess()
   }
 
   handleChangeFirstName(event) {
@@ -191,30 +197,36 @@ class NewPhysicalPerson extends Component {
       <Redirect to={`/customers/${this.props.customerId}`} />
       :
       (
-        <form className="col-sm-12">
+        <form className="col-sm-12 text-left">
           <div>
             <h2 className="h2">Cadastrar Cliente - Pessoal Física</h2>
             <hr style={{ color: '#757575', width: '90%' }} className="d-flex justify-content-start " />
             <h5 className="h5 mt-4">Informações Pessoais</h5>
             <div className="row">
               <div className="col-sm-6">
+                <label htmlFor="firstName">Nome</label>
                 <input type="text" className="form-control" placeholder="Nome" value={this.state.firstName} onChange={this.handleChangeFirstName.bind(this)} />
               </div>
               <div className="col-sm-6">
+                <label htmlFor="surname">Sobrenome</label>
                 <input type="text" className="form-control" placeholder="Sobrenome" value={this.state.surname} onChange={this.handleChangeSurname.bind(this)} />
               </div>
             </div>
             <div className="row mt-2">
               <div className="col-sm-3">
+                <label htmlFor="documentNumber">Cpf</label>
                 <input type="text" className="form-control" placeholder="Cpf" value={this.state.documentNumber} onChange={this.handleChangeDocumentNumber.bind(this)} />
               </div>
               <div className="col-sm-2">
+                <label htmlFor="generalRegistration">Rg</label>
                 <input type="text" className="form-control" placeholder="Rg" value={this.state.generalRegistration} onChange={this.handleChangeGeneralRegistration.bind(this)} />
               </div>
               <div className="col-sm-3">
+                <label htmlFor="birthDate">Data de Nascimento</label>
                 <input type="date" className="form-control" value={moment(this.state.birthDate).format('YYYY-MM-DD')} onChange={this.handleChangeBirthDate.bind(this)} />
               </div>
               <div className="col-sm-2">
+                <label htmlFor="sex">Sexo</label>
                 <select className="custom-select" value={this.state.sex} onChange={this.handleChangeSex.bind(this)}>
                   <option>Sexo</option>
                   <option value="Feminino">Feminino</option>
@@ -222,6 +234,7 @@ class NewPhysicalPerson extends Component {
                 </select>
               </div>
               <div className="col-sm-2">
+                <label htmlFor="maritalState">Estado Civil</label>
                 <select className="custom-select" value={this.state.maritalState} onChange={this.handleChangeMaritalState.bind(this)}>
                   <option>Estado Civil</option>
                   <option value="Solteiro">Solteiro</option>
@@ -235,18 +248,23 @@ class NewPhysicalPerson extends Component {
             <h5 className="h5 mt-4">Informações de Contato</h5>
             <div className="row mt-2">
               <div className="col-sm-1">
+                <label htmlFor="phoneAreaCode">DDD</label>
                 <input type="text" className="form-control" placeholder="DDD" value={this.state.phone.areaCode} onChange={this.handleChangePhoneAreaCode.bind(this)} />
               </div>
               <div className="col-sm-2">
+                <label htmlFor="phoneNumber">Telefone</label>
                 <input type="text" className="form-control" placeholder="Telefone" value={this.state.phone.number} onChange={this.handleChangePhoneNumber.bind(this)} />
               </div>
               <div className="col-sm-1">
+                <label htmlFor="cellPhoneAreaCode">DDD</label>
                 <input type="text" className="form-control" placeholder="DDD" value={this.state.cellPhone.areaCode} onChange={this.handleChangeCellPhoneAreaCode.bind(this)} />
               </div>
               <div className="col-sm-2">
+                <label htmlFor="cellPhoneNumber">Celular</label>
                 <input type="text" className="form-control" placeholder="Celular" value={this.state.cellPhone.number} onChange={this.handleChangeCellPhoneNumber.bind(this)} />
               </div>
               <div className="col-sm-6">
+                <label htmlFor="email">E-mail</label>
                 <input type="text" className="form-control" placeholder="Email" value={this.state.email} onChange={this.handleChangeEmail.bind(this)} />
               </div>
             </div>
@@ -254,26 +272,33 @@ class NewPhysicalPerson extends Component {
             <h5 className="h5 mt-4">Endereço</h5>
             <div className="row mt-2">
               <div className="col-sm-2">
+                <label htmlFor="zipCode">Cep</label>
                 <input type="text" className="form-control" placeholder="Cep" value={this.state.zipCode} onChange={this.handleChangeZipCode.bind(this)} />
               </div>
               <div className="col-sm-8">
+                <label htmlFor="street">Logradouro</label>
                 <input type="text" className="form-control" placeholder="Logradouro" value={this.state.street} onChange={this.handleChangeStreet.bind(this)} />
               </div>
               <div className="col-sm-2">
+                <label htmlFor="number">Número</label>
                 <input type="text" className="form-control" placeholder="Numero" value={this.state.number} onChange={this.handleChangeNumber.bind(this)} />
               </div>
             </div>
             <div className="row mt-4">
               <div className="col-sm-2">
+                <label htmlFor="complement">Complemento</label>
                 <input type="text" className="form-control" placeholder="Complemento" value={this.state.complement} onChange={this.handleChangeComplement.bind(this)} />
               </div>
               <div className="col-sm-4">
+                <label htmlFor="neighborhood">Bairro</label>
                 <input type="text" className="form-control" placeholder="Bairro" value={this.state.neighborhood} onChange={this.handleChangeNeighborhood.bind(this)} />
               </div>
               <div className="col-sm-4">
+                <label htmlFor="city">Cidade</label>
                 <input type="text" className="form-control" placeholder="Cidade" value={this.state.city} onChange={this.handleChangeCity.bind(this)} />
               </div>
               <div className="col-sm-2">
+                <label htmlFor="state">Estado</label>
                 <select className="custom-select" value={this.state.state} onChange={this.handleChangeState.bind(this)}>
                   <option value="UF">Estado</option>
                   <option value="AC">Acre</option>
@@ -330,7 +355,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  createCustomerPhysicalPerson: (customer) => dispatch(createCustomer(customer, 'physical-person'))
+  createCustomerPhysicalPerson: (customer) => dispatch(createCustomer(customer, 'physical-person')),
+  displaySuccess: () => dispatch(flashMessage({ text: 'Cliente Cadastrado!' }))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewPhysicalPerson)

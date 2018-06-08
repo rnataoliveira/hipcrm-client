@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link, Redirect } from 'react-router-dom'
 import { createCustomer, newCustomerForm } from '../actions'
+import { flashMessage } from '../../flash-messages/actions'
 
 class NewLegalPerson extends Component {
   state = {
@@ -24,6 +25,10 @@ class NewLegalPerson extends Component {
       complement: '',
     },
     notes: ''
+  }
+
+  componentWillUnmount() {
+    this.props.customerId && this.props.displaySuccess()
   }
 
   handleChangeCompanyName(event) {
@@ -168,21 +173,24 @@ class NewLegalPerson extends Component {
       <Redirect to={`/customers/${this.props.customerId}`} />
       :
       (
-        <form className="col-sm-12">
+        <form className="col-sm-12 text-left">
           <div>
             <h2 className="h2">Cadastrar Cliente - Pessoa Juridíca</h2>
             <hr style={{ color: '#757575', width: '90%' }} className="d-flex justify-content-start " />
             <h5 className="h5 mt-4">Informações da Empresa</h5>
             <div className="row">
               <div className="col-sm-12">
+                <label htmlFor="companyName">Nome da Empresa</label>
                 <input type="text" className="form-control" placeholder="Razão Social" value={this.state.companyName} onChange={this.handleChangeCompanyName.bind(this)} />
               </div>
             </div>
             <div className="row mt-2">
               <div className="col-sm-4">
+                <label htmlFor="companyRegistration">Cnpj</label>
                 <input type="text" className="form-control" placeholder="Cnpj" value={this.state.companyRegistration} onChange={this.handleChangeCompanyRegistration.bind(this)} />
               </div>
               <div className="col-sm-8">
+                <label htmlFor="stateRegistration">Inscrição Estadual</label>
                 <input type="text" className="form-control" placeholder="Inscrição Estadual" value={this.state.stateRegistration} onChange={this.handleChangeStateRegistration.bind(this)} />
               </div>
 
@@ -191,12 +199,15 @@ class NewLegalPerson extends Component {
             <h5 className="h5 mt-4">Informações de Contato</h5>
             <div className="row mt-2">
               <div className="col-sm-2">
+                <label htmlFor="phoneAreaCode">DDD</label>
                 <input type="text" className="form-control" placeholder="DDD" value={this.state.phone.areaCode} onChange={this.handleChangePhoneAreaCode.bind(this)} />
               </div>
               <div className="col-sm-2">
+                <label htmlFor="phoneNumber">Telefone</label>
                 <input type="text" className="form-control" placeholder="Telefone" value={this.state.phone.number} onChange={this.handleChangePhoneNumber.bind(this)} />
               </div>
               <div className="col-sm-8">
+                <label htmlFor="email">E-mail</label>
                 <input type="text" className="form-control" placeholder="Email" value={this.state.email} onChange={this.handleChangeEmail.bind(this)} />
               </div>
             </div>
@@ -204,26 +215,33 @@ class NewLegalPerson extends Component {
             <h5 className="h5 mt-4">Endereço Fiscal</h5>
             <div className="row mt-2">
               <div className="col-sm-2">
+                <label htmlFor="zipCode">Cep</label>
                 <input type="text" className="form-control" placeholder="Cep" value={this.state.zipCode} onChange={this.handleChangeZipCode.bind(this)} />
               </div>
               <div className="col-sm-8">
+                <label htmlFor="street">Logradouro</label>
                 <input type="text" className="form-control" placeholder="Logradouro" value={this.state.street} onChange={this.handleChangeStreet.bind(this)} />
               </div>
               <div className="col-sm-2">
+                <label htmlFor="number">Número</label>
                 <input type="text" className="form-control" placeholder="Numero" value={this.state.number} onChange={this.handleChangeNumber.bind(this)} />
               </div>
             </div>
             <div className="row mt-4">
               <div className="col-sm-2">
+                <label htmlFor="complement">Complemento</label>
                 <input type="text" className="form-control" placeholder="Complemento" value={this.state.complement} onChange={this.handleChangeComplement.bind(this)} />
               </div>
               <div className="col-sm-4">
+                <label htmlFor="neighborhood">Bairro</label>
                 <input type="text" className="form-control" placeholder="Bairro" value={this.state.neighborhood} onChange={this.handleChangeNeighborhood.bind(this)} />
               </div>
               <div className="col-sm-4">
+                <label htmlFor="city">Cidade</label>
                 <input type="text" className="form-control" placeholder="Cidade" value={this.state.city} onChange={this.handleChangeCity.bind(this)} />
               </div>
               <div className="col-sm-2">
+                <label htmlFor="state">Estado</label>
                 <select className="custom-select" value={this.state.state} onChange={this.handleChangeState.bind(this)}>
                   <option value="UF">Estado</option>
                   <option value="AC">Acre</option>
@@ -281,7 +299,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  createCustomerLegalPerson: (customer) => dispatch(createCustomer(customer, 'legal-person'))
+  createCustomerLegalPerson: (customer) => dispatch(createCustomer(customer, 'legal-person')),
+  displaySuccess: () => dispatch(flashMessage({ text: 'Cliente Cadastrado!' }))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewLegalPerson)
