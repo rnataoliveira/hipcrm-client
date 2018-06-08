@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 class NewAgreementLegalPerson extends Component {
   state = {
-    contractNumber: '',
+    agreementNumber: '',
     phone: {
       areaCode: '',
       number: '',
@@ -44,7 +44,7 @@ class NewAgreementLegalPerson extends Component {
         <hr style={{ color: '#757575', width: '90%' }} className="d-flex justify-content-start " />
         <div className="row">
           <div className="col-sm-4">
-            <label htmlFor="contractNumber">Número do Contrato</label>
+            <label htmlFor="agreementNumber">Número do Contrato</label>
             <input type="text" className="form-control" placeholder="Número do Contrato" />
           </div>
         </div>
