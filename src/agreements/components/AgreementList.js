@@ -3,10 +3,14 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { fetchAgreements, filterAgreements } from '../actions'
 import { connect } from 'react-redux'
+import { flashMessage } from '../../flash-messages/actions'
 
 class AgreementList extends Component {
   componentDidMount() {
     this.props.fetchAgreements()
+  }
+  componentWillUnmount() {
+    this.props.displaySuccess()
   }
 
   handleChange(event) {
@@ -38,11 +42,10 @@ class AgreementList extends Component {
                 <td>Renata Oliveira</td>
                 <td className="text-right">
                   <Link className="m-2" to="">Detalhes</Link>
-                  <button type="button" className="btn btn-primary m-2">Inativar</button>
+                  <button type="button" className="btn btn-primary m-2">Dar Baixa</button>
                 </td>
               </tr>
-            })
-            }
+            })}
           </tbody>
         </table>
       </div>
@@ -59,11 +62,13 @@ AgreementList.propTypes = {
 
 
 const mapStateToProps = state => ({
-  agreement: state.salesPipeline.sale.agreement,
+  agreements: state.agreements.all,
 })
 
 const mapDispatchToProps = dispatch => ({
   fetchAgreements: () => dispatch(fetchAgreements()),
-  filterAgreements: q => dispatch(filterAgreements(q))
+  filterAgreements: q => dispatch(filterAgreements(q)),
+  displaySuccess: () => dispatch(flashMessage({ text: 'Dar Baixa executado com sucesso!' }))
 })
+
 export default connect(mapStateToProps, mapDispatchToProps)(AgreementList)
