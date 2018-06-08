@@ -6,6 +6,7 @@ const config = {
   scope: `profile email openid https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/drive.appdata https://www.googleapis.com/auth/drive.file`,
   response_type: 'token id_token',
   redirect_uri: 'https://corretora-lopes.firebaseapp.com/auth/callback'
+  
   // redirect_uri: 'http://localhost:3000/auth/callback'
 }
 
