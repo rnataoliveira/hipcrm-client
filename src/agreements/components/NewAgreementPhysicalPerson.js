@@ -16,8 +16,9 @@ class NewAgreementPhysicalPerson extends Component {
     totalValue: 0,
     entranceFee: 0,
     installmentAmount: 0,
-    amountValue: 0,
+    installmentValue: 0,
     notes: ''
+
   }
   componentWillUnmount() {
     this.props.agreementId && this.props.displaySuccess()
@@ -65,7 +66,7 @@ class NewAgreementPhysicalPerson extends Component {
   handleChangeDependentsName(event, index) {
     this.setState({
       beneficiaries: this.state.beneficiaries.map((b, idx) => {
-        if(idx != index) return b
+        if(idx !== index) return b
 
         return { ...b, name: event.target.value }
       })
@@ -75,7 +76,7 @@ class NewAgreementPhysicalPerson extends Component {
   handleChangeDependentsDocumentNumber(event, index) {
     this.setState({
       beneficiaries: this.state.beneficiaries.map((b, idx) => {
-        if(idx != index) return b
+        if(idx !== index) return b
 
         return { ...b, documentNumber: event.target.value }
       })
@@ -85,7 +86,7 @@ class NewAgreementPhysicalPerson extends Component {
   handleChangeDependentsGeneralRegistration(event, index) {
     this.setState({
       beneficiaries: this.state.beneficiaries.map((b, idx) => {
-        if(idx != index) return b
+        if(idx !== index) return b
 
         return { ...b, generalRegistration: event.target.value }
       })
@@ -95,7 +96,7 @@ class NewAgreementPhysicalPerson extends Component {
   handleChangeDependentsBirthDate(event, index) {
     this.setState({
       beneficiaries: this.state.beneficiaries.map((b, idx) => {
-        if(idx != index) return b
+        if(idx !== index) return b
 
         return { ...b, birthDate: event.target.value }
       })
@@ -105,7 +106,7 @@ class NewAgreementPhysicalPerson extends Component {
   handleChangeDependentsMothersName(event, index) {
     this.setState({
       beneficiaries: this.state.beneficiaries.map((b, idx) => {
-        if(idx != index) return b
+        if(idx !== index) return b
 
         return { ...b, mothersName: event.target.value }
       })
@@ -115,7 +116,7 @@ class NewAgreementPhysicalPerson extends Component {
   handleChangeDependentsMaritalState(event, index) {
     this.setState({
       beneficiaries: this.state.beneficiaries.map((b, idx) => {
-        if(idx != index) return b
+        if(idx !== index) return b
 
         return { ...b, maritalState: event.target.value }
       })
@@ -125,7 +126,7 @@ class NewAgreementPhysicalPerson extends Component {
   handleChangeDependentsRelationShip(event, index) {
     this.setState({
       beneficiaries: this.state.beneficiaries.map((b, idx) => {
-        if(idx != index) return b
+        if(idx !== index) return b
 
         return { ...b, relationship: event.target.value }
       })
@@ -133,29 +134,33 @@ class NewAgreementPhysicalPerson extends Component {
   }
 
   handleChangeTotalValue(event) {
+    this.handleinstallmentValue()
     this.setState({
       totalValue: event.target.value
     })
   }
 
   handleChangeEntranceFee(event) {
+    this.handleinstallmentValue()
     this.setState({
       entranceFee: event.target.value
     })
   }
 
-  handleAmountValue(event) {
-    const total = this.state.totalValue
-    const entrance = this.state.entranceFee
-    const installment = this.state.installmentAmount
+  handleChangeInstallmentAmount(event) {
+    this.handleinstallmentValue()
     this.setState({
-      amountValue: ((total - entrance)/ installment)
+      installmentAmount: event.target.value
     })
   }
 
-  handleChangeInstallmentAmount(event) {
+  handleinstallmentValue() {
+    const total = this.state.totalValue
+    const entrance = this.state.entranceFee
+    const installment = this.state.installmentAmount
+    const totalMinuEntrance = total - entrance
     this.setState({
-      installmentAmount: event.target.value
+      installmentValue: (totalMinuEntrance / installment)
     })
   }
 
@@ -282,8 +287,8 @@ class NewAgreementPhysicalPerson extends Component {
           </div>
           <div className="col-sm-2">
             {/* (valor total - entrada) / parcelas*/}
-            <label htmlFor="amountValue">Parcela</label>
-            <input onChange={this.handleAmountValue.bind(this)} type="text" className="form-control" placeholder="Valor da Parcela" value={this.state.amountValue} />
+            <label htmlFor="installmentValue">Parcela</label>
+            <input readonly="readOnly" type="text" onChange={this.handleinstallmentValue.bind(this)} type="text" className="form-control" placeholder="Valor da Parcela" value={this.state.installmentValue} />
           </div>
           <div className="col-sm-3">
             <label htmlFor="comission">Comissão</label>

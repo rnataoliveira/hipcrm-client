@@ -11,7 +11,8 @@ class Home extends Component {
           left: '0',
           opacity: '0.8',
           padding: '0',
-          height: '100%'
+          height: '100%',
+          marginTop: '-50px'
         }}
         className="col-sm-12 d-flex position-absolute text-center"
       >

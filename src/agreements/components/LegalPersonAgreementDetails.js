@@ -47,39 +47,39 @@ class LegalPersonAgreementDetails extends Component {
         <div className="row mt-2">
           <div className="col-sm-2">
             <label htmlFor="zipCode">Cep</label>
-            <p className="form-control">{this.props.agreement.address.zipCode}</p>
+            <p className="form-control">{this.props.agreement.mailingAddress.zipCode}</p>
           </div>
           <div className="col-sm-8">
             <label htmlFor="street">Logradouro</label>
-            <p className="form-control">{this.props.agreement.address.street}</p>
+            <p className="form-control">{this.props.agreement.mailingAddress.street}</p>
           </div>
           <div className="col-sm-2">
             <label htmlFor="number">Número</label>
-            <p className="form-control">{this.props.agreement.address.number}</p>
+            <p className="form-control">{this.props.agreement.mailingAddress.number}</p>
           </div>
         </div>
         <div className="row mt-4">
           <div className="col-sm-2">
             <label htmlFor="complement">Complemento</label>
-            <p className="form-control">{this.props.agreement.address.complement}</p>
+            <p className="form-control">{this.props.agreement.mailingAddress.complement}</p>
           </div>
           <div className="col-sm-4">
             <label htmlFor="neighborhood">Bairro</label>
-            <p className="form-control">{this.props.agreement.address.neighborhood}</p>
+            <p className="form-control">{this.props.agreement.mailingAddress.neighborhood}</p>
           </div>
           <div className="col-sm-4">
             <label htmlFor="city">Cidade</label>
-            <p className="form-control">{this.props.agreement.address.city}</p>
+            <p className="form-control">{this.props.agreement.mailingAddress.city}</p>
           </div>
           <div className="col-sm-2">
             <label htmlFor="state">Estado</label>
-            <p className="custom-select">{this.props.agreement.address.state}</p>
+            <p className="custom-select">{this.props.agreement.mailingAddress.state}</p>
           </div>
         </div>
         <div className="row mt-2">
           <div className="col-sm-12">
             <label htmlFor="reference">Referência</label>
-            <p className="form-control">{this.props.agreement.address.reference}</p>
+            <p className="form-control">{this.props.agreement.mailingAddress.reference}</p>
           </div>
         </div>
 
@@ -120,24 +120,24 @@ class LegalPersonAgreementDetails extends Component {
         <div className="row mt-2">
           <div className="col-sm-2">
             <label htmlFor="totalValue">Total</label>
-            <p className="form-control">{this.props.agreement.totalValue}</p>
+            <p className="form-control">{this.props.agreement.payment.totalValue}</p>
           </div>
           <div className="col-sm-2">
             <label htmlFor="entranceFee">Entrada</label>
-            <p className="form-control">{this.props.agreement.entranceFee}</p>
+            <p className="form-control">{this.props.agreement.payment.entranceFee}</p>
           </div>
           <div className="col-sm-3">
             <label htmlFor="installmentAmount">Quantidade</label>
-            <p className="custom-select">{this.props.agreement.installmentAmount}</p>
+            <p className="custom-select">{this.props.agreement.payment.installmentAmount}</p>
           </div>
           <div className="col-sm-2">
             {/* (valor total - entrada) / parcelas*/}
-            <label htmlFor="amountValue">Parcela</label>
-            <p className="form-control">{this.props.agreement.amountValue}</p>
+            <label htmlFor="installmentValue">Parcela</label>
+            <p className="form-control">{this.props.agreement.payment.installmentValue}</p>
           </div>
           <div className="col-sm-3">
             <label htmlFor="comission">Comissão</label>
-            <p className="form-control">{this.props.agreement.comission}</p>
+            <p className="form-control">{this.props.agreement.payment.comission}</p>
           </div>
         </div>
         <h5 className="h5 mt-4">Observações</h5>
