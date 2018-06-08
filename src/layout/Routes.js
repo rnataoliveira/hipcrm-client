@@ -4,7 +4,7 @@ import { Route, Switch } from 'react-router'
 import { Home } from '../home'
 import { Login, Logout, Callback, PrivateRoute } from '../auth'
 import Dashboard from '../home/Dashboard'
-import { ContractsListContainer } from '../agreements'
+import { AgreementListContainer } from '../agreements'
 import { Reports } from '../reports'
 
 import { Router as CustomersModule } from '../customers'
@@ -19,7 +19,7 @@ const Routes = () => (
     <PrivateRoute path="/dashboard" component={Dashboard} />
     <PrivateRoute path="/sales" component={SalesModule} />
     <PrivateRoute path="/customers" component={CustomersModule} />
-    <PrivateRoute path="/agreements" component={ContractsListContainer} />
+    <PrivateRoute path="/agreements" component={AgreementListContainer} />
     <PrivateRoute path="/reports" component={Reports} />
   </Switch>
 )

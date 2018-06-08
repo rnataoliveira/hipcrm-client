@@ -9,7 +9,7 @@ export default (state = { all: [] }, action) => {
   case 'SAVE_AGREEMENT_SUCCESS':
     return { 
       ...state, 
-      messages: [ 'Cliente Cadastrado' ], 
+      messages: [ 'Contrado Salvo' ], 
       new: { }, 
       agreement: { saleId: action.payload.data.saleId } 
     }

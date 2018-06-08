@@ -171,6 +171,10 @@ class NewAgreementPhysicalPerson extends Component {
     })
   }
 
+  handleSubmit() {
+    this.props.agreementId && this.props.saveAgreementPhysicalPerson()
+  }
+
   render() {
     return (
       <form className="mt-2">
@@ -292,7 +296,7 @@ class NewAgreementPhysicalPerson extends Component {
             <textarea onChange={this.handleChangeNotes.bind(this)} className="form-control" id="exampleFormControlTextarea1" rows="3" value={this.state.notes}></textarea>
           </div>
         </div>
-        <button type="submit" className="btn btn-primary mt-5 float-right">Salvar</button>
+        <button onClick={this.handleSubmit.bind(this)} type="submit" className="btn btn-primary mt-5 float-right">Salvar</button>
       </form>
     )
   }
@@ -303,7 +307,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  saveAgreementLegalPerson: (sale) => dispatch(saveAgreement(sale, 'legal-person')),
+  saveAgreementPhysicalPerson: (sale) => dispatch(saveAgreement(sale, 'physical-person')),
   displaySuccess: () => dispatch(flashMessage({ text: 'Contrato Salvo!' }))
 })
 

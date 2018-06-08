@@ -4,14 +4,14 @@ import { fetchAgreements, filterAgreements } from '../actions'
 
 import AgreementList from '../components/AgreementList'
 
-const applyFilter = (contracts, q) => {
-  return q ? contracts.filter(contract => contract.number != q) : contracts
+const applyFilter = (agreement, q) => {
+  return q ? this.props.agreements.filter(agreement => agreement.number != q) : agreement
 }
 
 const mapStateToProps = state => ({
   // customers: applyFilter(state.customers.all, state.customers.filter),
-  contracts: applyFilter(state.contracts.all, state.contracts.filter),
-  filter: state.contracts.filter
+  agreements: applyFilter(state.agreements.all, state.agreements.filter),
+  filter: state.agreements.filter
 })
 
 const mapDispatchToProps = dispatch => ({
