@@ -47,6 +47,10 @@ export const createSale = ({ customerId }) => ({
   }
 })
 
+export const createSaleFailDisplay = () => ({
+  type: 'CREATE_SALE_FAIL_DISPLAY'
+})
+
 export const fetchSale = saleId => ({
   type: 'FETCH_SALE',
   payload: {
@@ -99,4 +103,9 @@ export const deleteSale = saleId => ({
 export const filterSales = q => ({
   type: 'FILTER_SALES',
   q
+})
+
+// Alert Error test
+export const messageShowed = () => ({
+  type: 'MESSAGE_SHOWED'
 })

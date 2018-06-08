@@ -11,6 +11,10 @@ class CustomerList extends Component {
     this.props.filterCustomers(event.target.value)
   }
 
+  handleDeleteCustomer(customerId) {
+    this.props.deleteCustomer(customerId)
+  }
+
   render() {
     return (
       <div>
@@ -35,8 +39,9 @@ class CustomerList extends Component {
                   <th scope="row">{customer.personalData.documentNumber}</th>
                   <td>{customer.personalData.firstName + ' ' + customer.personalData.surname}</td>
                   <td className="text-right">
-                    <Link to={`/customers/${customer.id}`}>Detalhes</Link>
-                    <button type="button" className="btn btn-primary">Excluir</button>
+                    <Link className="m-2" to={`/customers/${customer.id}`}>Detalhes</Link>
+                    <Link className="m-2" to={`/customers/physical-person/${customer.id}/edit`}>Edit</Link>
+                    <button onClick={() => this.handleDeleteCustomer(customer.id)} type="button" className="btn btn-primary m-2">Excluir</button>
                   </td>
                 </tr>
                 :
@@ -44,8 +49,9 @@ class CustomerList extends Component {
                   <th scope="row">{customer.personalData.companyRegistration}</th>
                   <td>{customer.personalData.companyName}</td>
                   <td className="text-right">
-                    <Link to={`/customers/${customer.id}`}>Detalhes</Link>
-                    <button type="button" className="btn btn-primary">Excluir</button>
+                    <Link className="m-2" to={`/customers/${customer.id}`}>Detalhes</Link>
+                    <Link className="m-2" to={`/customers/legal-person/${customer.id}/edit`}>Edit</Link>
+                    <button onClick={() => this.handleDeleteCustomer(customer.id)} type="button" className="btn btn-primary m-2">Excluir</button>
                   </td>
                 </tr>
             })}
@@ -59,6 +65,7 @@ class CustomerList extends Component {
 CustomerList.propTypes = {
   customers: PropTypes.array,
   filter: PropTypes.string,
+  deleteCustomer: PropTypes.func.isRequired,
   fetchCustomers: PropTypes.func.isRequired,
   filterCustomers: PropTypes.func.isRequired,
 }

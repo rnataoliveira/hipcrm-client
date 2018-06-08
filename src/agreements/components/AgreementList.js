@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
-class ContractsList extends Component {
+class AgreementList extends Component {
   componentDidMount() {
     this.props.fetchContracts()
   }
@@ -35,8 +35,8 @@ class ContractsList extends Component {
                 <th scope="row">0009</th>
                 <td>Renata Oliveira</td>
                 <td className="text-right">
-                  <Link to="">Detalhes</Link>
-                  <button type="button" className="btn btn-primary">Inativar</button>
+                  <Link className="m-2" to="">Detalhes</Link>
+                  <button type="button" className="btn btn-primary m-2">Inativar</button>
                 </td>
               </tr>
             })
@@ -48,11 +48,11 @@ class ContractsList extends Component {
   }
 }
 
-ContractsList.propTypes = {
+AgreementList.propTypes = {
   contracts: PropTypes.array,
   filter: PropTypes.string,
   fetchContracts: PropTypes.func.isRequired,
   filterContracts: PropTypes.func.isRequired
 }
 
-export default ContractsList
+export default AgreementList

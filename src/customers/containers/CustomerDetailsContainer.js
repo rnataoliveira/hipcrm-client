@@ -12,9 +12,8 @@ class CustomerDetailsContainer extends Component {
   }
 
   render() {
-    return (
-      <CustomerDetails customer={this.props.customer} />
-    )
+    return this.props.customer && this.props.customer.id ? 
+      <CustomerDetails customer={this.props.customer} /> : null
   }
 }
 

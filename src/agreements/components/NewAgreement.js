@@ -1,12 +1,12 @@
 import React from 'react'
-import NewContractPhysicalPerson from './NewContractPhysicalPerson'
-import NewContractLegalPerson from './NewContractLegalPerson'
+import NewAgreementLegalPerson from './NewAgreementLegalPerson'
+import NewAgreementPhysicalPerson from './NewAgreementPhysicalPerson'
 
 this.state = {
   contractType: ''
 }
 
-const NewContract = props => {
+const NewAgreement = props => {
   return (
     <div className="col-lg-12 mb-5 d-flex justify-content-center" >
       {
@@ -16,10 +16,10 @@ const NewContract = props => {
           <button onClick={() => this.setState({ contractType: 'legal-person' })} type="button" className="btn btn-primary mt-5 mr-2 align-self-center">Pessoa Jurídica</button>
         </div>
       }
-      {this.state.customerType === 'physical-person' && <NewContractPhysicalPerson />}
-      {this.state.customerType === 'legal-person' && <NewContractLegalPerson />}
+      {this.state.customerType === 'physical-person' && <NewAgreementPhysicalPerson />}
+      {this.state.customerType === 'legal-person' && <NewAgreementLegalPerson />}
     </div >
   )
 }
 
-export default NewContract
+export default NewAgreement

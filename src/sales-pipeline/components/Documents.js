@@ -1,58 +1,53 @@
 import React, { Component } from 'react'
-import { withRouter } from "react-router-dom"
+import withGoogleClient from '../../withGoogleClient'
+import { connect } from 'react-redux'
 
 class Documents extends Component {
+
   constructor(props) {
     super(props)
-    this.state = {
-      addNew: false
-    }
-  }
-
-  handleGoBack(event) {
-    console.log('Let\'s go back!')
-  }
-
-  handleGogoForward(event) {
-    console.log('Let\'s go foward!')
-  }
-
-  addNewFile(event) {
-    this.setState({
-      addNew: true
+    this.state = ({
+      picker: {}
     })
+  }
+
+  componentDidMount() {
+    window.gapi.load('picker', () => {
+      const uploadView = new window.google.picker.DocsUploadView()
+      uploadView.setParent(this.props.folderId)
+
+      const picker = new window.google.picker.PickerBuilder()
+        .addView(uploadView)
+        .setOAuthToken(this.props.oAuthToken)
+        .setDeveloperKey('AIzaSyBjauEuKZPDHAO9G1C8QolA3ljnpUvXaXM')
+        .build()
+
+      this.setState({ picker })
+    })
+  }
+
+  handlePicker() {
+    const { picker } = this.state
+    picker.setVisible(true)
   }
 
   render() {
     return (
       <div>
-        <h1>Documentos</h1>
-        <form>
-          <div className="input-group mb-3">
-            <div className="custom-file">
-              <input type="file" className="custom-file-input" id="inputGroupFile02" />
-              <label className="custom-file-label" forHtml="inputGroupFile02">Carregar Arquivos</label>
-            </div>
-            <div className="input-group-append">
-              <span className="input-group-text" id="" onClick={(event) => this.addNewFile()}>+</span>
-            </div>
-          </div>
-
-          {this.state.addNew && (
-            <div className="input-group mb-3">
-              <div className="custom-file">
-                <input type="file" className="custom-file-input" id="inputGroupFile02" />
-                <label className="custom-file-label" forHtml="inputGroupFile02">Carregar Arquivos</label>
-              </div>
-            </div>
-          )}
-
-          <button onClick={this.handleGogoForward.bind(this)} type="button" className="btn btn-primary mt-5 mr-2 float-right">Upload</button>
-          <button onClick={this.handleGoBack.bind(this)} type="button" className="btn btn-primary mt-5 mr-2 float-right">Anterior</button>
-        </form>
+        <div className="d-flex justify-content-center p-2 mt-5">
+          <button type="button" className="btn btn-primary m-2 float-center" onClick={this.handlePicker.bind(this)}>Adicionar Novo Documento</button>
+        </div>
+        <div className="embed-responsive embed-responsive-16by9">
+          <iframe className="embed-responsive-item" src={`https://drive.google.com/embeddedfolderview?id=${this.props.folderId}`} width="100%" height="unset"></iframe>
+        </div>
       </div >
     )
   }
 }
 
-export default Documents
+const mapStateToProps = state => ({
+  oAuthToken: state.oidc.user.access_token,
+  folderId: state.salesPipeline.sale.folderId
+})
+
+export default withGoogleClient(connect(mapStateToProps)(Documents))
