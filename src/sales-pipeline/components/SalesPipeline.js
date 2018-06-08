@@ -52,6 +52,7 @@ class SalesPipeline extends Component {
             <Route path="/sales/:id/customer" component={() => <CustomerDetails customer={this.props.sale.customer} />} />
             <Route path="/sales/:id/appointments" component={Appointments} />
             <Route path="/sales/:id/documents" component={Documents} />
+            <Route path="/sales/:id/agreements" component={() => <h1>Aggreements</h1>} />
             <Redirect to={`${match.url}/customer`} />
           </Switch>
         </div>
