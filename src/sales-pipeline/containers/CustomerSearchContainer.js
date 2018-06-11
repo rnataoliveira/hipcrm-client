@@ -22,7 +22,7 @@ class CustomerSearchContainer extends Component {
       return <Redirect to={`/sales/new/customer/${selectedCustomer.id}`} />
     return (
       <AsyncTypeahead
-        className='col-4'
+        className='col-md-4 col-lg-4 col-sm-8'
         labelKey='name'
         placeholder='Buscar um cliente existente'
         isLoading={this.state.isLoading}
