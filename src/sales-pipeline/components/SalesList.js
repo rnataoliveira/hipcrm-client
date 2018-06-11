@@ -22,7 +22,7 @@ class SalesList extends Component {
       <div>
         <h1 className="mt-4">Vendas</h1>
         <div className="row justify-content-center mt-2 mb-4 mt-4">
-          <form className="form-inline my-2 col-4 my-lg-0">
+          <form className="form-inline my-2 col-md-4 col-lg-4 col-sm-8">
             <input value={this.props.filter} onChange={this.handleChange.bind(this)} className="form-control col-12" type="search" placeholder="Buscar Venda" aria-label="Search" />
           </form>
         </div>
