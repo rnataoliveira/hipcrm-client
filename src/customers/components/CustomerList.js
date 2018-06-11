@@ -27,7 +27,7 @@ class CustomerList extends Component {
         <table className="table mt-2">
           <thead>
             <tr>
-              <th scope="col">Venda</th>
+              <th scope="col">Documento</th>
               <th scope="col">Cliente</th>
               <th scope="col"></th>
             </tr>
