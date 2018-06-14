@@ -22,6 +22,8 @@ export default (state = { new: { customers: [], selectedCustomer: null }, sale: 
     return { ...state, filter: action.q || '' }
   case 'MESSAGE_SHOWED': 
     return { new: { ...state.new } }
+  case 'SAVE_AGREEMENT_SUCCESS':
+    return { ...state, sale: { ...state.sale, agreementId: action.payload.data.id } }
   default: return { ...state }
   }
 }
