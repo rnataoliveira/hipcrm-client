@@ -38,7 +38,7 @@ class AgreementList extends Component {
                 <td>{a.sale.code}</td>
                 <td>{a.sale.customer.personalData.companyName}</td>
                 <td className="text-right">
-                  <Link className="m-2" to="">Detalhes</Link>
+                  {/* <Link className="m-2" to={`/agreements/${a.number}`}>Detalhes</Link> */}
                   <button type="button" className="btn btn-primary m-2">Dar Baixa</button>
                 </td>
               </tr>
