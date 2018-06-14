@@ -100,7 +100,7 @@ class Dashboard extends Component {
   }
 }
 Dashboard.propTypes = {
-  fetchSales: PropTypes,
+  fetchSales: PropTypes.func,
 }
 
 const mapStateToProps = state => ({
