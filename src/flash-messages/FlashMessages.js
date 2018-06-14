@@ -12,7 +12,7 @@ class FlashMessages extends Component {
   }
 
   static getDerivedStateFromProps(props, state) {
-    console.info('getDerivedStateFromProps', props, state)
+    // console.info('getDerivedStateFromProps', props, state)
     return { messages: props.messages, displaying: props.messages.length > 0 }
   }
 
