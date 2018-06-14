@@ -5,13 +5,22 @@ import { connect } from 'react-redux'
 
 class NewAgreementLegalPerson extends Component {
   state = {
-    agreementNumber: '',
+    number: '',
+    notes: '',
+    payment: {
+      comission: 0,
+      totalValue: 0,
+      entranceFee: 0,
+      installmentAmount: 0,
+      installmentValue: 0,
+      notes: ''
+    },
     phone: {
       areaCode: '',
       number: '',
     },
     email: '',
-    companyContact: '',
+    contact: '',
     mailingAddress: {
       zipCode: '',
       street: '',
@@ -21,21 +30,10 @@ class NewAgreementLegalPerson extends Component {
       city: '',
       state: ''
     },
-    beneficiaries: [{
-      plan: '',
-      number: ''
-    }],
+    beneficiaries: [],
     modality: '',
     dentalCare: {
-      whichDentalCare: ''
-    },
-    payment: {
-      comission: 0,
-      totalValue: 0,
-      entranceFee: 0,
-      installmentAmount: 0,
-      installmentValue: 0,
-      notes: ''
+      plan: ''
     }
   }
 
@@ -43,9 +41,68 @@ class NewAgreementLegalPerson extends Component {
     this.props.agreementId && this.props.displaySuccess()
   }
 
-  handleChangeAgreementNumber(event) {
+  handleAgreementChangeNumber(event) {
     this.setState({
-      agreementNumber: event.target.value
+      number: event.target.value
+    })
+  }
+
+  handleChangeNotes(event) {
+    this.setState({
+      notes: event.target.value
+    })
+  }
+
+  handleChangeTotalValue(event) {
+    this.setState({
+      payment: {
+        ...this.state.payment,
+        totalValue: event.target.value
+      }
+    })
+    this.handleinstallmentValue()
+  }
+
+  handleChangeEntranceFee(event) {
+    this.setState({
+      payment: {
+        ...this.state.payment,
+        entranceFee: event.target.value
+      }
+    })
+    this.handleinstallmentValue()
+  }
+
+  handleChangeInstallmentAmount(event) {
+    this.setState({
+      payment: {
+        ...this.state.payment,
+        installmentCount: event.target.value
+      }
+    })
+    this.handleinstallmentValue()
+  }
+
+  handleChangeComission(event) {
+    this.setState({
+      payment: {
+        ...this.state.payment,
+        installmentCount: event.target.value
+      }
+    })
+    this.handleinstallmentValue()
+  }
+
+  handleinstallmentValue() {
+    const total = this.state.totalValue
+    const entrance = this.state.entranceFee
+    const installmentAmount = this.state.installmentAmount
+    const totalMinuEntrance = total - entrance
+    this.setState({
+      payment: {
+        ...this.state.payment,
+        installmentValue: installmentAmount > 0 ? (total - entrance) / installmentAmount : 0
+      }
     })
   }
 
@@ -188,48 +245,10 @@ class NewAgreementLegalPerson extends Component {
     })
   }
 
-  handleChangeTotalValue(event) {
-    this.setState({
-      totalValue: event.target.value
-    })
-  }
-
-  handleChangeEntranceFee(event) {
-    this.setState({
-      entranceFee: event.target.value
-    })
-  }
-
-  handleinstallmentValue() {
-    const total = this.state.totalValue
-    const entrance = this.state.entranceFee
-    const installment = this.state.installmentAmount
-    const totalMinuEntrance = total - entrance
-    this.setState({
-      installmentValue: (totalMinuEntrance / installment).toString()
-    })
-  }
-
-  handleChangeInstallmentAmount(event) {
-    this.setState({
-      installmentAmount: event.target.value
-    })
-  }
-
-  handleChangeComission(event) {
-    this.setState({
-      comission: event.target.value
-    })
-  }
-
-  handleChangeNotes(event) {
-    this.setState({
-      notes: event.target.value
-    })
-  }
-
-  handleSubmit() {
-    this.props.agreementId && this.props.saveAgreementLegalPerson()
+  handleSubmit(event) {
+    event.preventDefault()
+    console.log(this.state)
+    // this.props.agreementId && this.props.saveAgreementLegalPerson()
   }
 
   render() {
@@ -240,7 +259,7 @@ class NewAgreementLegalPerson extends Component {
         <div className="row">
           <div className="col-sm-4">
             <label htmlFor="agreementNumber">Número do Contrato</label>
-            <input onChange={this.handleChangeAgreementNumber.bind(this)} type="text" className="form-control" placeholder="Número do Contrato" value={this.state.agreementNumber} />
+            <input onChange={this.handleAgreementChangeNumber.bind(this)} type="text" className="form-control" placeholder="Número do Contrato" value={this.state.agreementNumber} />
           </div>
         </div>
         <hr />
