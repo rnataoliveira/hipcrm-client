@@ -1,33 +1,106 @@
 import React, { Component } from 'react'
 import { fetchSales } from '../../src/sales-pipeline/actions'
 import { connect } from 'react-redux'
+import { BarChart, Bar, Brush, ReferenceLine, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts'
+import moment from 'moment'
+import PropTypes from 'prop-types'
 
 class Dashboard extends Component {
-
   componentDidMount() {
     this.props.fetchSales()
   }
 
   render() {
-    {
-      this.props.sales.map(sale => {
-        console.log(sale.calendarId)
-      })
-    }
+
+    const events = [
+      {
+        time: '10:00',
+        event: 'Ligar',
+        customer: 'Josefina Bosch'
+      },
+      {
+        time: '11:00',
+        event: 'Ligar',
+        customer: 'Josefina Bosch'
+      },
+      {
+        time: '13:00',
+        event: 'Ligar',
+        customer: 'Josefina Bosch'
+      },
+      {
+        time: '15:00',
+        event: 'Ligar',
+        customer: 'Josefina Bosch'
+      }
+    ]
+
+    const data = [
+      { name: 'Janeiro', received: 1000 },
+      { name: 'Fevereiro', received: 500 },
+      { name: 'Março', received: 850 },
+      { name: 'Abril', received: 250 },
+      { name: 'Maio', received: 600 },
+      { name: 'Junho', received: 700 },
+      { name: 'Julho', received: 100 },
+      { name: 'Agosto', received: 100 },
+      { name: 'Setembro', received: 100 },
+      { name: 'Outubro', received: 100 },
+      { name: 'Novembro', received: 100 },
+      { name: 'Dezembro', received: 500 },
+    ]
+
     return (
-      <div className="row mb-5" >
-        <div className="mt-4">
-          <h1>Compromissos do dia</h1>
+      <div className="row">
+        <div className="col-sm-12 mb-5" >
+          <h1>Compromissos</h1>
+          <h3 className="text-muted">{moment().format('D/MMM/YY')}</h3>
+          <div className="card">
+            <div className="card-body">
+              <table className="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Hora</th>
+                    <th scope="col">Evento</th>
+                    <th scope="col">Cliente</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {events.map((e, index) => (
+                    <tr key={index}>
+                      <th scope="row">{e.time}</th>
+                      <td>{e.event}</td>
+                      <td>{e.customer}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div >
+        <div className="col-sm-12 mb-5" >
+          <h1>Projeção de Faturamento</h1>
+          <div className="card">
+            <BarChart width={1100} height={300} data={data}
+              margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="name" />
+              <YAxis />
+              <Tooltip />
+              <Legend verticalAlign="top" wrapperStyle={{ lineHeight: '40px' }} />
+              <ReferenceLine y={0} stroke='#000' />
+              <Brush dataKey='name' height={30} stroke="#28a745" />
+              {/* <Bar dataKey="#007bff" /> */}
+              <Bar dataKey="received" name="Faturamento" fill="#82ca9d" />
+            </BarChart>
+          </div>
         </div>
-        {/* {this.props.sales.map(sale => { */}
-        <div className="embed-responsive embed-responsive-16by9 mt-2">
-          <iframe className="embed-responsive-item" src={`https://calendar.google.com/calendar/embed?showTitle=0&amp;height=600&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=primary&amp;color=%23AB8B00&amp;ctz=America%2FSao_Paulo`}
-            style={{ borderWidth: '0', width: '100%', height: '600px', frameborder: '0', scrolling: 'no' }}>
-          </iframe>
-        </div>
-        {/* })} */}
-      </div>)
+      </div>
+    )
   }
+}
+Dashboard.propTypes = {
+  fetchSales: PropTypes,
 }
 
 const mapStateToProps = state => ({
