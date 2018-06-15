@@ -1,14 +1,7 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { fetchAgreement } from '../actions'
 import PropTypes from 'prop-types'
 
 class LegalPersonAgreementDetails extends Component {
-  
-  componentDidMount() {
-    this.props.fetchAgreement()
-  }
-
   render() {
     return (
       <div className="mt-2">
@@ -86,7 +79,7 @@ class LegalPersonAgreementDetails extends Component {
         <h5 className="h5 mt-4">Beneficiários por plano</h5>
         {this.props.agreement.beneficiaries.map((b, index) => (
           <div className="row mt-2" key={index}>
-            <div className="col-sm-4" key={index}>
+            <div className="col-sm-4">
               <label htmlFor="beneficiariesNumber">Número</label>
               <p className="form-control">{b.number}</p>
             </div>
@@ -153,16 +146,7 @@ class LegalPersonAgreementDetails extends Component {
 }
 
 LegalPersonAgreementDetails.propTypes = {
-  agreement: PropTypes.object,
-  fetchAgreement: PropTypes.func.isRequired,
+  agreement: PropTypes.object
 }
 
-const mapStateToProps = state => ({
-  agreement: state.salesPipeline.sale.agreement,
-})
-
-const mapDispatchToProps = dispatch => ({
-  fetchAgreement: agreementId => dispatch(fetchAgreement(agreementId))
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(LegalPersonAgreementDetails)
+export default LegalPersonAgreementDetails

@@ -3,11 +3,6 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
 class AgreementPhysicalPersonDetails extends Component {
-
-  componentDidMount() {
-    this.props.fetchAgreement()
-  }
-
   render() {
     return (
       <div className="mt-2">
@@ -16,108 +11,95 @@ class AgreementPhysicalPersonDetails extends Component {
         <div className="row">
           <div className="col-sm-4">
             <label htmlFor="agreementNumber">Número do Contrato</label>
-            <p className="form-control" >{this.props.agreement.number}</p>
+            <p className="form-control" >{this.props.agreement.number ? this.props.agreement.number : <br />}</p>
           </div>
         </div>
         <hr />
 
         <h5 className="h5 mt-4">Dados do Plano</h5>
         <div className="row">
-          <div className="col-sm-8">
+          <div className="col-sm-12">
             <label htmlFor="plan">Plano</label>
-            <p className="form-control">{this.props.agreement.plan}</p>
-          </div>
-          <div className="col-sm-2">
-            <label htmlFor="phoneAreaCode">DDD</label>
-            <p className="form-control">{this.props.agreement.phone.areaCode}</p>
-          </div>
-          <div className="col-sm-2">
-            <label htmlFor="phoneNumber">Telefone</label>
-            <p className="form-control" >{this.props.agreement.phone.number}</p>
+            <p className="form-control">{this.props.agreement.personalData.plan ? this.props.agreement.personalData.plan : <br />}</p>
           </div>
         </div>
 
         <h5 className="h5 mt-4">Dependentes</h5>
-        {this.props.agreement.dependents.map((d, index) => (
+        {this.props.agreement.personalData.dependents.map((d, index) => (
           <div className="mt-2" key={index}>
-            <div className="row mt-2">
+            <div className="row">
               <div className="col-sm-6">
                 <label htmlFor="dependentName">Nome</label>
-                <p className="form-control" >{d.name}</p>
+                <p className="form-control" >{d.name ? d.name : <br />}</p>
               </div>
-              <div className="col-sm-2">
+              <div className="col-sm-4">
                 <label htmlFor="dependentDocumentNumber">Cpf</label>
-                <p className="form-control" >{d.documentNumber}</p>
+                <p className="form-control" >{d.documentNumber ? d.documentNumber : <br />}</p>
               </div>
               <div className="col-sm-2">
                 <label htmlFor="dependentGeneralRegistration">Rg</label>
-                <p className="form-control" >{d.generalRegistration}</p>
-              </div>
-              <div className="col-sm-2">
-                <label htmlFor="dependentBirthDate">Data de Nascimento</label>
-                <p className="form-control" >{d.birthDate}</p>
+                <p className="form-control" >{d.generalRegistration ? d.generalRegistration : <br />}</p>
               </div>
             </div>
-            <div className="row mt-2">
-              <div className="col-sm-7">
+            <div className="row">
+              <div className="col-sm-4">
+                <label htmlFor="dependentBirthDate">Data de Nascimento</label>
+                <p className="form-control" >{d.birthDate ? d.birthDate : <br />}</p>
+              </div>
+              <div className="col-sm-4">
                 <label htmlFor="dependentMothersName">Nome da Mãe</label>
-                <p className="form-control" >{d.mothersName}</p>
+                <p className="form-control" >{d.mothersName ? d.mothersName : <br />}</p>
               </div>
               <div className="col-sm-2">
                 <label htmlFor="dependentMaritalState">Estado Civil</label>
-                <p className="form-control">{d.maritalState}</p>
+                <p className="form-control">{d.maritalState ? d.maritalState : <br />}</p>
               </div>
-              <div className="col-sm-3">
+              <div className="col-sm-2">
                 <label htmlFor="dependentRelationship">Parentesco</label>
-                <p className="form-control" >{d.relationship}</p>
+                <p className="form-control" >{d.relationship ? d.relationship : <br />}</p>
               </div>
             </div>
           </div>
         ))}
-        <div className="row mt-2">
-          <div className="col-sm-12">
-            <button type="button" className="btn btn-primary float-right">Mais Dependentes</button>
-          </div>
-        </div>
 
         <h5 className="h5 mt-4">Controle de Pagamento do Contrato</h5>
         <div className="row mt-2">
           <div className="col-sm-2">
             <label htmlFor="totalValue">Total</label>
-            <p className="form-control">{this.props.agreement.totalValue}</p>
+            <p className="form-control">{this.props.agreement.payment.totalValue ? this.props.agreement.payment.totalValue : <br />}</p>
           </div>
           <div className="col-sm-2">
             <label htmlFor="entranceFee">Entrada</label>
-            <p className="form-control">{this.props.agreement.entranceFee}</p>
+            <p className="form-control">{this.props.agreement.payment.entranceFee ? this.props.agreement.payment.entranceFee : <br />}</p>
           </div>
           <div className="col-sm-3">
             <label htmlFor="installmentAmount">Quantidade</label>
-            <p className="form-control">{this.props.agreement.installmentAmount}</p>
+            <p className="form-control">{this.props.agreement.payment.installmentsCount ? this.props.agreement.payment.installmentsCount : <br />}</p>
           </div>
           <div className="col-sm-2">
             <label htmlFor="amountValue">Parcela</label>
-            <p className="form-control">{this.props.agreement.amountValue}</p>
+            <p className="form-control"><br /></p>
           </div>
           <div className="col-sm-3">
             <label htmlFor="comission">Comissão</label>
-            <p className="form-control">{this.props.agreement.comission}</p>
+            <p className="form-control">{this.props.agreement.payment.comission ? this.props.agreement.payment.comission : <br />}</p>
           </div>
         </div>
         <h5 className="h5 mt-4">Observações</h5>
         <div className="row mt-2">
           <div className="col-sm-12">
-            <textarea className="form-control" id="exampleFormControlTextarea1" rows="3" >{this.props.agreement.notes}</textarea>
+            <textarea className="form-control" id="exampleFormControlTextarea1" rows="3" >{this.props.agreement.notes ? this.props.agreement.notes : <br />}</textarea>
           </div>
         </div>
-        <Link to="/agreements" className="btn btn-primary mt-5 float-right">Voltar</Link>
+        <button type="submit" className="btn btn-primary mt-4 mb-5 float-right">Dar Baixa</button>
+        <Link to="/agreements" className="btn btn-primary mt-4 mr-2 mb-5 float-right">Voltar</Link>
       </div>
     )
   }
 }
 
 AgreementPhysicalPersonDetails.propTypes = {
-  agreement: PropTypes.object,
-  fetchAgreement: PropTypes.func.isRequired,
+  agreement: PropTypes.object
 }
 
 export default AgreementPhysicalPersonDetails

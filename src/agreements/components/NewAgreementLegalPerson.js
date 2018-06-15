@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { saveAgreement, filterSales } from '../../sales-pipeline/actions';
+import { saveAgreement } from '../../sales-pipeline/actions';
 import { flashMessage } from '../../flash-messages/actions'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
