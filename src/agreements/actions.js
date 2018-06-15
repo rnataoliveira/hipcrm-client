@@ -1,10 +1,10 @@
 import { store } from '../store'
 
-export const fetchAgreement = (number) => ({
-  type: 'FETCH_agreement',
+export const fetchAgreement = (agreementId) => ({
+  type: 'FETCH_AGREEMENT',
   payload: {
     request: {
-      url: `/agreement/${number}`,
+      url: `/agreements/${agreementId}`,
       headers: {
         'Authorization': `Bearer ${store.getState().oidc.user.id_token}`
       }

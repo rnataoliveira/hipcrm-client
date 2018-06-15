@@ -2,4 +2,6 @@ export { default as AgreementListContainer } from './containers/AgreementListCon
 export { default as NewAgreement } from './components/NewAgreement'
 export { default as NewAgreementLegalPerson } from './components/NewAgreementLegalPerson'
 export { default as NewAgreementPhysicalPerson } from './components/NewAgreementPhysicalPerson'
+export { default as AgreementDetailsContainer } from './containers/AgreementDetailsContainer'
+export { default as Router } from './Router'
 export { default as reducer } from './reducer'

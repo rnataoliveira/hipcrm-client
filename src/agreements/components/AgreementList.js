@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import { fetchAgreements } from '../actions'
 
 class AgreementList extends Component {
   componentDidMount() {
@@ -13,7 +12,6 @@ class AgreementList extends Component {
   }
 
   render() {
-    console.log(this.props, 'props')
     return (
       <div>
         <h1 className="mt-4">Contratos</h1>
@@ -38,7 +36,7 @@ class AgreementList extends Component {
                 <td>{a.sale.code}</td>
                 <td>{a.sale.customer.personalData.companyName}</td>
                 <td className="text-right">
-                  {/* <Link className="m-2" to={`/agreements/${a.number}`}>Detalhes</Link> */}
+                  <Link className="m-2" to={`/agreements/${a.id}`}>Detalhes</Link>
                   <button type="button" className="btn btn-primary m-2">Dar Baixa</button>
                 </td>
               </tr>

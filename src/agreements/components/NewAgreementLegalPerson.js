@@ -250,7 +250,7 @@ class NewAgreementLegalPerson extends Component {
     event.preventDefault()
     const { id: saleId } = this.props.match.params
     console.log(this.state)
-    this.props.saveAgreementLegalPerson(this.state, saleId)
+    this.props.saveAgreementLegalPerson(this.state, saleId, 'legal-person')
   }
 
   render() {

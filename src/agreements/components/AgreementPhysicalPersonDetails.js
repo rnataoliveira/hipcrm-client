@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
-import { fetchAgreement } from '../actions'
+import { Link } from 'react-router-dom'
 
-class PhysicalPersonAgreementDetails extends Component {
-  
+class AgreementPhysicalPersonDetails extends Component {
+
   componentDidMount() {
     this.props.fetchAgreement()
   }
@@ -17,7 +16,7 @@ class PhysicalPersonAgreementDetails extends Component {
         <div className="row">
           <div className="col-sm-4">
             <label htmlFor="agreementNumber">Número do Contrato</label>
-            <p className="form-control" >{this.props.agreement.agreementNumber}</p>
+            <p className="form-control" >{this.props.agreement.number}</p>
           </div>
         </div>
         <hr />
@@ -110,22 +109,15 @@ class PhysicalPersonAgreementDetails extends Component {
             <textarea className="form-control" id="exampleFormControlTextarea1" rows="3" >{this.props.agreement.notes}</textarea>
           </div>
         </div>
-        <button type="submit" className="btn btn-primary mt-5 float-right">Salvar</button>
+        <Link to="/agreements" className="btn btn-primary mt-5 float-right">Voltar</Link>
       </div>
     )
   }
 }
 
-PhysicalPersonAgreementDetails.propTypes = {
+AgreementPhysicalPersonDetails.propTypes = {
   agreement: PropTypes.object,
   fetchAgreement: PropTypes.func.isRequired,
 }
 
-const mapStateToProps = state => ({
-  agreement: state.salesPipeline.sale.agreement,
-})
-
-const mapDispatchToProps = dispatch => ({
-  fetchAgreement: agreementId => dispatch(fetchAgreement(agreementId))
-})
-export default connect(mapStateToProps, mapDispatchToProps)(PhysicalPersonAgreementDetails)
+export default AgreementPhysicalPersonDetails

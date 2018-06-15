@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { flashMessage } from '../../flash-messages/actions'
 import { connect } from 'react-redux'
-import { saveAgreement } from '../actions';
+
 
 class NewAgreementPhysicalPerson extends Component {
   state = {
@@ -312,7 +312,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  saveAgreementPhysicalPerson: (sale) => dispatch(saveAgreement(sale, 'physical-person')),
+  // saveAgreementPhysicalPerson: (sale) => dispatch(saveAgreement(sale, 'physical-person')),
   displaySuccess: () => dispatch(flashMessage({ text: 'Contrato Salvo!' }))
 })
 
