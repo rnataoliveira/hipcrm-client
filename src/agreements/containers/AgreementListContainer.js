@@ -5,9 +5,19 @@ import { flashMessage } from '../../flash-messages/actions'
 import AgreementList from '../components/AgreementList'
 import PropTypes from 'prop-types'
 
-
 const applyFilter = (agreements, q) => {
-  return q ? this.props.agreements.filter(agreement => agreement.number === q) : agreements
+  return q ? agreements
+    .filter(agreement =>
+      agreement.number === q ||
+      agreement.sale.code === q || (
+        agreement.sale.customer.type === 'PhysicalPerson' && (
+          agreement.sale.customer.personalData.firstName.toLowerCase().includes(q.toLowerCase()) ||
+          agreement.sale.customer.personalData.surname.toLowerCase().includes(q.toLowerCase())) ||
+        agreement.sale.customer.type === 'LegalPerson' && (
+          agreement.sale.customer.personalData.companyName.toLowerCase().includes(q.toLowerCase())
+        )
+      )
+    ) : agreements
 }
 
 const mapStateToProps = state => ({
