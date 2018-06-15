@@ -31,15 +31,26 @@ class AgreementList extends Component {
           </thead>
           <tbody>
             {this.props.agreements.map(a =>
-              <tr key={a.id}>
-                <th scope="row">{a.number}</th>
-                <td>{a.sale.code}</td>
-                <td>{a.sale.customer.personalData.companyName}</td>
-                <td className="text-right">
-                  <Link className="m-2" to={`/agreements/${a.id}`}>Detalhes</Link>
-                  <button type="button" className="btn btn-primary m-2">Dar Baixa</button>
-                </td>
-              </tr>
+              a.sale.customer.type === 'LegalPerson' ?
+                <tr key={a.id}>
+                  <th scope="row">{a.number}</th>
+                  <td>{a.sale.code}</td>
+                  <td>{a.sale.customer.personalData.companyName}</td>
+                  <td className="text-right">
+                    <Link className="m-2" to={`/agreements/${a.id}`}>Detalhes</Link>
+                    <button type="button" className="btn btn-primary m-2">Dar Baixa</button>
+                  </td>
+                </tr>
+                :
+                <tr key={a.id}>
+                  <th scope="row">{a.number}</th>
+                  <td>{a.sale.code}</td>
+                  <td>{a.sale.customer.personalData.firstName +' '+ a.sale.customer.personalData.surname}</td>
+                  <td className="text-right">
+                    <Link className="m-2" to={`/agreements/${a.id}`}>Detalhes</Link>
+                    <button type="button" className="btn btn-primary m-2">Dar Baixa</button>
+                  </td>
+                </tr>
             )}
           </tbody>
         </table>
