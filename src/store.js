@@ -18,7 +18,7 @@ const initialState = { }
 const history = createHistory()
 
 const apiClient = axios.create({
-  baseURL: 'http://localhost:5000',
+  baseURL: 'https://hipcrm-container-api.azurewebsites.net',
   responseType: JSON
 })
 
