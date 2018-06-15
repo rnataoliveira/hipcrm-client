@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 
 class LegalPersonAgreementDetails extends Component {
   render() {
+    const installmentValue = (this.props.agreement.payment.totalValue - this.props.agreement.payment.entranceFee) / this.props.agreement.payment.installmentsCount
+    console.log(installmentValue)
     return (
       <div className="mt-2">
         <h2 className="h2">Contrato - Pessoa Juridíca</h2>
@@ -126,7 +128,7 @@ class LegalPersonAgreementDetails extends Component {
           <div className="col-sm-2">
             {/* (valor total - entrada) / parcelas*/}
             <label htmlFor="installmentValue">Parcela</label>
-            <p className="form-control">{this.props.agreement.payment.installmentValue}</p>
+            <p className="form-control">{installmentValue}</p>
           </div>
           <div className="col-sm-3">
             <label htmlFor="comission">Comissão</label>

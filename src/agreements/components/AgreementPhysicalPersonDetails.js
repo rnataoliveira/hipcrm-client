@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom'
 
 class AgreementPhysicalPersonDetails extends Component {
   render() {
+    const installmentValue = (this.props.agreement.payment.totalValue - this.props.agreement.payment.entranceFee) / this.props.agreement.payment.installmentsCount
+    console.log(installmentValue)
     return (
       <div className="mt-2">
         <h2 className="h2">Contrato - Pessoa Fisíca</h2>
@@ -78,7 +80,7 @@ class AgreementPhysicalPersonDetails extends Component {
           </div>
           <div className="col-sm-2">
             <label htmlFor="amountValue">Parcela</label>
-            <p className="form-control"><br /></p>
+            <p className="form-control">{installmentValue}</p>
           </div>
           <div className="col-sm-3">
             <label htmlFor="comission">Comissão</label>

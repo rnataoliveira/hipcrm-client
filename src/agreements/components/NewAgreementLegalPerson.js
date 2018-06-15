@@ -396,11 +396,11 @@ class NewAgreementLegalPerson extends Component {
         </div>
         <h5 className="h5 mt-4">Controle de Pagamento do Contrato</h5>
         <div className="row mt-2">
-          <div className="col-sm-2">
+          <div className="col-sm-3">
             <label htmlFor="totalValue">Total</label>
             <input onChange={this.handleChangePaymentTotalValue.bind(this)} type="text" className="form-control" placeholder="Valor Total do Plano" value={this.state.payment.totalValue} />
           </div>
-          <div className="col-sm-2">
+          <div className="col-sm-3">
             <label htmlFor="entranceFee">Entrada</label>
             <input onChange={this.handleChangePaymentEntranceFee.bind(this)} type="text" className="form-control" placeholder="Valor da Entrada" value={this.state.payment.entranceFee} />
           </div>
@@ -420,11 +420,7 @@ class NewAgreementLegalPerson extends Component {
               <option value="10">10</option>
             </select>
           </div>
-          <div className="col-sm-2">
-            {/* (valor total - entrada) / parcelas*/}
-            <label htmlFor="installmentValue">Parcela</label>
-            <input readOnly="readonly" type="text" type="text" className="form-control" placeholder="Valor da Parcela" />
-          </div>
+          
           <div className="col-sm-3">
             <label htmlFor="comission">Comissão</label>
             <input onChange={this.handleChangePaymentComission.bind(this)} type="text" className="form-control" placeholder="Valor da Comissão" value={this.state.payment.comission} />
