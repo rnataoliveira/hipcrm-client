@@ -140,7 +140,6 @@ class AgreementLegalPersonDetails extends Component {
             <p className="form-control">{this.props.agreement.notes ? this.props.agreement.notes : <br />}</p>
           </div>
         </div>
-        {/* <button type="submit" className="btn btn-primary mt-4 mb-5 float-right">Dar Baixa</button> */}
         <Link to="/agreements" className="btn btn-primary mt-4 mr-2 mb-5 float-right">Voltar</Link>
       </div>
     )
