@@ -38,7 +38,7 @@ class AgreementList extends Component {
                   <td>{a.sale.customer.personalData.companyName}</td>
                   <td className="text-right">
                     <Link className="m-2" to={`/agreements/${a.id}`}>Detalhes</Link>
-                    <button type="button" className="btn btn-primary m-2">Dar Baixa</button>
+                    {/* <button type="button" className="btn btn-primary m-2">Dar Baixa</button> */}
                   </td>
                 </tr>
                 :
@@ -48,7 +48,7 @@ class AgreementList extends Component {
                   <td>{a.sale.customer.personalData.firstName +' '+ a.sale.customer.personalData.surname}</td>
                   <td className="text-right">
                     <Link className="m-2" to={`/agreements/${a.id}`}>Detalhes</Link>
-                    <button type="button" className="btn btn-primary m-2">Dar Baixa</button>
+                    {/* <button type="button" className="btn btn-primary m-2">Dar Baixa</button> */}
                   </td>
                 </tr>
             )}
