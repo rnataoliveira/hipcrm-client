@@ -109,3 +109,18 @@ export const filterSales = q => ({
 export const messageShowed = () => ({
   type: 'MESSAGE_SHOWED'
 })
+
+export const saveAgreement = (agreement, saleId, type) => ({
+  type: 'SAVE_AGREEMENT',
+  payload: {
+    request: {
+      method: 'post',
+      url: `sales-pipelines/${saleId}/agreement/${type}`,
+      headers: {
+        'Authorization': `Bearer ${store.getState().oidc.user.id_token}`,
+        'AccessToken': store.getState().oidc.user.access_token
+      },
+      data: agreement
+    }
+  }
+})

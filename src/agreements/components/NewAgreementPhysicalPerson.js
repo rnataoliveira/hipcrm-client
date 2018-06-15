@@ -1,24 +1,24 @@
 import React, { Component } from 'react'
+import { saveAgreement } from '../../sales-pipeline/actions';
 import { flashMessage } from '../../flash-messages/actions'
 import { connect } from 'react-redux'
-import { saveAgreement } from '../actions';
+import { withRouter } from 'react-router'
 
 class NewAgreementPhysicalPerson extends Component {
-  state = {
-    agreementNumber: '',
-    plan: '',
-    phone: {
-      areaCode: '',
-      number: ''
-    },
-    dependents: [],
-    comission: 0,
-    totalValue: 0,
-    entranceFee: 0,
-    installmentAmount: 0,
-    installmentValue: 0,
-    notes: ''
-
+  constructor(props) {
+    super(props)
+    this.state = {
+      number: '',
+      plan: '',
+      dependents: [],
+      payment: {
+        totalValue: 0,
+        entranceFee: 0,
+        installmentsCount: 0,
+        comission: 0
+      },
+      notes: ''
+    }
   }
   componentWillUnmount() {
     this.props.agreementId && this.props.displaySuccess()
@@ -26,16 +26,16 @@ class NewAgreementPhysicalPerson extends Component {
 
   handleAddMoreDependents(event) {
     this.setState({
-      dependents: [...this.state.dependent, {
-        name: null, documentNumber: null, generalRegistration: null, birthDate: null,
-        mothersName: null, maritalState: null, relationship: null
-      }]
+      dependents: [ ...this.state.dependents, {
+        name: '', documentNumber: '', generalRegistration: '', birthDate: '',
+        mothersName: '', maritalState: '', relationship: ''
+      } ]
     })
   }
 
   handleChangeAgreementNumber(event) {
     this.setState({
-      agreementNumber: event.target.value
+      number: event.target.value
     })
   }
 
@@ -45,28 +45,10 @@ class NewAgreementPhysicalPerson extends Component {
     })
   }
 
-  handleChangePhoneAreaCode(event) {
-    this.setState({
-      phone: {
-        ...this.state.phone,
-        areaCode: event.target.value
-      }
-    })
-  }
-
-  handleChangePhoneNumber(event) {
-    this.setState({
-      phone: {
-        ...this.state.phone,
-        number: event.target.value
-      }
-    })
-  }
-
   handleChangeDependentsName(event, index) {
     this.setState({
-      beneficiaries: this.state.beneficiaries.map((b, idx) => {
-        if(idx !== index) return b
+      dependents: this.state.dependents.map((b, idx) => {
+        if (idx !== index) return b
 
         return { ...b, name: event.target.value }
       })
@@ -75,8 +57,8 @@ class NewAgreementPhysicalPerson extends Component {
 
   handleChangeDependentsDocumentNumber(event, index) {
     this.setState({
-      beneficiaries: this.state.beneficiaries.map((b, idx) => {
-        if(idx !== index) return b
+      dependents: this.state.dependents.map((b, idx) => {
+        if (idx !== index) return b
 
         return { ...b, documentNumber: event.target.value }
       })
@@ -85,8 +67,8 @@ class NewAgreementPhysicalPerson extends Component {
 
   handleChangeDependentsGeneralRegistration(event, index) {
     this.setState({
-      beneficiaries: this.state.beneficiaries.map((b, idx) => {
-        if(idx !== index) return b
+      dependents: this.state.dependents.map((b, idx) => {
+        if (idx !== index) return b
 
         return { ...b, generalRegistration: event.target.value }
       })
@@ -95,8 +77,8 @@ class NewAgreementPhysicalPerson extends Component {
 
   handleChangeDependentsBirthDate(event, index) {
     this.setState({
-      beneficiaries: this.state.beneficiaries.map((b, idx) => {
-        if(idx !== index) return b
+      dependents: this.state.dependents.map((b, idx) => {
+        if (idx !== index) return b
 
         return { ...b, birthDate: event.target.value }
       })
@@ -105,8 +87,8 @@ class NewAgreementPhysicalPerson extends Component {
 
   handleChangeDependentsMothersName(event, index) {
     this.setState({
-      beneficiaries: this.state.beneficiaries.map((b, idx) => {
-        if(idx !== index) return b
+      dependents: this.state.dependents.map((b, idx) => {
+        if (idx !== index) return b
 
         return { ...b, mothersName: event.target.value }
       })
@@ -115,8 +97,8 @@ class NewAgreementPhysicalPerson extends Component {
 
   handleChangeDependentsMaritalState(event, index) {
     this.setState({
-      beneficiaries: this.state.beneficiaries.map((b, idx) => {
-        if(idx !== index) return b
+      dependents: this.state.dependents.map((b, idx) => {
+        if (idx !== index) return b
 
         return { ...b, maritalState: event.target.value }
       })
@@ -125,48 +107,47 @@ class NewAgreementPhysicalPerson extends Component {
 
   handleChangeDependentsRelationShip(event, index) {
     this.setState({
-      beneficiaries: this.state.beneficiaries.map((b, idx) => {
-        if(idx !== index) return b
+      dependents: this.state.dependents.map((b, idx) => {
+        if (idx !== index) return b
 
         return { ...b, relationship: event.target.value }
       })
     })
   }
 
-  handleChangeTotalValue(event) {
-    this.handleinstallmentValue()
+  handleChangePaymentTotalValue(event) {
     this.setState({
-      totalValue: event.target.value
+      payment: {
+        ...this.state.payment,
+        totalValue: event.target.value
+      }
     })
   }
 
-  handleChangeEntranceFee(event) {
-    this.handleinstallmentValue()
+  handleChangePaymentEntranceFee(event) {
     this.setState({
-      entranceFee: event.target.value
+      payment: {
+        ...this.state.payment,
+        entranceFee: event.target.value
+      }
     })
   }
 
-  handleChangeInstallmentAmount(event) {
-    this.handleinstallmentValue()
+  handleChangePaymentInstallmentCount(event) {
     this.setState({
-      installmentAmount: event.target.value
+      payment: {
+        ...this.state.payment,
+        installmentsCount: event.target.value
+      }
     })
   }
 
-  handleinstallmentValue() {
-    const total = this.state.totalValue
-    const entrance = this.state.entranceFee
-    const installment = this.state.installmentAmount
-    const totalMinuEntrance = total - entrance
+  handleChangePaymentComission(event) {
     this.setState({
-      installmentValue: (totalMinuEntrance / installment)
-    })
-  }
-
-  handleChangeComission(event) {
-    this.setState({
-      comission: event.target.value
+      payment: {
+        ...this.state.payment,
+        comission: event.target.value
+      }
     })
   }
 
@@ -176,8 +157,11 @@ class NewAgreementPhysicalPerson extends Component {
     })
   }
 
-  handleSubmit() {
-    this.props.agreementId && this.props.saveAgreementPhysicalPerson()
+  handleSubmit(event) {
+    event.preventDefault()
+    const { id: saleId } = this.props.match.params
+    console.log(this.state)
+    this.props.saveAgreementPhysicalPerson(this.state, saleId, 'physical-person')
   }
 
   render() {
@@ -188,23 +172,15 @@ class NewAgreementPhysicalPerson extends Component {
         <div className="row">
           <div className="col-sm-4">
             <label htmlFor="agreementNumber">Número do Contrato</label>
-            <input onChange={this.handleChangeAgreementNumber.bind(this)} value={this.state.agreementNumber} type="text" className="form-control" placeholder="Número do Contrato" />
+            <input onChange={this.handleChangeAgreementNumber.bind(this)} value={this.state.number} type="text" className="form-control" placeholder="Número do Contrato" />
           </div>
         </div>
         <hr />
         <h5 className="h5 mt-4">Dados do Plano</h5>
         <div className="row">
-          <div className="col-sm-8">
+          <div className="col-sm-12">
             <label htmlFor="plan">Plano</label>
             <input onChange={this.handleChangePlan.bind(this)} value={this.state.plan} type="text" className="form-control" placeholder="Plano Contratado" />
-          </div>
-          <div className="col-sm-2">
-            <label htmlFor="phoneAreaCode">DDD</label>
-            <input onChange={this.handleChangePhoneAreaCode.bind(this)} value={this.state.phone.areaCode} type="text" className="form-control" placeholder="DDD" />
-          </div>
-          <div className="col-sm-2">
-            <label htmlFor="phoneNumber">Telefone</label>
-            <input onChange={this.handleChangePhoneNumber.bind(this)}  value={this.state.phone.number} type="text" className="form-control" placeholder="Telefone do Plano" />
           </div>
         </div>
 
@@ -226,7 +202,7 @@ class NewAgreementPhysicalPerson extends Component {
               </div>
               <div className="col-sm-2">
                 <label htmlFor="dependentBirthDate">Data de Nascimento</label>
-                <input onChange={(e) => this.handleChangeDependentsBirthDate(e, index)}value={d.birthDate} type="text" className="form-control" placeholder="DD/MM/AAAA" />
+                <input onChange={(e) => this.handleChangeDependentsBirthDate(e, index)} value={d.birthDate} type="text" className="form-control" placeholder="DD/MM/AAAA" />
               </div>
             </div>
             <div className="row mt-2">
@@ -258,20 +234,19 @@ class NewAgreementPhysicalPerson extends Component {
           </div>
         </div>
 
-
-       <h5 className="h5 mt-4">Controle de Pagamento do Contrato</h5>
+        <h5 className="h5 mt-4">Controle de Pagamento do Contrato</h5>
         <div className="row mt-2">
           <div className="col-sm-2">
             <label htmlFor="totalValue">Total</label>
-            <input onChange={this.handleChangeTotalValue.bind(this)} type="text" className="form-control" placeholder="Valor Total do Plano" value={this.state.totalValue} />
+            <input onChange={this.handleChangePaymentTotalValue.bind(this)} type="text" className="form-control" placeholder="Valor Total do Plano" value={this.state.payment.totalValue} />
           </div>
           <div className="col-sm-2">
             <label htmlFor="entranceFee">Entrada</label>
-            <input onChange={this.handleChangeEntranceFee.bind(this)} type="text" className="form-control" placeholder="Valor da Entrada" value={this.state.entranceFee} />
+            <input onChange={this.handleChangePaymentEntranceFee.bind(this)} type="text" className="form-control" placeholder="Valor da Entrada" value={this.state.payment.entranceFee} />
           </div>
           <div className="col-sm-3">
             <label htmlFor="installmentAmount">Quantidade</label>
-            <select onChange={this.handleChangeInstallmentAmount.bind(this)} className="custom-select" value={this.state.installmentAmount}>
+            <select onChange={this.handleChangePaymentInstallmentCount.bind(this)} className="custom-select" value={this.state.payment.installmentsCount}>
               <option value="parcelas">Quantidade de Parcelas</option>
               <option value="1">1</option>
               <option value="2">2</option>
@@ -288,11 +263,11 @@ class NewAgreementPhysicalPerson extends Component {
           <div className="col-sm-2">
             {/* (valor total - entrada) / parcelas*/}
             <label htmlFor="installmentValue">Parcela</label>
-            <input readonly="readOnly" type="text" onChange={this.handleinstallmentValue.bind(this)} type="text" className="form-control" placeholder="Valor da Parcela" value={this.state.installmentValue} />
+            <input readOnly="readonly" type="text" className="form-control" placeholder="Valor da Parcela" value={this.state.payment.installmentValue} />
           </div>
           <div className="col-sm-3">
             <label htmlFor="comission">Comissão</label>
-            <input onChange={this.handleChangeComission.bind(this)} type="text" className="form-control" placeholder="Valor da Comissão" value={this.state.comission} />
+            <input onChange={this.handleChangePaymentComission.bind(this)} type="text" className="form-control" placeholder="Valor da Comissão" value={this.state.payment.comission} />
           </div>
         </div>
         <h5 className="h5 mt-4">Observações</h5>
@@ -308,12 +283,11 @@ class NewAgreementPhysicalPerson extends Component {
 }
 
 const mapStateToProps = state => ({
-  customerId: state.customers.customer.customerId
 })
 
 const mapDispatchToProps = dispatch => ({
-  saveAgreementPhysicalPerson: (sale) => dispatch(saveAgreement(sale, 'physical-person')),
+  saveAgreementPhysicalPerson: (agreement, saleId) => dispatch(saveAgreement(agreement, saleId, 'physical-person')),
   displaySuccess: () => dispatch(flashMessage({ text: 'Contrato Salvo!' }))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(NewAgreementPhysicalPerson)
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(NewAgreementPhysicalPerson))

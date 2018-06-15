@@ -66,7 +66,7 @@ class Shell extends Component {
                       <Link to="/agreements" className="dropdown-item">Ver Contratos</Link>
                     </div>
                   </li>
-                  <li className="nav-item dropdown">
+                  {/* <li className="nav-item dropdown">
                     <a className="nav-link dropdown-toggle"
                       id="navbarDropdownMenuContracts"
                       aria-haspopup="true"
@@ -78,7 +78,7 @@ class Shell extends Component {
                     <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuContracts">
                       <Link to="/reports" className="dropdown-item">Relatório de Faturamento</Link>
                     </div>
-                  </li>
+                  </li> */}
                 </ul>
               </div>
               )

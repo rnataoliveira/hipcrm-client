@@ -1,39 +1,45 @@
 import React, { Component } from 'react'
-import { saveAgreement } from '../actions';
+import { saveAgreement } from '../../sales-pipeline/actions';
 import { flashMessage } from '../../flash-messages/actions'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router'
 
 class NewAgreementLegalPerson extends Component {
-  state = {
-    number: '',
-    notes: '',
-    payment: {
-      comission: 0,
-      totalValue: 0,
-      entranceFee: 0,
-      installmentAmount: 0,
-      installmentValue: 0,
-      notes: ''
-    },
-    phone: {
-      areaCode: '',
+  constructor(props) {
+    super(props)
+    this.state = {
       number: '',
-    },
-    email: '',
-    contact: '',
-    mailingAddress: {
-      zipCode: '',
-      street: '',
-      number: '',
-      complement: '',
-      neighborhood: '',
-      city: '',
-      state: ''
-    },
-    beneficiaries: [],
-    modality: '',
-    dentalCare: {
-      plan: ''
+      notes: '',
+      payment: {
+        totalValue: 0,
+        entranceFee: 0,
+        installmentsCount: 0,
+        comission: 0
+      },
+      phone: {
+        areaCode: '',
+        number: ''
+      },
+      email: '',
+      contact: '',
+      mailingAddress: {
+        zipCode: '',
+        street: '',
+        number: '',
+        complement: '',
+        neighborhood: '',
+        city: '',
+        state: ''
+      },
+      beneficiaries: [ {
+        plan: '',
+        number: ''
+      } ],
+      modality: 0,
+      dentalCare: {
+        plan: '',
+        has: false
+      }
     }
   }
 
@@ -41,7 +47,7 @@ class NewAgreementLegalPerson extends Component {
     this.props.agreementId && this.props.displaySuccess()
   }
 
-  handleAgreementChangeNumber(event) {
+  handleChangeNumber(event) {
     this.setState({
       number: event.target.value
     })
@@ -53,55 +59,38 @@ class NewAgreementLegalPerson extends Component {
     })
   }
 
-  handleChangeTotalValue(event) {
+  handleChangePaymentTotalValue(event) {
     this.setState({
       payment: {
         ...this.state.payment,
         totalValue: event.target.value
       }
     })
-    this.handleinstallmentValue()
   }
 
-  handleChangeEntranceFee(event) {
+  handleChangePaymentEntranceFee(event) {
     this.setState({
       payment: {
         ...this.state.payment,
         entranceFee: event.target.value
       }
     })
-    this.handleinstallmentValue()
   }
 
-  handleChangeInstallmentAmount(event) {
+  handleChangePaymentInstallmentCount(event) {
     this.setState({
       payment: {
         ...this.state.payment,
-        installmentCount: event.target.value
+        installmentsCount: event.target.value
       }
     })
-    this.handleinstallmentValue()
   }
 
-  handleChangeComission(event) {
+  handleChangePaymentComission(event) {
     this.setState({
       payment: {
         ...this.state.payment,
-        installmentCount: event.target.value
-      }
-    })
-    this.handleinstallmentValue()
-  }
-
-  handleinstallmentValue() {
-    const total = this.state.totalValue
-    const entrance = this.state.entranceFee
-    const installmentAmount = this.state.installmentAmount
-    const totalMinuEntrance = total - entrance
-    this.setState({
-      payment: {
-        ...this.state.payment,
-        installmentValue: installmentAmount > 0 ? (total - entrance) / installmentAmount : 0
+        comission: event.target.value
       }
     })
   }
@@ -124,9 +113,9 @@ class NewAgreementLegalPerson extends Component {
     })
   }
 
-  handleChangeCompanyContact(event) {
+  handleChangeContact(event) {
     this.setState({
-      companyContact: event.target.value
+      contact: event.target.value
     })
   }
 
@@ -136,7 +125,7 @@ class NewAgreementLegalPerson extends Component {
     })
   }
 
-  handleChangeZipCode(event) {
+  handleChangeAddressZipCode(event) {
     this.setState({
       mailingAddress: {
         ...this.state.mailingAddress,
@@ -145,7 +134,7 @@ class NewAgreementLegalPerson extends Component {
     })
   }
 
-  handleChangeStreet(event) {
+  handleChangeAddressStreet(event) {
     this.setState({
       mailingAddress: {
         ...this.state.mailingAddress,
@@ -154,7 +143,7 @@ class NewAgreementLegalPerson extends Component {
     })
   }
 
-  handleChangeNumber(event) {
+  handleChangeAddressNumber(event) {
     this.setState({
       mailingAddress: {
         ...this.state.mailingAddress,
@@ -163,7 +152,7 @@ class NewAgreementLegalPerson extends Component {
     })
   }
 
-  handleChangeNeighborhood(event) {
+  handleChangeAddressNeighborhood(event) {
     this.setState({
       mailingAddress: {
         ...this.state.mailingAddress,
@@ -172,7 +161,7 @@ class NewAgreementLegalPerson extends Component {
     })
   }
 
-  handleChangeCity(event) {
+  handleChangeAddressCity(event) {
     this.setState({
       mailingAddress: {
         ...this.state.mailingAddress,
@@ -181,7 +170,7 @@ class NewAgreementLegalPerson extends Component {
     })
   }
 
-  handleChangeState(event) {
+  handleChangeAddressState(event) {
     this.setState({
       mailingAddress: {
         ...this.state.mailingAddress,
@@ -190,7 +179,7 @@ class NewAgreementLegalPerson extends Component {
     })
   }
 
-  handleChangeComplement(event) {
+  handleChangeAddressComplement(event) {
     this.setState({
       mailingAddress: {
         ...this.state.mailingAddress,
@@ -201,7 +190,7 @@ class NewAgreementLegalPerson extends Component {
 
   handleAddMoreBeneficiaries(event) {
     this.setState({
-      beneficiaries: [...this.state.beneficiaries, { plan: null, number: null }]
+      beneficiaries: [...this.state.beneficiaries, { plan: '', number: '' }]
     })
   }
 
@@ -232,23 +221,36 @@ class NewAgreementLegalPerson extends Component {
   }
 
   handleChangeDentalCare(event) {
-    this.setState({
-      dentalCare: event.target.value
-    })
+    if (event.target.value === 'true')
+      this.setState({
+        dentalCare: {
+          ...this.state.dentalCare,
+          has: true
+        }
+      })
+    else if (event.target.value === 'false')
+      this.setState({
+        dentalCare: {
+          has: false,
+          plan: ''
+        }
+      })
   }
 
   handleChangeDentalCarePlan(event) {
     this.setState({
       dentalCare: {
-        whichDentalCare: event.target.value
+        ...this.state.dentalCare,
+        plan: event.target.value || ''
       }
     })
   }
 
   handleSubmit(event) {
     event.preventDefault()
+    const { id: saleId } = this.props.match.params
     console.log(this.state)
-    // this.props.agreementId && this.props.saveAgreementLegalPerson()
+    this.props.saveAgreementLegalPerson(this.state, saleId, 'legal-person')
   }
 
   render() {
@@ -259,7 +261,7 @@ class NewAgreementLegalPerson extends Component {
         <div className="row">
           <div className="col-sm-4">
             <label htmlFor="agreementNumber">Número do Contrato</label>
-            <input onChange={this.handleAgreementChangeNumber.bind(this)} type="text" className="form-control" placeholder="Número do Contrato" value={this.state.agreementNumber} />
+            <input onChange={this.handleChangeNumber.bind(this)} type="text" className="form-control" placeholder="Número do Contrato" value={this.state.agreementNumber} />
           </div>
         </div>
         <hr />
@@ -279,8 +281,8 @@ class NewAgreementLegalPerson extends Component {
             <input onChange={this.handleChangeEmail.bind(this)} type="text" className="form-control" placeholder="E-mail" value={this.state.email} />
           </div>
           <div className="col-sm-5">
-            <label htmlFor="companyContact">Contato da Empresa</label>
-            <input onChange={this.handleChangeCompanyContact.bind(this)} type="text" className="form-control" placeholder="Contato da Empresa" value={this.state.companyContact} />
+            <label htmlFor="contact">Contato da Empresa</label>
+            <input onChange={this.handleChangeContact.bind(this)} type="text" className="form-control" placeholder="Contato" value={this.state.contact} />
           </div>
         </div>
 
@@ -289,33 +291,33 @@ class NewAgreementLegalPerson extends Component {
         <div className="row mt-2">
           <div className="col-sm-2">
             <label htmlFor="zipCode">Cep</label>
-            <input onChange={this.handleChangeZipCode.bind(this)} type="text" className="form-control" placeholder="Cep" value={this.state.mailingAddress.zipCode} />
+            <input onChange={this.handleChangeAddressZipCode.bind(this)} type="text" className="form-control" placeholder="Cep" value={this.state.mailingAddress.zipCode} />
           </div>
           <div className="col-sm-8">
             <label htmlFor="street">Logradouro</label>
-            <input onChange={this.handleChangeStreet.bind(this)} type="text" className="form-control" placeholder="Logradouro" value={this.state.mailingAddress.street} />
+            <input onChange={this.handleChangeAddressStreet.bind(this)} type="text" className="form-control" placeholder="Logradouro" value={this.state.mailingAddress.street} />
           </div>
           <div className="col-sm-2">
             <label htmlFor="number">Número</label>
-            <input onChange={this.handleChangeNumber.bind(this)} type="text" className="form-control" placeholder="Numero" value={this.state.mailingAddress.number} />
+            <input onChange={this.handleChangeAddressNumber.bind(this)} type="text" className="form-control" placeholder="Numero" value={this.state.mailingAddress.number} />
           </div>
         </div>
         <div className="row mt-4">
           <div className="col-sm-2">
             <label htmlFor="complement">Complemento</label>
-            <input onChange={this.handleChangeComplement.bind(this)} type="text" className="form-control" placeholder="Complemento" value={this.state.mailingAddress.complement} />
+            <input onChange={this.handleChangeAddressComplement.bind(this)} type="text" className="form-control" placeholder="Complemento" value={this.state.mailingAddress.complement} />
           </div>
           <div className="col-sm-4">
             <label htmlFor="neighborhood">Bairro</label>
-            <input onChange={this.handleChangeNeighborhood.bind(this)} type="text" className="form-control" placeholder="Bairro" value={this.state.mailingAddress.neighborhood} />
+            <input onChange={this.handleChangeAddressNeighborhood.bind(this)} type="text" className="form-control" placeholder="Bairro" value={this.state.mailingAddress.neighborhood} />
           </div>
           <div className="col-sm-4">
             <label htmlFor="city">Cidade</label>
-            <input onChange={this.handleChangeCity.bind(this)} type="text" className="form-control" placeholder="Cidade" value={this.state.mailingAddress.city} />
+            <input onChange={this.handleChangeAddressCity.bind(this)} type="text" className="form-control" placeholder="Cidade" value={this.state.mailingAddress.city} />
           </div>
           <div className="col-sm-2">
             <label htmlFor="state">Estado</label>
-            <select onChange={this.handleChangeState.bind(this)} className="custom-select" value={this.state.mailingAddress.state}>
+            <select onChange={this.handleChangeAddressState.bind(this)} className="custom-select" value={this.state.mailingAddress.state}>
               <option value="UF">Estado</option>
               <option value="AC">Acre</option>
               <option value="AL">Alagoas</option>
@@ -369,53 +371,42 @@ class NewAgreementLegalPerson extends Component {
 
         <h5 className="h5 mt-4">Modalidade</h5>
         <div className="row mt-2">
-          <div className="form-check form-check-inline m-2">
-            <input onChange={this.handleChangeModality.bind(this)} className="form-check-input" type="radio" name="modality" id="exampleRadios1" value={this.state.modality} />
-            <label className="form-check-label">
-              Com Participação
-            </label>
-          </div>
-          <div className="form-check form-check-inline m-2">
-            <input onChange={this.handleChangeModality.bind(this)} className="form-check-input" type="radio" name="modality" id="exampleRadios2" value={this.state.modality} />
-            <label className="form-check-label">
-              Sem Participação
-            </label>
+          <div className="col-sm-4">
+            <select onChange={this.handleChangeModality.bind(this)} className="custom-select" value={this.state.modality}>
+              <option value={1}>Com Participação</option>
+              <option value={0}>Sem Participação</option>
+            </select>
           </div>
         </div>
         <h5 className="h5 mt-4">Contratação de Assistência Odontológica</h5>
         <div className="row mt-2">
-          <div className="form-check form-check-inline m-2">
-            <input onChange={this.handleChangeDentalCare.bind(this)} className="form-check-input" type="radio" name="dentalCare" id="exampleRadios1" value={this.state.dentalCare} />
-            <label className="form-check-label">
-              Sim
-            </label>
+          <div className="col-sm-2">
+            <label htmlFor="dentalCarePlan">Contratar?</label>
+            <select onChange={this.handleChangeDentalCare.bind(this)} className="custom-select" value={this.state.dentalCare.has}>
+              <option value={true}>Sim</option>
+              <option value={false}>Não</option>
+            </select>
           </div>
-          <div className="form-check form-check-inline m-2">
-            <input onChange={this.handleChangeDentalCare.bind(this)} className="form-check-input" type="radio" name="dentalCare" id="exampleRadios2" value={this.state.dentalCare} />
-            <label className="form-check-label">
-              Não
-            </label>
-          </div>
-        </div>
-        <div className="row mt-2">
-          <div className="col-sm-12">
-            <label htmlFor="dentalCarePlan">Qual?</label>
-            <input onChange={this.handleChangeDentalCarePlan.bind(this)} type="text" className="form-control" placeholder="Qual?" value={this.state.dentalCare.plan} />
-          </div>
+          {this.state.dentalCare.has && (
+            <div className="col-sm-10">
+              <label htmlFor="dentalCarePlan">Qual?</label>
+              <input onChange={this.handleChangeDentalCarePlan.bind(this)} type="text" className="form-control" placeholder="Qual?" value={this.state.dentalCare.plan} />
+            </div>
+          )}
         </div>
         <h5 className="h5 mt-4">Controle de Pagamento do Contrato</h5>
         <div className="row mt-2">
           <div className="col-sm-2">
             <label htmlFor="totalValue">Total</label>
-            <input onChange={this.handleChangeTotalValue.bind(this)} type="text" className="form-control" placeholder="Valor Total do Plano" value={this.state.totalValue} />
+            <input onChange={this.handleChangePaymentTotalValue.bind(this)} type="text" className="form-control" placeholder="Valor Total do Plano" value={this.state.payment.totalValue} />
           </div>
           <div className="col-sm-2">
             <label htmlFor="entranceFee">Entrada</label>
-            <input onChange={this.handleChangeEntranceFee.bind(this)} type="text" className="form-control" placeholder="Valor da Entrada" value={this.state.entranceFee} />
+            <input onChange={this.handleChangePaymentEntranceFee.bind(this)} type="text" className="form-control" placeholder="Valor da Entrada" value={this.state.payment.entranceFee} />
           </div>
           <div className="col-sm-3">
             <label htmlFor="installmentAmount">Quantidade</label>
-            <select onChange={this.handleChangeInstallmentAmount.bind(this)} className="custom-select" value={this.state.installmentAmount}>
+            <select onChange={this.handleChangePaymentInstallmentCount.bind(this)} className="custom-select" value={this.state.payment.installmentsCount}>
               <option value="parcelas">Quantidade de Parcelas</option>
               <option value="1">1</option>
               <option value="2">2</option>
@@ -432,11 +423,11 @@ class NewAgreementLegalPerson extends Component {
           <div className="col-sm-2">
             {/* (valor total - entrada) / parcelas*/}
             <label htmlFor="installmentValue">Parcela</label>
-            <input readonly="readOnly" type="text" onChange={this.handleinstallmentValue.bind(this)} type="text" className="form-control" placeholder="Valor da Parcela" value={this.state.installmentValue} />
+            <input readOnly="readonly" type="text" type="text" className="form-control" placeholder="Valor da Parcela" />
           </div>
           <div className="col-sm-3">
             <label htmlFor="comission">Comissão</label>
-            <input onChange={this.handleChangeComission.bind(this)} type="text" className="form-control" placeholder="Valor da Comissão" value={this.state.comission} />
+            <input onChange={this.handleChangePaymentComission.bind(this)} type="text" className="form-control" placeholder="Valor da Comissão" value={this.state.payment.comission} />
           </div>
         </div>
         <h5 className="h5 mt-4">Observações</h5>
@@ -452,12 +443,12 @@ class NewAgreementLegalPerson extends Component {
 }
 
 const mapStateToProps = state => ({
-  customerId: state.customers.customer.customerId
+
 })
 
 const mapDispatchToProps = dispatch => ({
-  saveAgreementLegalPerson: (sale) => dispatch(saveAgreement(sale, 'legal-person')),
+  saveAgreementLegalPerson: (agreement, saleId) => dispatch(saveAgreement(agreement, saleId, 'legal-person')),
   displaySuccess: () => dispatch(flashMessage({ text: 'Contrato Salvo!' }))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(NewAgreementLegalPerson)
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(NewAgreementLegalPerson))

@@ -1,10 +1,10 @@
 import { store } from '../store'
 
-export const fetchAgreement = (number) => ({
-  type: 'FETCH_agreement',
+export const fetchAgreement = (agreementId) => ({
+  type: 'FETCH_AGREEMENT',
   payload: {
     request: {
-      url: `/agreement/${number}`,
+      url: `/agreements/${agreementId}`,
       headers: {
         'Authorization': `Bearer ${store.getState().oidc.user.id_token}`
       }
@@ -16,7 +16,7 @@ export const fetchAgreements = () => ({
   type: 'FETCH_AGREEMENTS',
   payload: {
     request: {
-      url: `/agreement`,
+      url: `/agreements`,
       headers: {
         'Authorization': `Bearer ${store.getState().oidc.user.id_token}`
       }
@@ -29,17 +29,3 @@ export const filterAgreements = q => ({
   q
 })
 
-export const saveAgreement = (sale, saleId, type) => ({
-  type: 'SAVE_AGREEMENT',
-  payload: {
-    request: {
-      method: 'post',
-      url: `sales-pipelines/${saleId}/agreement/${type}`,
-      headers: {
-        'Authorization': `Bearer ${store.getState().oidc.user.id_token}`,
-        'AccessToken': store.getState().oidc.user.access_token
-      },
-      data: sale
-    }
-  }
-})
