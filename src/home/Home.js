@@ -38,7 +38,7 @@ class Home extends Component {
           </div>
           <hr className="mt-4" />
           <h5 className="mt-4">Solicite um orçamento agora mesmo!</h5>
-          <a href="https://docs.google.com/forms/d/e/1FAIpQLSeYckeqc33CElUM-o65IBVPLjwG9VAQVTsRio4IEZnku1y4zg/viewform" className="mb-5">
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSeYckeqc33CElUM-o65IBVPLjwG9VAQVTsRio4IEZnku1y4zg/viewform" className="mb-5" target="_blank">
             <button type="button" className="btn btn-primary mt-2">Solicitar Orçamento</button>
           </a>
         </div>
