@@ -4,50 +4,33 @@ import { connect } from 'react-redux'
 import { BarChart, Bar, Brush, ReferenceLine, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts'
 import moment from 'moment'
 import PropTypes from 'prop-types'
+import { fetchAllAppointments } from './actions'
 
 class Dashboard extends Component {
+  constructor(props) {
+    super(props)
+  }
+
   componentDidMount() {
-    this.props.fetchSales()
+    this.props.fetchAllAppointments()
   }
 
   render() {
-
-    const events = [
-      {
-        time: '10:00',
-        event: 'Ligar',
-        customer: 'Josefina Bosch'
-      },
-      {
-        time: '11:00',
-        event: 'Ligar',
-        customer: 'Josefina Bosch'
-      },
-      {
-        time: '13:00',
-        event: 'Ligar',
-        customer: 'Josefina Bosch'
-      },
-      {
-        time: '15:00',
-        event: 'Ligar',
-        customer: 'Josefina Bosch'
-      }
-    ]
+    console.log(this.props.appointments, 'appointments')
 
     const data = [
       { name: 'Janeiro', received: 1000 },
-      { name: 'Fevereiro', received: 500 },
-      { name: 'Março', received: 850 },
-      { name: 'Abril', received: 250 },
-      { name: 'Maio', received: 600 },
-      { name: 'Junho', received: 700 },
-      { name: 'Julho', received: 100 },
-      { name: 'Agosto', received: 100 },
-      { name: 'Setembro', received: 100 },
-      { name: 'Outubro', received: 100 },
-      { name: 'Novembro', received: 100 },
-      { name: 'Dezembro', received: 500 },
+      { name: 'Fevereiro', received: 800 },
+      { name: 'Março', received: 900 },
+      { name: 'Abril', received: 700 },
+      { name: 'Maio', received: 700 },
+      { name: 'Junho', received: null },
+      { name: 'Julho', received: null },
+      { name: 'Agosto', received: null },
+      { name: 'Setembro', received: null },
+      { name: 'Outubro', received: null },
+      { name: 'Novembro', received: null },
+      { name: 'Dezembro', received: null },
     ]
 
     return (
@@ -55,28 +38,34 @@ class Dashboard extends Component {
         <div className="col-sm-12 mb-5" >
           <h1>Compromissos</h1>
           <h3 className="text-muted">{moment().format('D/MMM/YY')}</h3>
-          <div className="card">
-            <div className="card-body">
-              <table className="table">
-                <thead>
-                  <tr>
-                    <th scope="col">Hora</th>
-                    <th scope="col">Evento</th>
-                    <th scope="col">Cliente</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {events.map((e, index) => (
-                    <tr key={index}>
-                      <th scope="row">{e.time}</th>
-                      <td>{e.event}</td>
-                      <td>{e.customer}</td>
+          {this.props.appointments && (
+            <div className="card">
+              <div className="card-body">
+                <table className="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Data</th>
+                      <th scope="col">Hora</th>
+                      <th scope="col">Evento</th>
+                      <th scope="col">Link</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody>
+                    {this.props.appointments.map((a, index) => (
+                      moment().format('D/MMM/YY') === moment(a.start.dateTime).format('D/MMM/YY') ?
+                        <tr key={index}>
+                          <th >{moment(a.start.dateTime).format('D/MMM/YY')}</th>
+                          <th scope="row">{moment(a.start.dateTime).format('hh:mm')}</th>
+                          <td>{a.summary}</td>
+                          <td><a href={a.htmlLink} target="_blank">Acessar</a></td>
+                        </tr>
+                        : ''
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
-          </div>
+          )}
         </div >
         <div className="col-sm-12 mb-5" >
           <h1>Projeção de Faturamento</h1>
@@ -90,7 +79,6 @@ class Dashboard extends Component {
               <Legend verticalAlign="top" wrapperStyle={{ lineHeight: '40px' }} />
               <ReferenceLine y={0} stroke='#000' />
               <Brush dataKey='name' height={30} stroke="#28a745" />
-              {/* <Bar dataKey="#007bff" /> */}
               <Bar dataKey="received" name="Faturamento" fill="#82ca9d" />
             </BarChart>
           </div>
@@ -99,15 +87,21 @@ class Dashboard extends Component {
     )
   }
 }
+
 Dashboard.propTypes = {
+  fetchAllAppointments: PropTypes.func,
+  appointments: PropTypes,
   fetchSales: PropTypes.func,
+  sales: PropTypes.array
 }
 
 const mapStateToProps = state => ({
+  appointments: state.home.appointments,
   sales: state.salesPipeline.sales
 })
 
 const mapDispatchToProps = dispatch => ({
+  fetchAllAppointments: () => dispatch(fetchAllAppointments()),
   fetchSales: () => dispatch(fetchSales())
 })
 
