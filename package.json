@@ -23,7 +23,7 @@
     "react-router-enter": "^0.2.1",
     "react-router-redux": "^5.0.0-alpha.9",
     "react-scripts": "5.0.1",
-    "recharts": "^1.0.0-beta.10",
+    "recharts": "^3.8.0",
     "redux": "^4.0.0",
     "redux-axios-middleware": "^4.0.0",
     "redux-oidc": "^3.0.0-beta.17",
